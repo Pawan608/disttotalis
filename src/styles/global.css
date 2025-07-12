@@ -1,1 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: rgb(117, 180, 75);
+  --color-primary-dark: rgb(89, 135, 56);
+  --color-primary-light: rgb(140, 210, 100);
+  --color-modal-blue: rgb(231, 245, 254);
+  --color-modal-blue-dark: rgb(80, 169, 238);
+}

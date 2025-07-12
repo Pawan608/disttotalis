@@ -1,45 +1,38 @@
 ---
-import heroImage from '../assets/first.jpg';
-import { Image } from 'astro:assets';
+import Hero from '../components/hero.astro';
 import Layout from '../layouts/layout.astro';
-import Button from '../components/button.astro';
 ---
 
 <Layout title="Totalis - By Hindalco">
-  <section
-    id="hero"
-    class="relative w-full min-h-[75dvh] max-h-[90dvh] overflow-hidden flex items-center justify-center"
-  >
-    <div class="absolute inset-0 w-full h-full z-0">
-      <Image
-        src={heroImage}
-        format="avif"
-        quality={90}
-        decoding={'async'}
-        priority={true}
-        fetchpriority={'high'}
-        layout="full-width"
-        fit="cover"
-        loading={'eager'}
-        alt="Hero Background"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-black/30"></div>
-    </div>
+  <Hero />
+  <section id="content" class="py-6 px-4 max-w-6xl mx-auto">
 
-    <div class="relative z-10 text-center text-white px-4 max-w-2xl">
-      <h1 class="text-5xl md:text-6xl font-bold mb-4 shadow-sm sm:shadow-md">
-        TESTED HAI <br /> TRUSTED HAI
-      </h1>
-      <p class="text-xl mb-6">System aluminium windows made for Indian homes</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button title="Book a free consultation" variant="primary" />
-        <Button title="Download Brochur" variant="secondary" />
+
+    
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:bg-modal-blue lg:rounded-2xl lg:grid-cols-4 lg:gap-1.5 gap-2 sm:gap-2.5 text-center mb-8"
+    >
+      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
+        <h2 class="text-4xl font-bold text-modal-blue-dark">No. 1</h2>
+        <p class="text-gray-700 text-sm">Aluminium Producer<br />Globally</p>
+      </div>
+      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
+        <h2 class="text-4xl font-bold text-modal-blue-dark">52</h2>
+        <p class="text-gray-700 text-sm">
+          Manufacturing Facilities<br />Globally
+        </p>
+      </div>
+      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
+        <h2 class="text-4xl font-bold text-modal-blue-dark">85</h2>
+        <p class="text-gray-700 text-sm">Extrusion Plants<br />in INDIA</p>
+      </div>
+      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
+        <h2 class="text-4xl font-bold text-modal-blue-dark">12</h2>
+        <p class="text-gray-700 text-sm">Global R&amp;D<br />Centres</p>
       </div>
     </div>
-  </section>
 
-  <section id="content" class="py-12 px-4 max-w-5xl mx-auto">
-    <p>This is the main content of the page.</p>
+    <p class="text-lg text-gray-800">This is the main content of the page.</p>
   </section>
 </Layout>
