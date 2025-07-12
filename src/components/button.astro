@@ -1,0 +1,21 @@
+---
+const { title, onClick, startIcon, endIcon, variant } = Astro.props;
+
+let className;
+if (variant === 'primary') {
+  className =
+    'bg-green-600 hover:bg-green-700 cursor-pointer text-white py-2 px-4 rounded-xl';
+} else if (variant === 'secondary') {
+  className =
+    'bg-transparent border border-green-500 hover:bg-green-600 hover:text-white text-green-500 py-2 px-4 rounded-xl';
+} else {
+  className =
+    'bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-xl';
+}
+---
+
+<button onclick={onClick} class={className}>
+  {startIcon && <span>{startIcon}</span>}
+  <span>{title}</span>
+  {endIcon && <span>{endIcon}</span>}
+</button>

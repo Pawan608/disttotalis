@@ -1,16 +1,45 @@
 ---
-
+import heroImage from '../assets/first.jpg';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/layout.astro';
+import Button from '../components/button.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Totalis - By Hindalco">
+  <section
+    id="hero"
+    class="relative w-full min-h-[75dvh] max-h-[90dvh] overflow-hidden flex items-center justify-center"
+  >
+    <div class="absolute inset-0 w-full h-full z-0">
+      <Image
+        src={heroImage}
+        format="avif"
+        quality={90}
+        decoding={'async'}
+        priority={true}
+        fetchpriority={'high'}
+        layout="full-width"
+        fit="cover"
+        loading={'eager'}
+        alt="Hero Background"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+
+    <div class="relative z-10 text-center text-white px-4 max-w-2xl">
+      <h1 class="text-5xl md:text-6xl font-bold mb-4 shadow-sm sm:shadow-md">
+        TESTED HAI <br /> TRUSTED HAI
+      </h1>
+      <p class="text-xl mb-6">System aluminium windows made for Indian homes</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button title="Book a free consultation" variant="primary" />
+        <Button title="Download Brochur" variant="secondary" />
+      </div>
+    </div>
+  </section>
+
+  <section id="content" class="py-12 px-4 max-w-5xl mx-auto">
+    <p>This is the main content of the page.</p>
+  </section>
+</Layout>
