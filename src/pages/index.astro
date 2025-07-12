@@ -4,7 +4,7 @@ import Hero from '../components/hero.astro';
 import Layout from '../layouts/layout.astro';
 import hindalcoLogo from '../assets/hindalco.jpg';
 import Button from '../components/button.astro';
-import { Sparkle } from '@lucide/astro';
+import { Sparkle, Settings, Wind, Droplet, AirVent, Icon } from '@lucide/astro';
 
 // General performance stats
 const capsules = [
@@ -20,21 +20,26 @@ const climaticCapsules = [
     title: 'Engineered Strength',
     description:
       'Precision-engineered for structural integrity and long-term durability—even in harsh climates.',
+    icon: Settings,
   },
   {
     title: 'Wind Resistance',
     description:
       'Tested for high wind loads to ensure safety in high-rises and coastal zones.',
+    icon: Wind,
   },
+
   {
     title: 'Water Tightness',
     description:
       'Sealed to resist rainwater penetration—protects your interiors during monsoons.',
+    icon: Droplet,
   },
   {
     title: 'Air Infiltration',
     description:
       'Engineered to prevent air leakage and enhance energy efficiency indoors.',
+    icon: AirVent,
   },
 ];
 ---
@@ -106,15 +111,11 @@ const climaticCapsules = [
         {
           climaticCapsules.map((item, i) => (
             <div
-              class="p-6 rounded-xl h-72 border border-primary/30  bg-white reveal"
+              class="group relative p-6 rounded-xl h-72 border border-primary/30 bg-white reveal hover:before:opacity-100 before:transition-opacity before:duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-primary/20 before:blur-2xl before:opacity-0"
               data-delay={i * 200}
             >
               <div class="mb-4">
-                {/* <Image
-              src={}
-                  alt="Feature icon"
-                  // class="w-10 h-10 text-primary"
-                /> */}
+                <item.icon size={64} stroke-width={1} class="stroke-primary" />
               </div>
               <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
               <p class="text-gray-700 text-sm">{item.description}</p>
