@@ -1,36 +1,32 @@
 ---
 import Hero from '../components/hero.astro';
+import RevealText from '../components/reveal-text.astro';
 import Layout from '../layouts/layout.astro';
+
+const capsules = [
+  { title: 'No. 1', description: 'Aluminium Producer Globally' },
+  { title: '52', description: 'Manufacturing Facilities Globally' },
+  { title: '85', description: 'Extrusion Plants in INDIA' },
+  { title: '12', description: 'Global R&D Centres' },
+];
 ---
 
 <Layout title="Totalis - By Hindalco">
   <Hero />
   <section id="content" class="py-6 px-4 max-w-6xl mx-auto">
-
-
-    
-
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:bg-modal-blue lg:rounded-2xl lg:grid-cols-4 lg:gap-1.5 gap-2 sm:gap-2.5 text-center mb-8"
     >
-      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
-        <h2 class="text-4xl font-bold text-modal-blue-dark">No. 1</h2>
-        <p class="text-gray-700 text-sm">Aluminium Producer<br />Globally</p>
-      </div>
-      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
-        <h2 class="text-4xl font-bold text-modal-blue-dark">52</h2>
-        <p class="text-gray-700 text-sm">
-          Manufacturing Facilities<br />Globally
-        </p>
-      </div>
-      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
-        <h2 class="text-4xl font-bold text-modal-blue-dark">85</h2>
-        <p class="text-gray-700 text-sm">Extrusion Plants<br />in INDIA</p>
-      </div>
-      <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
-        <h2 class="text-4xl font-bold text-modal-blue-dark">12</h2>
-        <p class="text-gray-700 text-sm">Global R&amp;D<br />Centres</p>
-      </div>
+      {
+        capsules.map((capsule, i) => (
+          <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
+            <h2 class="text-4xl font-bold text-modal-blue-dark">
+              <RevealText text={capsule.title} delay={i * 50} />
+            </h2>
+            <p class="text-gray-700 text-sm">{capsule.description}</p>
+          </div>
+        ))
+      }
     </div>
 
     <p class="text-lg text-gray-800">This is the main content of the page.</p>

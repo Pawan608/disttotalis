@@ -1,0 +1,19 @@
+---
+// Accepts: text, baseDelay (optional), stepDelay (optional)
+const { text, baseDelay = 0, step = 100 } = Astro.props;
+
+const words = text.split(' ');
+---
+
+<span aria-label={text} role="presentation">
+  {
+    words.map((word: string, i: number) => (
+      <span
+        class="reveal inline-block whitespace-nowrap"
+        data-delay={baseDelay + i * step}
+      >
+        {word}&nbsp;
+      </span>
+    ))
+  }
+</span>

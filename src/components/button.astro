@@ -4,7 +4,7 @@ const { title, onClick, startIcon, endIcon, variant } = Astro.props;
 let className;
 if (variant === 'primary') {
   className =
-    'bg-primary hover:bg-primary-light duration-150 cursor-pointer text-white py-2 px-4 rounded-xl';
+    'bg-primary hover:bg-primary-light hover:scale-95 outline-2 outline-transparent outline-offset-4 hover:outline-primary duration-300 cursor-pointer text-white py-2 px-4 rounded-xl';
 } else if (variant === 'secondary') {
   className =
     'bg-transparent border border-green-500 hover:bg-green-600 hover:text-white text-green-500 py-2 px-4 rounded-xl';

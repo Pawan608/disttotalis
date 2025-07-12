@@ -2,6 +2,9 @@
 import heroImage from '../assets/sliding-wind.webp';
 import { Image } from 'astro:assets';
 import Button from '../components/button.astro';
+import StaggerText from './stagger-text.astro';
+import '../styles/reveal.css';
+import RevealText from './reveal-text.astro';
 ---
 
 <section
@@ -27,14 +30,27 @@ import Button from '../components/button.astro';
 
   <div class="relative z-10 text-white px-4 md:ml-16 max-w-2xl">
     <h1 class="text-5xl md:text-7xl text-primary font-bold mb-4 tracking-tight">
-      <span>TESTED HAI</span>
+      <StaggerText text="TESTED HAI" baseDelay={0} step={150} />
       <br />
-      <span>TRUSTED HAI</span>
+      <StaggerText text="TRUSTED HAI" baseDelay={400} step={150} />
     </h1>
-    <p class="text-xl mb-6">System aluminium windows made for Indian homes</p>
+    <p class="text-xl mb-6">
+      <RevealText
+        text="System aluminium windows made for Indian homes"
+        delay={870}
+      />
+    </p>
     <div class="flex flex-col sm:flex-row gap-4">
       <Button title="Book a free consultation" variant="primary" />
       <Button title="Download Brochur" variant="secondary" />
     </div>
   </div>
 </section>
+
+<script>
+  import { initRevealObserver } from '../scripts/reveal';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initRevealObserver();
+  });
+</script>
