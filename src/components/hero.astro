@@ -3,7 +3,6 @@ import heroImage from '../assets/sliding-wind.webp';
 import { Image } from 'astro:assets';
 import Button from '../components/button.astro';
 import StaggerText from './stagger-text.astro';
-import '../styles/reveal.css';
 import RevealText from './reveal-text.astro';
 ---
 
@@ -27,22 +26,33 @@ import RevealText from './reveal-text.astro';
     />
     <div class="absolute inset-0 bg-black/60"></div>
   </div>
-
   <div class="relative z-10 text-white px-4 md:ml-16 max-w-2xl">
-    <h1 class="text-5xl md:text-7xl text-primary font-bold mb-4 tracking-tight">
-      <StaggerText text="TESTED HAI" baseDelay={0} step={150} />
+    <h1
+      class="text-6xl md:text-8xl text-shadow-md text-primary font-bold mb-4 tracking-tight"
+    >
+      <StaggerText text="TESTED HAI" baseDelay={0} step={120} />
       <br />
-      <StaggerText text="TRUSTED HAI" baseDelay={400} step={150} />
+      <StaggerText text="TRUSTED HAI" baseDelay={400} step={120} />
     </h1>
-    <p class="text-xl mb-6">
-      <RevealText
-        text="System aluminium windows made for Indian homes"
-        delay={870}
-      />
+    <p
+      class="text-2xl lg:text-4xl mb-6 max-w-lg text-wrap text-shadow-sm reveal"
+      data-delay={870}
+    >
+      System aluminium windows made for Indian homes
     </p>
     <div class="flex flex-col sm:flex-row gap-4">
-      <Button title="Book a free consultation" variant="primary" />
-      <Button title="Download Brochur" variant="secondary" />
+      <Button
+        title="Book a free consultation"
+        reveal={true}
+        animationDelay={800}
+        variant="primary"
+      />
+      <Button
+        title="Download Brochur"
+        reveal={true}
+        animationDelay={1000}
+        variant="secondary"
+      />
     </div>
   </div>
 </section>

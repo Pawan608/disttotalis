@@ -1,27 +1,86 @@
 ---
+import { Image } from 'astro:assets';
 import Hero from '../components/hero.astro';
 import RevealText from '../components/reveal-text.astro';
 import Layout from '../layouts/layout.astro';
+import hindalcoLogo from '../assets/hindalco.jpg';
+import Button from '../components/button.astro';
+import StaggerText from '../components/stagger-text.astro';
 
+// General performance stats
 const capsules = [
   { title: 'No. 1', description: 'Aluminium Producer Globally' },
   { title: '52', description: 'Manufacturing Facilities Globally' },
   { title: '85', description: 'Extrusion Plants in INDIA' },
   { title: '12', description: 'Global R&D Centres' },
 ];
+
+// Climatic performance features
+const climaticCapsules = [
+  {
+    title: 'Engineered Strength',
+    description:
+      'Precision-engineered for structural integrity and long-term durability—even in harsh climates.',
+  },
+  {
+    title: 'Wind Resistance',
+    description:
+      'Tested for high wind loads to ensure safety in high-rises and coastal zones.',
+  },
+  {
+    title: 'Water Tightness',
+    description:
+      'Sealed to resist rainwater penetration—protects your interiors during monsoons.',
+  },
+  {
+    title: 'Air Infiltration',
+    description:
+      'Engineered to prevent air leakage and enhance energy efficiency indoors.',
+  },
+];
 ---
 
 <Layout title="Totalis - By Hindalco">
   <Hero />
-  <section id="content" class="py-6 px-4 max-w-6xl mx-auto">
+  <section id="content" class="px-4 max-w-6xl mx-auto">
+    <!-- Hero Section -->
+    <div class="my-4 grid md:grid-cols-2 py-4 items-center">
+      <Image
+        src={hindalcoLogo}
+        alt="Hindalco"
+        layout="constrained"
+        class="px-4 py-8 md:px-16 reveal"
+        data-delay="100"
+        loading="eager"
+        decoding="async"
+      />
+
+      <div
+        class="bg-primary flex flex-col justify-center p-8 min-h-64 text-white rounded-xl reveal"
+        data-delay="100"
+      >
+        <h3 class="text-3xl font-semibold">
+          Backed by a Legacy of Material Excellence
+        </h3>
+        <p class="font-light text-md mt-2 tracking-wide">
+          Totalis is crafted by Hindalco, a global aluminium leader and part of
+          the Aditya Birla Group — a name trusted for generations.
+        </p>
+      </div>
+    </div>
+
+    <!-- Global Stats -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:bg-modal-blue lg:rounded-2xl lg:grid-cols-4 lg:gap-1.5 gap-2 sm:gap-2.5 text-center mb-8"
+      class="my-4 grid grid-cols-1 sm:grid-cols-2 lg:bg-modal-blue lg:rounded-2xl lg:grid-cols-4 lg:gap-1.5 gap-2 sm:gap-2.5 text-center"
     >
       {
         capsules.map((capsule, i) => (
-          <div class="p-6 rounded-xl not-lg:bg-modal-blue flex flex-col gap-2">
-            <h2 class="text-4xl font-bold text-modal-blue-dark">
-              <RevealText text={capsule.title} delay={i * 50} />
+          <div class="p-6 rounded-xl not-lg:bg-modal-blue not-lg:reveal flex flex-col gap-2">
+            <h2
+              class="text-4xl font-bold text-modal-blue-dark reveal"
+              data-delay={i * 50}
+            >
+              {capsule.title}
             </h2>
             <p class="text-gray-700 text-sm">{capsule.description}</p>
           </div>
@@ -29,6 +88,47 @@ const capsules = [
       }
     </div>
 
-    <p class="text-lg text-gray-800">This is the main content of the page.</p>
+    <!-- Climatic Capsule Section -->
+    <div class="text-center py-8 lg:py-16">
+      <h3 class="text-4xl font-semibold reveal">
+        Tested and Certified for Indian Climatic Conditions
+      </h3>
+      <h5 class="text-lg text-gray-700 mt-2 reveal" data-delay="100">
+        Totalis system aluminium windows are built for performance. Certified
+        for peace of mind.
+      </h5>
+
+      <div
+        class="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left"
+      >
+        {
+          climaticCapsules.map((item, i) => (
+            <div
+              class="p-6 rounded-xl h-72 border border-primary/30  bg-white reveal"
+              data-delay={i * 200}
+            >
+              <div class="mb-4">
+                {/* <Image
+              src={}
+                  alt="Feature icon"
+                  // class="w-10 h-10 text-primary"
+                /> */}
+              </div>
+              <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
+              <p class="text-gray-700 text-sm">{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-8">
+      <Button
+        title="Book a free consultation"
+        variant="primary"
+        classList="z-40"
+      />
+    </div>
   </section>
 </Layout>

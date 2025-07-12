@@ -1,6 +1,6 @@
 ---
 // Accepts: text, baseDelay (optional), stepDelay (optional)
-const { text, baseDelay = 0, step = 100 } = Astro.props;
+const { text, baseDelay = 0, step = 100, className } = Astro.props;
 
 const words = text.split(' ');
 ---
@@ -9,7 +9,7 @@ const words = text.split(' ');
   {
     words.map((word: string, i: number) => (
       <span
-        class="reveal inline-block whitespace-nowrap"
+        class={`reveal inline-block whitespace-nowrap ${className}`}
         data-delay={baseDelay + i * step}
       >
         {word}&nbsp;
