@@ -3,7 +3,7 @@ import heroImage from '../assets/sliding-wind.webp';
 import { Image } from 'astro:assets';
 import Button from '../components/button.astro';
 import StaggerText from './stagger-text.astro';
-import RevealText from './reveal-text.astro';
+import { Download } from '@lucide/astro';
 ---
 
 <section
@@ -52,7 +52,9 @@ import RevealText from './reveal-text.astro';
         reveal={true}
         animationDelay={1000}
         variant="secondary"
-      />
+      >
+        <Download slot={'startIcon'} size={16} />
+      </Button>
     </div>
   </div>
 </section>

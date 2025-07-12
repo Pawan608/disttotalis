@@ -1,11 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import Hero from '../components/hero.astro';
-import RevealText from '../components/reveal-text.astro';
 import Layout from '../layouts/layout.astro';
 import hindalcoLogo from '../assets/hindalco.jpg';
 import Button from '../components/button.astro';
-import StaggerText from '../components/stagger-text.astro';
+import { Sparkle } from '@lucide/astro';
 
 // General performance stats
 const capsules = [
@@ -56,13 +55,16 @@ const climaticCapsules = [
       />
 
       <div
-        class="bg-primary flex flex-col justify-center p-8 min-h-64 text-white rounded-xl reveal"
+        class="relative bg-primary flex flex-col justify-center px-12 min-h-64 text-white rounded-xl reveal"
         data-delay="100"
       >
-        <h3 class="text-3xl font-semibold">
+        <span class="absolute top-6 right-4">
+          <Sparkle class="inline-block stroke-0 fill-amber-300" />
+        </span>
+        <h3 class="text-3xl py-2 font-semibold">
           Backed by a Legacy of Material Excellence
         </h3>
-        <p class="font-light text-md mt-2 tracking-wide">
+        <p class="font-light text-md py-2 tracking-wide">
           Totalis is crafted by Hindalco, a global aluminium leader and part of
           the Aditya Birla Group — a name trusted for generations.
         </p>

@@ -1,25 +1,20 @@
 ---
-const {
-  title,
-  onClick,
-  startIcon,
-  endIcon,
-  variant,
-  reveal,
-  animationDelay,
-  classList,
-} = Astro.props;
+const { title, onClick, variant, reveal, animationDelay, classList } =
+  Astro.props;
 
-let className;
+let className =
+  'inline-flex items-center justify-center gap-2 cursor-pointer py-2 px-4 rounded-xl';
+
+className += ' ';
+
 if (variant === 'primary') {
-  className =
-    'bg-primary hover:bg-primary-light hover:scale-95 outline-2 outline-transparent outline-offset-4 hover:outline-primary duration-300 transition-all cursor-pointer text-white py-2 px-4 rounded-xl';
+  className +=
+    'bg-primary hover:bg-primary-light hover:scale-95 outline-2 outline-transparent outline-offset-4 hover:outline-primary text-white ';
 } else if (variant === 'secondary') {
-  className =
-    'bg-transparent border border-green-500 hover:bg-green-600 hover:text-white text-green-500 py-2 px-4 rounded-xl';
+  className +=
+    'bg-transparent border border-green-500 hover:bg-green-600 hover:text-white text-green-500';
 } else {
-  className =
-    'bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-xl';
+  className += 'bg-gray-200 hover:bg-gray-300 text-gray-800';
 }
 
 if (reveal) {
@@ -32,7 +27,7 @@ if (classList) {
 ---
 
 <button onclick={onClick} class={className} data-delay={animationDelay}>
-  {startIcon && <span>{startIcon}</span>}
+  <slot name="startIcon" />
   <span>{title}</span>
-  {endIcon && <span>{endIcon}</span>}
+  <slot name="endIcon" />
 </button>
