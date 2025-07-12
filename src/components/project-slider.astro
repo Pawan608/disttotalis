@@ -1,0 +1,209 @@
+---
+import { ChevronLeft, CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import demoImage from '../assets/building.jpeg';
+import demoBrand from '../assets/hindalco.jpg';
+import demoBuilding from '../assets/hotel-building.jpg';
+
+// Property data array
+const properties = [
+  {
+    id: 1,
+    name: 'Supreme, Pune',
+    area: '88544 Sqft.',
+    image: demoImage,
+  },
+  {
+    id: 2,
+    name: 'Shalimar Mannat, Lucknow',
+    area: '88544 Sqft.',
+
+    image: demoBuilding,
+  },
+  {
+    id: 3,
+    name: 'Eldeco Luxa',
+    area: '30000 Sqft.',
+    image: demoImage,
+  },
+  {
+    id: 4,
+    name: 'Natura by One Oak, Lucknow',
+    area: '75114 Sqft.',
+    image: demoImage,
+  },
+  {
+    id: 5,
+    name: 'Supreme Elite, Mumbai',
+    area: '95000 Sqft.',
+    image: demoImage,
+  },
+  {
+    id: 6,
+    name: 'Shalimar Heights, Delhi',
+    area: '72000 Sqft.',
+    image: demoImage,
+  },
+];
+
+// Brand logos for marquee
+const brands = [
+  demoBrand,
+  demoBrand,
+  demoBrand,
+  demoBrand,
+  demoBrand,
+  demoBrand,
+];
+---
+
+<section class="w-full">
+  <!-- Properties Section -->
+  <div class="bg-indigo-800 py-16 px-4">
+    <div class="px-4 max-w-6xl mx-auto">
+      <!-- Header with Navigation -->
+      <div class="flex items-center justify-between mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-white reveal">
+          Shaping Skylines with excellence
+        </h2>
+        <div class="flex items-center gap-3 reveal" data-delay="200">
+          <button id="prevBtn" class="text-white">
+            <CircleArrowLeft size={48} stroke-width={1.5} />
+          </button>
+          <button id="nextBtn" class="text-white">
+            <CircleArrowRight size={48} stroke-width={1.5} />
+          </button>
+        </div>
+      </div>
+
+      <!-- Carousel Container -->
+      <div class="relative overflow-hidden">
+        <div
+          id="carousel"
+          class="flex transition-transform duration-500 ease-in-out gap-6"
+        >
+          {
+            properties.map((property) => (
+              <div class="w-64 flex-shrink-0 snap-start">
+                <div class="aspect-[8/9] overflow-hidden">
+                  <div class="rounded-xl w-full bg-radial from-indigo-500 to-indigo-600 overflow-hidden h-full">
+                    <Image
+                      src={property.image}
+                      alt={property.name}
+                      loading={'lazy'}
+                      decoding="async"
+                      layout="full-width"
+                      format="avif"
+                      class="h-full object-cover hover:scale-105 transition-transform duration-400"
+                    />
+                  </div>
+                </div>
+                <div class="p-2">
+                  <h3 class="text-md font-semibold text-white">
+                    {property.name}
+                  </h3>
+                  <p class="text-gray-100 font-medium text-sm">
+                    {property.area}
+                  </p>
+                </div>
+                {/* </div> */}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Trust Badge -->
+      <div class="text-center mt-12">
+        <div
+          class="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-8 py-3"
+        >
+          <span class="text-white font-semibold text-lg"
+            >Our Trusted Project</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee Section -->
+  <div class="bg-white py-8 overflow-hidden">
+    <div class="flex animate-marquee gap-16">
+      {
+        [...brands].map((brand, index) => (
+          <Image
+            src={brand}
+            alt="Brand logo"
+            class="h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="bg-gradient-to-r from-green-400 to-green-600 py-16 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <h3 class="text-lg font-semibold text-white/90 mb-4">Testimonials</h3>
+      <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+        Real Voices, Genuine Experiences
+      </h2>
+      <p class="text-white/90 text-lg max-w-2xl mx-auto">
+        Discover what our clients say about their transformative experiences
+        working with us
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Simple carousel functionality
+  let currentIndex = 0;
+  const carousel = document.getElementById('carousel');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const cardWidth = window.innerWidth < 768 ? 304 : 344; // card width + gap
+  const totalCards = 6;
+  const maxIndex = window.innerWidth < 768 ? totalCards - 1 : totalCards - 4;
+
+  function updateCarousel() {
+    const translateX = -currentIndex * cardWidth;
+    carousel.style.transform = `translateX(${translateX}px)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = Math.max(0, currentIndex - 1);
+    updateCarousel();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = Math.min(maxIndex, currentIndex + 1);
+    updateCarousel();
+  });
+
+  // Update on resize
+  window.addEventListener('resize', () => {
+    currentIndex = 0;
+    updateCarousel();
+  });
+</script>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>

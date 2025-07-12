@@ -3,8 +3,9 @@ import { Image } from 'astro:assets';
 import Hero from '../components/hero.astro';
 import Layout from '../layouts/layout.astro';
 import hindalcoLogo from '../assets/hindalco.jpg';
-import Button from '../components/button.astro';
+
 import { Sparkle, Settings, Wind, Droplet, AirVent, Icon } from '@lucide/astro';
+import ProjectSlider from '../components/project-slider.astro';
 
 // General performance stats
 const capsules = [
@@ -60,7 +61,7 @@ const climaticCapsules = [
       />
 
       <div
-        class="relative bg-primary flex flex-col justify-center px-12 min-h-64 text-white rounded-xl reveal"
+        class="relative bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-xl reveal"
         data-delay="100"
       >
         <span class="absolute top-6 right-4">
@@ -111,12 +112,13 @@ const climaticCapsules = [
         {
           climaticCapsules.map((item, i) => (
             <div
-              class="group relative p-6 rounded-xl h-72 border border-primary/30 bg-white reveal hover:before:opacity-100 before:transition-opacity before:duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-primary/20 before:blur-2xl before:opacity-0"
+              class="group flex flex-col relative p-6 rounded-xl h-72 border border-primary/30 bg-white reveal hover:before:opacity-100 before:transition-opacity before:duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-primary/20 before:blur-2xl before:opacity-0"
               data-delay={i * 200}
             >
-              <div class="mb-4">
+              <div class="mb-4 grow">
                 <item.icon size={64} stroke-width={1} class="stroke-primary" />
               </div>
+
               <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
               <p class="text-gray-700 text-sm">{item.description}</p>
             </div>
@@ -126,12 +128,8 @@ const climaticCapsules = [
     </div>
 
     <!-- CTA -->
-    <div class="text-center mt-8">
-      <Button
-        title="Book a free consultation"
-        variant="primary"
-        classList="z-40"
-      />
-    </div>
+  </section>
+  <section id="projects">
+    <ProjectSlider />
   </section>
 </Layout>

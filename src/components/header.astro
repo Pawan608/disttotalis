@@ -1,11 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import totalisLogo from '../assets/totalis-logo.png';
+import { Hamburger, Menu } from '@lucide/astro';
 ---
 
-<header class="z-20 w-full fixed top-2">
+<header class="z-20 w-full fixed lg:top-4 top-2">
   <nav
-    class="h-20 mx-auto max-w-[calc(100dvw-1.25rem)] lg:max-w-7xl bg-[#fff] rounded-lg backdrop-blur-md px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+    class="h-20 mx-auto max-w-[calc(100dvw-2rem)] lg:max-w-7xl bg-[rgba(255,255,255,0.825)] drop-shadow-lg rounded-2xl backdrop-blur-sm px-4 sm:px-6 lg:px-8 flex justify-between items-center"
   >
     <div class="flex flex-row items-center">
       <Image
@@ -15,7 +16,7 @@ import totalisLogo from '../assets/totalis-logo.png';
         layout="constrained"
         class={'w-24'}
       />
-      <a href="/" class="text-lg font-semibold">Totalis.</a>
+      <!-- <a href="/" class="text-lg font-semibold">Totalis.</a> -->
     </div>
 
     <!-- Mobile menu button -->
@@ -24,18 +25,7 @@ import totalisLogo from '../assets/totalis-logo.png';
       class="md:hidden text-gray-700 focus:outline-none"
       aria-label="Toggle menu"
     >
-      <svg
-        class="h-6 w-6"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
+      <Menu />
     </button>
 
     <!-- Links -->

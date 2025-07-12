@@ -1,15 +1,68 @@
-<footer class="bg-gray-100 text-gray-700 py-6 mt-10">
-  <div
-    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
-  >
-    <p class="text-sm">
-      &copy; {new Date().getFullYear()} MySite. All rights reserved.
-    </p>
+---
+// components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
 
-    <ul class="flex space-x-6 text-sm">
-      <li><a href="/" class="hover:text-primary">Home</a></li>
-      <li><a href="/about" class="hover:text-primary">About</a></li>
-      <li><a href="/contact" class="hover:text-primary">Contact</a></li>
-    </ul>
+<footer class="bg-footer text-footer-light pt-12 pb-6 text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <!-- Top Section -->
+    <div class="flex flex-col lg:flex-row lg:justify-between gap-10">
+      <!-- Logo & Description -->
+      <div class="flex-1 max-w-md">
+        <div class="flex items-center gap-3 mb-4">
+          <!-- <img src="/logo.svg" alt="Totalis Logo" class="h-10 w-auto" /> -->
+          <div class="text-xl font-semibold">TOTALIS</div>
+        </div>
+        <p class="mb-2">
+          Totalis – Doors and Windows by Hindalco, are crafted from eternally
+          recyclable aluminium and undergo rigorous testing against wind load,
+          water penetration, and air infiltration.
+        </p>
+        <p class="mb-2">
+          This commitment to testing ensures that customers can place their
+          trust in the durability and reliability of Totalis products.
+        </p>
+        <a href="#" class="underline hover:text-primary">Read More</a>
+      </div>
+
+      <!-- Navigation -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 flex-shrink-0">
+        <div class="flex flex-col space-y-2">
+          <a href="/" class="hover:text-primary">Home</a>
+          <a href="/about" class="hover:text-primary">About us</a>
+          <a href="/services" class="hover:text-primary">Services</a>
+          <a href="/products" class="hover:text-primary">Products</a>
+          <a href="/contact" class="hover:text-primary">Contact Us</a>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <a href="#" class="hover:text-primary">Linkedin</a>
+          <a href="#" class="hover:text-primary">Twitter</a>
+        </div>
+        <div class="flex flex-col space-y-2">
+          <a href="/terms" class="hover:text-primary">Terms and Conditions</a>
+          <!-- <span>Copyright © 2023</span> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider & Legal -->
+    <div
+      class="border-t border-white/20 pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs"
+    >
+      <div class="flex flex-wrap gap-4">
+        <a href="/terms" class="hover:text-primary">Terms of Use</a>
+        <a href="/privacy" class="hover:text-primary">Privacy Policy</a>
+        <a href="/cookies" class="hover:text-primary">About Cookies</a>
+      </div>
+      <div>&copy; {currentYear} Totalis by HINDALCO. All rights reserved.</div>
+    </div>
+
+    <!-- Final Note -->
+    <div class="text-xs text-footer-light/80">
+      Totalis Business empowers organizations with comprehensive tools for
+      financial transparency, offering intuitive features for budgeting, expense
+      tracking, financial reporting, and analytics—so businesses can clearly
+      understand and communicate their financial health.
+    </div>
   </div>
 </footer>

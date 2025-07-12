@@ -6,6 +6,9 @@
   --color-primary-light: rgb(140, 210, 100);
   --color-modal-blue: rgb(231, 245, 254);
   --color-modal-blue-dark: rgb(80, 169, 238);
+
+  --color-footer: #1c5163;
+  --color-footer-light: #f3f4f6;
 }
 
 @layer utilities {
@@ -24,5 +27,21 @@
 
   .reveal.visible {
     @apply opacity-100 translate-y-0 rotate-0 blur-none;
+  }
+
+  .bg-footer {
+    background-color: var(--color-footer);
+  }
+
+  .bg-footer-light {
+    background-color: var(--color-footer-light);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .hover\:text-primary:hover {
+    color: var(--color-primary);
   }
 }
