@@ -21,6 +21,16 @@ export function initCardGlowEffect() {
 
       card.style.setProperty('--tilt-x', `${rotateX}deg`);
       card.style.setProperty('--tilt-y', `${rotateY}deg`);
+
+      // Set reveal animation transforms based on current state
+      const isVisible = card.classList.contains('visible');
+      if (isVisible) {
+        card.style.setProperty('--reveal-y', '0px');
+        card.style.setProperty('--reveal-rotate', '0deg');
+      } else {
+        card.style.setProperty('--reveal-y', '3rem'); // Same as translate-y-12
+        card.style.setProperty('--reveal-rotate', '2deg');
+      }
     });
   });
 }

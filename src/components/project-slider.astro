@@ -17,7 +17,6 @@ const properties = [
     id: 2,
     name: 'Shalimar Mannat, Lucknow',
     area: '88544 Sqft.',
-
     image: demoBuilding,
   },
   {
@@ -47,14 +46,7 @@ const properties = [
 ];
 
 // Brand logos for marquee
-const brands = [
-  demoBrand,
-  demoBrand,
-  demoBrand,
-  demoBrand,
-  demoBrand,
-  demoBrand,
-];
+const brands = [demoBrand, demoBrand, demoBrand];
 ---
 
 <section class="w-full">
@@ -67,46 +59,52 @@ const brands = [
           Shaping Skylines with excellence
         </h2>
         <div class="flex items-center gap-3 reveal" data-delay="200">
-          <button id="prevBtn" class="text-white">
+          <button
+            id="embla-prev"
+            class="text-white hover:text-indigo-300 transition-colors disabled:opacity-50"
+            aria-label="Previous slide"
+          >
             <CircleArrowLeft size={48} stroke-width={1.5} />
           </button>
-          <button id="nextBtn" class="text-white">
+          <button
+            id="embla-next"
+            class="text-white hover:text-indigo-300 transition-colors disabled:opacity-50"
+            aria-label="Next slide"
+          >
             <CircleArrowRight size={48} stroke-width={1.5} />
           </button>
         </div>
       </div>
 
-      <!-- Carousel Container -->
-      <div class="relative overflow-hidden">
-        <div
-          id="carousel"
-          class="flex transition-transform duration-500 ease-in-out gap-6"
-        >
+      <!-- Embla Carousel Container -->
+      <div class="embla" id="embla">
+        <div class="embla__container">
           {
             properties.map((property) => (
-              <div class="w-64 flex-shrink-0 snap-start">
-                <div class="aspect-[8/9] overflow-hidden">
-                  <div class="rounded-xl w-full bg-radial from-indigo-500 to-indigo-600 overflow-hidden h-full">
-                    <Image
-                      src={property.image}
-                      alt={property.name}
-                      loading={'lazy'}
-                      decoding="async"
-                      layout="full-width"
-                      format="avif"
-                      class="h-full object-cover hover:scale-105 transition-transform duration-400"
-                    />
+              <div class="embla__slide">
+                <div class="w-64 flex-shrink-0">
+                  <div class="aspect-[8/9] overflow-hidden">
+                    <div class="rounded-xl w-full bg-radial from-indigo-500 to-indigo-600 overflow-hidden h-full">
+                      <Image
+                        src={property.image}
+                        alt={property.name}
+                        loading={'lazy'}
+                        decoding="async"
+                        layout="full-width"
+                        format="avif"
+                        class="h-full object-cover hover:scale-105 transition-transform duration-400"
+                      />
+                    </div>
+                  </div>
+                  <div class="p-2">
+                    <h3 class="text-md font-semibold text-white">
+                      {property.name}
+                    </h3>
+                    <p class="text-gray-100 font-medium text-sm">
+                      {property.area}
+                    </p>
                   </div>
                 </div>
-                <div class="p-2">
-                  <h3 class="text-md font-semibold text-white">
-                    {property.name}
-                  </h3>
-                  <p class="text-gray-100 font-medium text-sm">
-                    {property.area}
-                  </p>
-                </div>
-                {/* </div> */}
               </div>
             ))
           }
@@ -126,18 +124,31 @@ const brands = [
     </div>
   </div>
 
-  <!-- Marquee Section -->
+  <!-- Smooth Marquee Section -->
   <div class="bg-white py-8 overflow-hidden">
-    <div class="flex animate-marquee gap-16">
-      {
-        [...brands].map((brand, index) => (
-          <Image
-            src={brand}
-            alt="Brand logo"
-            class="h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
-          />
-        ))
-      }
+    <div class="marquee-container">
+      <div class="marquee-content">
+        {
+          brands.map((brand, index) => (
+            <Image
+              src={brand}
+              alt="Brand logo"
+              class="h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 mx-8"
+            />
+          ))
+        }
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        {
+          brands.map((brand, index) => (
+            <Image
+              src={brand}
+              alt="Brand logo"
+              class="h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 mx-8"
+            />
+          ))
+        }
+      </div>
     </div>
   </div>
 
@@ -157,45 +168,158 @@ const brands = [
 </section>
 
 <script>
-  // Simple carousel functionality
-  let currentIndex = 0;
-  const carousel = document.getElementById('carousel');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+  import EmblaCarousel from 'embla-carousel';
+  import Autoplay from 'embla-carousel-autoplay';
 
-  if (!carousel || !prevBtn || !nextBtn) {
-    console.error('Carousel or buttons not found');
-    return;
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const emblaNode = document.getElementById('embla');
+    const prevBtn = document.getElementById('embla-prev');
+    const nextBtn = document.getElementById('embla-next');
 
-  const cardWidth = window.innerWidth < 768 ? 304 : 344; // card width + gap
-  const totalCards = 6;
-  const maxIndex = window.innerWidth < 768 ? totalCards - 1 : totalCards - 4;
+    if (!emblaNode || !prevBtn || !nextBtn) return;
 
-  const updateCarousel = () => {
-    const translateX = -currentIndex * cardWidth;
-    carousel.style.transform = `translateX(${translateX}px)`;
-  };
+    // Embla options
+    const options = {
+      align: 'start' as const,
+      slidesToScroll: 1,
+      containScroll: 'trimSnaps' as const,
+      dragFree: false,
+      loop: false,
+      skipSnaps: false,
+      // Responsive breakpoints
+      breakpoints: {
+        '(min-width: 768px)': { slidesToScroll: 2 },
+        '(min-width: 1024px)': { slidesToScroll: 3 },
+      },
+    };
 
-  prevBtn.addEventListener('click', () => {
-    currentIndex = Math.max(0, currentIndex - 1);
-    updateCarousel();
-  });
+    // Initialize Embla with autoplay plugin (optional)
+    const embla = EmblaCarousel(emblaNode, options, [
+      // Autoplay({ delay: 4000, stopOnInteraction: false }) // Uncomment for autoplay
+    ]);
 
-  nextBtn.addEventListener('click', () => {
-    currentIndex = Math.min(maxIndex, currentIndex + 1);
-    updateCarousel();
-  });
+    // Button functionality
+    const updateButtons = () => {
+      const prevButton = prevBtn as HTMLButtonElement;
+      const nextButton = nextBtn as HTMLButtonElement;
 
-  // Update on resize
-  window.addEventListener('resize', () => {
-    currentIndex = 0;
-    updateCarousel();
+      prevButton.disabled = !embla.canScrollPrev();
+      nextButton.disabled = !embla.canScrollNext();
+    };
+
+    prevBtn.addEventListener('click', () => {
+      embla.scrollPrev();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      embla.scrollNext();
+    });
+
+    // Update buttons on slide change
+    embla.on('select', updateButtons);
+    embla.on('init', updateButtons);
+
+    // Keyboard navigation
+    emblaNode.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        embla.scrollPrev();
+      } else if (e.key === 'ArrowRight') {
+        embla.scrollNext();
+      }
+    });
+
+    // Optional: Add dots/indicators
+    const addDotButtons = () => {
+      const parentNode = emblaNode.parentNode;
+      if (!parentNode) return;
+
+      const dotsContainer = document.createElement('div');
+      dotsContainer.className = 'embla__dots flex justify-center mt-6 gap-2';
+
+      embla.scrollSnapList().forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className =
+          'embla__dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-colors';
+        dot.addEventListener('click', () => embla.scrollTo(index));
+        dotsContainer.appendChild(dot);
+      });
+
+      parentNode.appendChild(dotsContainer);
+
+      const updateDots = () => {
+        const dots = dotsContainer.querySelectorAll('.embla__dot');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle(
+            'bg-white',
+            index === embla.selectedScrollSnap()
+          );
+          dot.classList.toggle(
+            'bg-white/30',
+            index !== embla.selectedScrollSnap()
+          );
+        });
+      };
+
+      embla.on('select', updateDots);
+      embla.on('init', updateDots);
+    };
+
+    // Uncomment to add dot indicators
+    // addDotButtons();
   });
 </script>
 
 <style>
-  @keyframes marquee {
+  /* Embla Carousel Styles */
+  .embla {
+    overflow: hidden;
+  }
+
+  .embla__container {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .embla__slide {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+
+  /* Smooth Marquee CSS */
+  .marquee-container {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+  }
+
+  .marquee-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-shrink: 0;
+    min-width: 100%;
+    animation: scroll-left 30s linear infinite;
+  }
+
+  .marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-left {
     0% {
       transform: translateX(0);
     }
@@ -204,11 +328,19 @@ const brands = [
     }
   }
 
-  .animate-marquee {
-    animation: marquee 40s linear infinite;
+  .marquee-content {
+    will-change: transform;
   }
 
-  .animate-marquee:hover {
-    animation-play-state: paused;
+  @media (max-width: 768px) {
+    .marquee-content {
+      animation-duration: 20s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-content {
+      animation-duration: 60s;
+    }
   }
 </style>

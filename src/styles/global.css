@@ -7,7 +7,6 @@
   --color-modal-blue: rgb(231, 245, 254);
   --color-modal-blue-dark: rgb(80, 169, 238);
 
-  --color-footer: #1c5163;
   --color-footer-light: #f3f4f6;
 }
 
@@ -26,6 +25,11 @@
   }
 
   .reveal.visible {
+    @apply opacity-100 translate-y-0 rotate-0 blur-none;
+  }
+
+  /* No-JS fallback - show elements by default when JS is disabled */
+  .no-js .reveal {
     @apply opacity-100 translate-y-0 rotate-0 blur-none;
   }
 }
@@ -75,10 +79,22 @@
 }
 
 .glow-card:hover {
-  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg))
+  transform: perspective(1000px) translateY(var(--reveal-y, 0px))
+    rotate(var(--reveal-rotate, 0deg)) rotateX(var(--tilt-x, 0deg))
     rotateY(var(--tilt-y, 0deg)) scale(1.02);
 }
 
 .glow-card:not(:hover) {
-  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);
+  transform: perspective(1000px) translateY(var(--reveal-y, 0px))
+    rotate(var(--reveal-rotate, 0deg)) rotateX(0deg) rotateY(0deg) scale(1);
+}
+
+/* No-JS fallback - disable glow effects when JS is disabled */
+.no-js .glow-card {
+  transform: none !important;
+}
+
+.no-js .glow-card::before,
+.no-js .glow-card::after {
+  display: none;
 }
