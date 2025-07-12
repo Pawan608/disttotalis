@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import totalisLogo from '../assets/totalis-logo.png';
-import { Hamburger, Menu } from '@lucide/astro';
+import { X, Menu } from '@lucide/astro';
 ---
 
 <header class="z-20 w-full fixed lg:top-4 top-2">
@@ -16,54 +16,181 @@ import { Hamburger, Menu } from '@lucide/astro';
         layout="constrained"
         class={'w-24'}
       />
-      <!-- <a href="/" class="text-lg font-semibold">Totalis.</a> -->
     </div>
 
     <!-- Mobile menu button -->
     <button
       id="menu-toggle"
-      class="md:hidden text-gray-700 focus:outline-none"
+      class="md:hidden text-gray-700 focus:outline-none transition-transform duration-300 hover:scale-110"
       aria-label="Toggle menu"
     >
-      <Menu />
+      <Menu class="w-6 h-6" />
     </button>
 
-    <!-- Links -->
-    <ul
-      id="mobile-menu"
-      class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-gray-600 font-medium absolute md:static bg-white w-full left-0 top-full md:w-auto md:bg-transparent px-4 md:px-0 shadow md:shadow-none z-50"
-    >
+    <!-- Desktop Links -->
+    <ul class="hidden md:flex flex-row space-x-6 text-gray-600 font-medium">
       <li>
         <a
           href="/"
-          class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs"
+          class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs transition-colors duration-200"
           >Home</a
         >
       </li>
       <li>
         <a
           href="/about"
-          class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs"
+          class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs transition-colors duration-200"
           >About</a
         >
       </li>
       <li>
         <a
           href="/contact"
-          class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs"
+          class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs transition-colors duration-200"
           >Contact</a
         >
       </li>
     </ul>
   </nav>
 
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toggleBtn = document.getElementById('menu-toggle');
-      const menu = document.getElementById('mobile-menu');
-      toggleBtn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-      });
-    });
-  </script>
+  <!-- Mobile Overlay Menu -->
+  <div
+    id="mobile-overlay"
+    class="fixed inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100 backdrop-blur-md z-50 transform -translate-y-full transition-transform duration-500 ease-in-out md:hidden"
+  >
+    <!-- Close Button -->
+    <button
+      id="menu-close"
+      class="absolute top-8 right-6 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+      aria-label="Close menu"
+    >
+      <X class="w-8 h-8" />
+    </button>
+
+    <!-- Menu Content -->
+    <div class="flex flex-col justify-center items-center h-full space-y-12">
+      <!-- Logo -->
+      <div class="mb-8">
+        <Image
+          src={totalisLogo}
+          format="avif"
+          alt={'Totalis Brand Logo'}
+          layout="constrained"
+          class={'w-32 opacity-90'}
+        />
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="text-center space-y-8">
+        <a
+          href="/"
+          class="block text-4xl font-light text-gray-800 hover:text-primary transition-all duration-300 hover:scale-110 hover:tracking-wider"
+          >Home</a
+        >
+        <a
+          href="/about"
+          class="block text-4xl font-light text-gray-800 hover:text-primary transition-all duration-300 hover:scale-110 hover:tracking-wider"
+          >About</a
+        >
+        <a
+          href="/contact"
+          class="block text-4xl font-light text-gray-800 hover:text-primary transition-all duration-300 hover:scale-110 hover:tracking-wider"
+          >Contact</a
+        >
+      </nav>
+
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl"
+      >
+      </div>
+      <div
+        class="absolute bottom-1/4 right-1/4 w-40 h-40 bg-gradient-to-tl from-blue-200/20 to-transparent rounded-full blur-3xl"
+      >
+      </div>
+    </div>
+
+    <!-- Bottom Accent -->
+    <div
+      class="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary via-blue-500 to-purple-500"
+    >
+    </div>
+  </div>
 </header>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('menu-toggle');
+    const closeBtn = document.getElementById('menu-close');
+    const overlay = document.getElementById('mobile-overlay');
+    const body = document.body;
+
+    function openMenu() {
+      overlay.classList.remove('-translate-y-full');
+      overlay.classList.add('translate-y-0');
+      body.classList.add('overflow-hidden');
+
+      // Animate menu items
+      const menuItems = overlay.querySelectorAll('nav a');
+      menuItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        setTimeout(
+          () => {
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          },
+          index * 100 + 200
+        );
+      });
+    }
+
+    function closeMenu() {
+      overlay.classList.add('-translate-y-full');
+      overlay.classList.remove('translate-y-0');
+      body.classList.remove('overflow-hidden');
+    }
+
+    toggleBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+
+    // Close on link click
+    const menuLinks = overlay.querySelectorAll('nav a');
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function (e) {
+      if (
+        e.key === 'Escape' &&
+        !overlay.classList.contains('-translate-y-full')
+      ) {
+        closeMenu();
+      }
+    });
+  });
+</script>
+
+<style>
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -194,9 +194,7 @@ const brands = [demoBrand, demoBrand, demoBrand];
     };
 
     // Initialize Embla with autoplay plugin (optional)
-    const embla = EmblaCarousel(emblaNode, options, [
-      // Autoplay({ delay: 4000, stopOnInteraction: false }) // Uncomment for autoplay
-    ]);
+    const embla = EmblaCarousel(emblaNode, options);
 
     // Button functionality
     const updateButtons = () => {
@@ -227,50 +225,10 @@ const brands = [demoBrand, demoBrand, demoBrand];
         embla.scrollNext();
       }
     });
-
-    // Optional: Add dots/indicators
-    const addDotButtons = () => {
-      const parentNode = emblaNode.parentNode;
-      if (!parentNode) return;
-
-      const dotsContainer = document.createElement('div');
-      dotsContainer.className = 'embla__dots flex justify-center mt-6 gap-2';
-
-      embla.scrollSnapList().forEach((_, index) => {
-        const dot = document.createElement('button');
-        dot.className =
-          'embla__dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-colors';
-        dot.addEventListener('click', () => embla.scrollTo(index));
-        dotsContainer.appendChild(dot);
-      });
-
-      parentNode.appendChild(dotsContainer);
-
-      const updateDots = () => {
-        const dots = dotsContainer.querySelectorAll('.embla__dot');
-        dots.forEach((dot, index) => {
-          dot.classList.toggle(
-            'bg-white',
-            index === embla.selectedScrollSnap()
-          );
-          dot.classList.toggle(
-            'bg-white/30',
-            index !== embla.selectedScrollSnap()
-          );
-        });
-      };
-
-      embla.on('select', updateDots);
-      embla.on('init', updateDots);
-    };
-
-    // Uncomment to add dot indicators
-    // addDotButtons();
   });
 </script>
 
 <style>
-  /* Embla Carousel Styles */
   .embla {
     overflow: hidden;
   }
@@ -283,64 +241,5 @@ const brands = [demoBrand, demoBrand, demoBrand];
   .embla__slide {
     flex: 0 0 auto;
     min-width: 0;
-  }
-
-  /* Smooth Marquee CSS */
-  .marquee-container {
-    display: flex;
-    overflow: hidden;
-    user-select: none;
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 5%,
-      black 95%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 5%,
-      black 95%,
-      transparent
-    );
-  }
-
-  .marquee-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-shrink: 0;
-    min-width: 100%;
-    animation: scroll-left 30s linear infinite;
-  }
-
-  .marquee-container:hover .marquee-content {
-    animation-play-state: paused;
-  }
-
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  .marquee-content {
-    will-change: transform;
-  }
-
-  @media (max-width: 768px) {
-    .marquee-content {
-      animation-duration: 20s;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-content {
-      animation-duration: 60s;
-    }
   }
 </style>
