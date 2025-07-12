@@ -163,14 +163,19 @@ const brands = [
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
+  if (!carousel || !prevBtn || !nextBtn) {
+    console.error('Carousel or buttons not found');
+    return;
+  }
+
   const cardWidth = window.innerWidth < 768 ? 304 : 344; // card width + gap
   const totalCards = 6;
   const maxIndex = window.innerWidth < 768 ? totalCards - 1 : totalCards - 4;
 
-  function updateCarousel() {
+  const updateCarousel = () => {
     const translateX = -currentIndex * cardWidth;
     carousel.style.transform = `translateX(${translateX}px)`;
-  }
+  };
 
   prevBtn.addEventListener('click', () => {
     currentIndex = Math.max(0, currentIndex - 1);

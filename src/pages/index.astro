@@ -112,7 +112,7 @@ const climaticCapsules = [
         {
           climaticCapsules.map((item, i) => (
             <div
-              class="group flex flex-col relative p-6 rounded-xl h-72 border border-primary/30 bg-white reveal hover:before:opacity-100 before:transition-opacity before:duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-primary/20 before:blur-2xl before:opacity-0"
+              class="glow-card flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden h-72 bg-white reveal"
               data-delay={i * 200}
             >
               <div class="mb-4 grow">
@@ -126,10 +126,18 @@ const climaticCapsules = [
         }
       </div>
     </div>
-
-    <!-- CTA -->
   </section>
   <section id="projects">
     <ProjectSlider />
   </section>
 </Layout>
+
+<script>
+  import { initCardGlowEffect } from '../scripts/glow';
+  import { initRevealObserver } from '../scripts/reveal';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initRevealObserver();
+    initCardGlowEffect();
+  });
+</script>
