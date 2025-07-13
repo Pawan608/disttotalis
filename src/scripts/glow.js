@@ -7,30 +7,19 @@ export function initCardGlowEffect() {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Existing glow position
+      // Set glow position
       card.style.setProperty('--x', `${x}px`);
       card.style.setProperty('--y', `${y}px`);
 
-      // Fixed tilt calculation with proper center and range
+      // Calculate 3D tilt based on mouse position
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      // Calculate rotation based on distance from center
       const rotateX = ((y - centerY) / centerY) * -6; // Inverted for natural feel
       const rotateY = ((x - centerX) / centerX) * 6; // Normal direction
 
       card.style.setProperty('--tilt-x', `${rotateX}deg`);
       card.style.setProperty('--tilt-y', `${rotateY}deg`);
-
-      // Set reveal animation transforms based on current state
-      const isVisible = card.classList.contains('visible');
-      if (isVisible) {
-        card.style.setProperty('--reveal-y', '0px');
-        card.style.setProperty('--reveal-rotate', '0deg');
-      } else {
-        card.style.setProperty('--reveal-y', '3rem'); // Same as translate-y-12
-        card.style.setProperty('--reveal-rotate', '2deg');
-      }
     });
   });
 }
