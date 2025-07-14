@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import totalisLogo from '../assets/totalis.png';
 import { X } from '@lucide/astro';
-import abgLogo from '../assets/abg-logo.png';
+import abgLogo from '../assets/abg-logo-no-bg.png';
 
 const links = [
   { href: '/', label: 'Home' },
@@ -12,9 +12,9 @@ const links = [
 ];
 ---
 
-<header class="z-20 w-full fixed top-2 lg:top-4">
+<header class="z-20 w-full fixed top-3.5 lg:top-4">
   <nav
-    class="h-12 mx-auto w-7xl max-w-[calc(100dvw-1.25rem)] bg-[rgba(255,255,255,0.925)] outline-1 outline-[rgba(255,255,255,0.9)] drop-shadow-sm rounded-2xl backdrop-blur-md px-4 sm:px-6 lg:px-8 flex justify-between items-center"
+    class="h-12 mx-auto w-7xl max-w-[calc(100dvw-1.25rem)] bg-[rgba(255,255,255,0.8)] border border-[rgba(255,255,255,0.9)] drop-shadow-sm rounded-2xl backdrop-blur-xl px-4 sm:px-6 lg:px-8 flex justify-between items-center"
   >
     <div class="flex flex-row items-center">
       <Image
@@ -22,45 +22,63 @@ const links = [
         format="avif"
         alt="Totalis Brand Logo"
         layout="constrained"
-        class="w-28"
+        class="w-30"
       />
     </div>
 
     <!-- Mobile menu button -->
-    <button
-      id="menu-toggle"
-      class="md:hidden text-gray-700 focus:outline-none transition-transform duration-300 hover:scale-110"
-      aria-label="Toggle menu"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        class="size-6 stroke-zinc-800"
+    <div class="md:hidden flex items-center gap-2">
+      <Image
+        src={abgLogo}
+        format="avif"
+        alt={'Aditya Birla Group Brand Logo'}
+        layout="constrained"
+        class={'w-10'}
+      />
+      <button
+        id="menu-toggle"
+        class="text-gray-700 focus:outline-none transition-transform duration-300 hover:scale-110"
+        aria-label="Toggle menu"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
-      </svg>
-    </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          class="size-6 stroke-zinc-800"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 9h16.5m-16.5 6.75h16.5"></path>
+        </svg>
+      </button>
+    </div>
 
     <!-- Desktop Links -->
-    <ul class="hidden md:flex flex-row space-x-6 text-gray-600 font-medium">
-      {
-        links.map(({ href, label }) => (
-          <li>
-            <a
-              href={href}
-              class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs transition-colors duration-200"
-            >
-              {label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="hidden md:flex gap-6 items-center">
+      <ul class="flex space-x-6 text-gray-700 font-medium">
+        {
+          links.map(({ href, label }) => (
+            <li>
+              <a
+                href={href}
+                class="block hover:text-primary hover:underline underline-offset-4 decoration-primary uppercase text-xs transition-colors duration-200"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <Image
+        src={abgLogo}
+        format="avif"
+        alt={'Aditya Birla Group Brand Logo'}
+        layout="constrained"
+        class={'w-10'}
+      />
+    </div>
   </nav>
 
   <!-- Mobile Overlay Menu -->
@@ -95,9 +113,9 @@ const links = [
           links.map(({ href, label }) => (
             <a
               href={href}
-              class="block text-3xl font-light text-gray-800 hover:text-primary transition-all duration-300 hover:scale-105"
+              class="block text-3xl px-2 font-light text-gray-800 hover:text-primary transition-all transform duration-300 ease-in hover:scale-105"
             >
-              {label}
+              <span>{label}</span>
             </a>
           ))
         }

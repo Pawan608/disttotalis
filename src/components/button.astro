@@ -23,6 +23,9 @@ if (variant === 'primary') {
 } else if (variant === 'secondary') {
   className +=
     'bg-primary/5 border-2 border-primary text-primary-glass-text backdrop-blur-sm backdrop-brightness-110 focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
+} else if (variant === 'outline') {
+  className +=
+    'border-2 border-primary text-primary focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
 } else {
   className +=
     'bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-400';

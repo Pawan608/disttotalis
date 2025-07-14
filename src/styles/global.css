@@ -84,6 +84,13 @@
     @apply relative;
     transform-style: preserve-3d;
     transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+
+    --x: 0;
+    --y: 0;
   }
 
   .glow-card::before,
