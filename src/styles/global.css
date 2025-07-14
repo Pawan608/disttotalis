@@ -1,11 +1,14 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: rgb(117, 180, 75);
-  --color-primary-dark: rgb(89, 135, 56);
-  --color-primary-light: rgb(140, 210, 100);
-  --color-modal-blue: rgb(231, 245, 254);
-  --color-modal-blue-dark: rgb(80, 169, 238);
+  --color-primary: rgba(97, 182, 54, 1);
+  --color-primary-dark: rgb(75, 135, 42);
+  --color-primary-light: rgb(160, 220, 120);
+  --color-primary-glass-text: hsl(100, 5%, 98%);
+  --color-secondary: rgba(44, 42, 124, 1);
+  --color-secondary-light: rgba(121, 119, 234, 1);
+  --color-modal-blue: rgb(228, 246, 255);
+  --color-modal-blue-dark: rgb(30, 160, 225);
   --color-footer-light: #f3f4f6;
 }
 

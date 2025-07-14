@@ -1,0 +1,112 @@
+---
+import { CheckCircle, XCircle } from '@lucide/astro';
+import SectionHeading from '../components/section-heading.astro';
+
+// Comparison table data
+const comparisonData = [
+  {
+    benefit: 'High Structural Strength',
+    aluminium: { status: 'positive', text: 'Yes' },
+    upvc: { status: 'negative', text: 'Limited' },
+  },
+  {
+    benefit: 'Slim, Sleek Aesthetics',
+    aluminium: { status: 'positive', text: 'Ultra-slim frames' },
+    upvc: { status: 'negative', text: 'Bulky' },
+  },
+  {
+    benefit: 'Long-term Durability',
+    aluminium: { status: 'positive', text: 'Rust & Warp proof' },
+
+    upvc: { status: 'negative', text: 'Prone to Discolouration & Cracks' },
+  },
+  {
+    benefit: 'Fire & Heat Resistance',
+    aluminium: { status: 'positive', text: 'Non-combustible' },
+    upvc: { status: 'negative', text: 'Melts easily' },
+  },
+  {
+    benefit: 'Eco-Friendly & Recyclable',
+    aluminium: { status: 'positive', text: '100% Recyclable' },
+    upvc: { status: 'negative', text: 'Plastic waste' },
+  },
+  {
+    benefit: 'Customisation Flexibility',
+    aluminium: { status: 'positive', text: 'High' },
+    upvc: { status: 'negative', text: 'Limited' },
+  },
+  {
+    benefit: 'Thermal & Acoustic Insulation',
+    aluminium: { status: 'positive', text: 'Superior Technologies' },
+    upvc: { status: 'negative', text: 'Basic only' },
+  },
+  {
+    benefit: 'Premium Look & Feel',
+    aluminium: { status: 'positive', text: 'Architectural Grade' },
+    upvc: { status: 'negative', text: 'Plastic finish' },
+  },
+];
+---
+
+<!-- Comparison Table Section -->
+<section id="checklist-table" class="px-4 max-w-6xl mx-auto">
+  <div class="text-center py-8 lg:py-16">
+    <SectionHeading
+      title="Engineered to Outperform uPVC"
+      description="Why system aluminium is the smarter, stronger choice."
+    />
+
+    <!-- Comparison Table -->
+    <div class="mt-8 lg:mt-12">
+      <div
+        class="min-w-full bg-white rounded-2xl shadow-lg overflow-hidden reveal"
+        data-delay="100"
+      >
+        <!-- Table Header -->
+        <div class="grid grid-cols-3 bg-secondary text-white">
+          <div class="p-4 lg:p-6 text-left font-semibold text-lg">Benefit</div>
+          <div
+            class="p-4 lg:p-6 text-center font-semibold text-lg border-l border-secondary"
+          >
+            Aluminium
+          </div>
+          <div
+            class="p-4 lg:p-6 text-center font-semibold text-lg border-l border-secondary"
+          >
+            uPVC
+          </div>
+        </div>
+
+        <!-- Table Body -->
+        {
+          comparisonData.map((row, i) => (
+            <div class={'grid grid-cols-3 reveal'} data-delay={i * 100}>
+              <div
+                class="p-4 lg:p-6 text-left font-medium text-gray-800 border-b border-gray-200 text-sm md:text-base bg-[rgb(223,255,208)]
+"
+              >
+                <span>{row.benefit}</span>
+              </div>
+              <div class="p-4 lg:p-6 border-b border-gray-200 border-l bg-[rgb(240,255,230)]">
+                <div class="flex items-center gap-2">
+                  <CheckCircle class="size-4 md:size-5 text-green-500 shrink-0" />
+                  <span class="text-green-700 text-left font-medium text-sm md:text-base">
+                    {row.aluminium.text}
+                  </span>
+                </div>
+              </div>
+              <div class="p-4 lg:p-6 border-b border-gray-200 border-l">
+                <div class="flex items-center gap-2">
+                  <XCircle class="size-4 md:size-5 text-red-600 shrink-0" />
+                  <span class="text-red-700 font-medium break-words text-sm md:text-base">
+                    {row.upvc.text}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

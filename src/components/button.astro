@@ -1,20 +1,31 @@
 ---
-const { title, onClick, variant, reveal, animationDelay, classList } =
-  Astro.props;
+const {
+  title,
+  onClick,
+  variant = 'default',
+  reveal,
+  animationDelay,
+  classList,
+  disabled = false,
+  ariaLabel,
+  ariaPressed,
+  type = 'button',
+} = Astro.props;
 
 let className =
-  'inline-flex items-center justify-center gap-2 cursor-pointer py-2 px-4 rounded-xl';
+  'inline-flex items-center justify-center gap-2 cursor-pointer py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
 className += ' ';
 
 if (variant === 'primary') {
   className +=
-    'bg-primary hover:bg-primary-light hover:scale-95 outline-2 outline-transparent outline-offset-4 hover:outline-primary text-white ';
+    'bg-primary/90 backdrop-blur-sm backdrop-brightness-130 border border-primary text-white focus:ring-primary outline-transparent hover:outline-primary outline-offset-8 hover:outline-offset-4 outline-2 hover:scale-95';
 } else if (variant === 'secondary') {
   className +=
-    'bg-transparent border border-green-500 hover:bg-green-600 hover:text-white text-green-500';
+    'bg-primary/5 border-2 border-primary text-primary-glass-text backdrop-blur-sm backdrop-brightness-110 focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
 } else {
-  className += 'bg-gray-200 hover:bg-gray-300 text-gray-800';
+  className +=
+    'bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-400';
 }
 
 if (reveal) {
@@ -26,8 +37,26 @@ if (classList) {
 }
 ---
 
-<button onclick={onClick} class={className} data-delay={animationDelay}>
+<button
+  onclick={onClick}
+  class={className}
+  data-delay={animationDelay}
+  type={type}
+  disabled={disabled}
+  aria-label={ariaLabel || title}
+  aria-pressed={ariaPressed}
+  role="button"
+  tabindex={disabled ? -1 : 0}
+>
   <slot name="startIcon" />
-  <span>{title}</span>
+  {title && <span>{title}</span>}
   <slot name="endIcon" />
 </button>
+
+<style>
+  /* Ensure icons don't shrink during animations */
+  button [slot='startIcon'],
+  button [slot='endIcon'] {
+    flex-shrink: 0;
+  }
+</style>

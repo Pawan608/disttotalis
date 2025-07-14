@@ -1,0 +1,95 @@
+---
+import {
+  Droplet,
+  Layers,
+  RotateCcw,
+  Zap,
+  VolumeX,
+  Palette,
+  Lock,
+  Recycle,
+} from '@lucide/astro';
+import SectionHeading from '../components/section-heading.astro';
+
+// Features that set Totalis apart
+const totalisFeatures = [
+  {
+    title: 'High-Quality Aluminium',
+    description: 'Long lasting durability from Hindalco',
+    icon: Layers,
+  },
+  {
+    title: 'Rollers & Locks',
+    description: 'Superior quality rollers and hassle-free operations.',
+    icon: RotateCcw,
+  },
+  {
+    title: 'Leak-Proof Sealing',
+    description: 'Keeps interiors dry even in heavy monsoons.',
+    icon: Droplet,
+  },
+  {
+    title: 'Laminated and DGU Glass',
+    description: 'Helps maintain room temperature efficiently.',
+    icon: Zap,
+  },
+  {
+    title: 'Acoustic Control',
+    description: 'Blocks outdoor noise for peaceful indoors.',
+    icon: VolumeX,
+  },
+  {
+    title: 'Custom Finishes',
+    description: 'Choose from a range of premium colours.',
+    icon: Palette,
+  },
+  {
+    title: 'Superior Quality Locks',
+    description: 'Enhanced safety with secure locking system',
+    icon: Lock,
+  },
+  {
+    title: 'Eco-Friendly Build',
+    description: '100% recyclable, made with green metal.',
+    icon: Recycle,
+  },
+];
+---
+
+<!-- Features That Set Totalis Apart Section -->
+<section id="totalis-features" class="px-4 max-w-6xl mx-auto">
+  <div class="text-center py-8 lg:py-16">
+    <SectionHeading
+      title="Features That Set Totalis Apart"
+      description="Every detail engineered for performance, durability, and design."
+    />
+
+    <div
+      class="mt-8 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+    >
+      {
+        totalisFeatures.map((feature, i) => (
+          <div class="reveal" data-delay={i * 85}>
+            <div class="glow-card bg-white rounded-2xl border border-gray-200 p-6 text-center hover:shadow-lg">
+              <div class="mb-4 flex justify-center">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <feature.icon
+                    size={32}
+                    class="stroke-primary"
+                    stroke-width={1.5}
+                  />
+                </div>
+              </div>
+              <h4 class="font-semibold text-lg mb-2 text-secondary">
+                {feature.title}
+              </h4>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

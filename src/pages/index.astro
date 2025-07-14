@@ -1,20 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import Hero from '../components/hero.astro';
+import Hero from '../sections/hero.astro';
 import Layout from '../layouts/layout.astro';
 import hindalcoLogo from '../assets/hindalco.jpg';
 
-import {
-  Sparkle,
-  Settings,
-  Wind,
-  Droplet,
-  AirVent,
-  CheckCircle,
-  XCircle,
-} from '@lucide/astro';
-import ProjectSlider from '../components/project-slider.astro';
+import { Sparkle, Settings, Wind, Droplet, AirVent } from '@lucide/astro';
+import Projects from '../sections/projects.astro';
 import SectionHeading from '../components/section-heading.astro';
+import FeaturesSection from '../sections/features.astro';
+import TableComparisonSection from '../sections/table-comparison.astro';
 
 // General performance stats
 const capsules = [
@@ -51,50 +45,6 @@ const climaticCapsules = [
     icon: AirVent,
   },
 ];
-
-// Comparison table data
-const comparisonData = [
-  {
-    benefit: 'High Structural Strength',
-    aluminium: { status: 'positive', text: 'Yes' },
-    upvc: { status: 'negative', text: 'Limited' },
-  },
-  {
-    benefit: 'Slim, Sleek Aesthetics',
-    aluminium: { status: 'positive', text: 'Ultra-slim frames' },
-    upvc: { status: 'negative', text: 'Bulky' },
-  },
-  {
-    benefit: 'Long-term Durability',
-    aluminium: { status: 'positive', text: 'Rust & Warp proof' },
-    upvc: { status: 'negative', text: 'Prone to Discolouration/Cracks' },
-  },
-  {
-    benefit: 'Fire & Heat Resistance',
-    aluminium: { status: 'positive', text: 'Non-combustible' },
-    upvc: { status: 'negative', text: 'Melts easily' },
-  },
-  {
-    benefit: 'Eco-Friendly & Recyclable',
-    aluminium: { status: 'positive', text: '100% Recyclable' },
-    upvc: { status: 'negative', text: 'Plastic waste' },
-  },
-  {
-    benefit: 'Customisation Flexibility',
-    aluminium: { status: 'positive', text: 'High' },
-    upvc: { status: 'negative', text: 'Limited' },
-  },
-  {
-    benefit: 'Thermal & Acoustic Insulation',
-    aluminium: { status: 'positive', text: 'Superior Technologies' },
-    upvc: { status: 'negative', text: 'Basic only' },
-  },
-  {
-    benefit: 'Premium Look & Feel',
-    aluminium: { status: 'positive', text: 'Architectural Grade' },
-    upvc: { status: 'negative', text: 'Plastic finish' },
-  },
-];
 ---
 
 <Layout title="Totalis - By Hindalco" htmlClassName="no-js">
@@ -102,26 +52,28 @@ const comparisonData = [
 
   <section id="content" class="px-4 max-w-6xl mx-auto">
     <!-- Hero Section -->
-    <div class="my-4 grid md:grid-cols-2 py-4 items-center">
+    <div class="my-4 grid md:grid-cols-2 not-md:gap-4 py-4 items-center">
       <Image
         src={hindalcoLogo}
         alt="Hindalco"
         layout="constrained"
-        class="px-4 py-8 md:px-16 reveal"
+        class="reveal justify-self-center"
         data-delay="100"
         loading="eager"
         decoding="async"
       />
 
       <div
-        class="relative bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-xl reveal"
+        class="relative bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl reveal"
         data-delay="100"
       >
         <Sparkle class="absolute top-6 right-4 stroke-0 fill-amber-300" />
-        <h3 class="text-3xl py-2 font-semibold">
+        <h3 class="py-2 font-semibold text-[clamp(1.5rem,2.5vw,2rem)]">
           Backed by a Legacy of Material Excellence
         </h3>
-        <p class="font-light text-md py-2 tracking-wide">
+        <p
+          class="font-light py-2 tracking-wide text-[clamp(0.95rem,1.8vw,1.05rem)]"
+        >
           Totalis is crafted by Hindalco, a global aluminium leader and part of
           the Aditya Birla Group — a name trusted for generations.
         </p>
@@ -161,7 +113,35 @@ const comparisonData = [
           climaticCapsules.map((item, i) => (
             <div data-delay={(i + 1) * 200} class="reveal relative">
               <div class="glow-card flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden h-72 bg-white">
-                <div class="mb-4 grow">
+                <svg
+                  width="118"
+                  height="187"
+                  viewBox="0 0 118 187"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="z-0 absolute top-0 right-0"
+                >
+                  <defs>
+                    <linearGradient
+                      id="gradient"
+                      x1="126.863"
+                      y1="150.703"
+                      x2="-35.4923"
+                      y2="98.7256"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#61B636" />
+                      <stop offset="1" stop-color="#2C2A7C" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    opacity="0.3"
+                    d="M6.04808 0.5C-1.11859 22.3333 -6.15192 70.3 31.0481 87.5C77.5481 109 99.5479 55.5 78.5479 42.5C57.5479 29.5 27.5479 93 53.0479 135C73.4479 168.6 104.215 183 117.048 186"
+                    stroke="url(#gradient)"
+                  />
+                </svg>
+
+                <div class="mb-4 grow z-10">
                   <item.icon
                     size={64}
                     stroke-width={1}
@@ -178,85 +158,19 @@ const comparisonData = [
     </div>
   </section>
 
-  <!-- Comparison Table Section -->
-  <section id="checklist-table" class="px-4 max-w-6xl mx-auto">
-    <div class="text-center py-8 lg:py-16">
-      <SectionHeading
-        title="Engineered to Outperform uPVC"
-        description="Why system aluminium is the smarter, stronger choice."
-      />
+  <TableComparisonSection />
 
-      <!-- Comparison Table -->
-      <div class="mt-8 lg:mt-12 overflow-x-auto">
-        <div
-          class="min-w-full bg-white rounded-2xl shadow-lg overflow-hidden reveal"
-          data-delay="100"
-        >
-          <!-- Table Header -->
-          <div
-            class="grid grid-cols-3 bg-gradient-to-r from-blue-900 to-blue-800 text-white"
-          >
-            <div class="p-4 lg:p-6 text-left font-semibold text-lg">
-              Benefit
-            </div>
-            <div
-              class="p-4 lg:p-6 text-center font-semibold text-lg border-l border-blue-700"
-            >
-              Aluminium
-            </div>
-            <div
-              class="p-4 lg:p-6 text-center font-semibold text-lg border-l border-blue-700"
-            >
-              uPVC
-            </div>
-          </div>
+  <FeaturesSection />
 
-          <!-- Table Body -->
-          {
-            comparisonData.map((row, i) => (
-              <div
-                class={`grid grid-cols-3 ${i % 2 === 0 ? 'bg-green-50' : 'bg-white'} reveal`}
-                data-delay={i * 100}
-              >
-                <div class="p-4 lg:p-6 text-left font-medium text-gray-800 border-b border-gray-200">
-                  {row.benefit}
-                </div>
-                <div class="p-4 lg:p-6 text-center border-b border-gray-200 border-l">
-                  <div class="flex items-center gap-2">
-                    <CheckCircle class="w-5 h-5 text-green-500" />
-                    <span class="text-green-700 font-medium">
-                      {row.aluminium.text}
-                    </span>
-                  </div>
-                </div>
-                <div class="p-4 lg:p-6 text-center border-b border-gray-200 border-l">
-                  <div class="flex items-center gap-2">
-                    <XCircle class="w-5 h-5 text-red-600" />
-                    <span class="text-red-700 font-medium">
-                      {row.upvc.text}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
+  <Projects />
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <ProjectSlider />
-  </section>
+  <script>
+    import { initCardGlowEffect } from '../scripts/glow';
+    import { initRevealObserver } from '../scripts/reveal';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initRevealObserver();
+      initCardGlowEffect();
+    });
+  </script>
 </Layout>
-
-<script>
-  import { initCardGlowEffect } from '../scripts/glow';
-  import { initRevealObserver } from '../scripts/reveal';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    initRevealObserver();
-    initCardGlowEffect();
-  });
-</script>

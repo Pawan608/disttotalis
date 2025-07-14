@@ -1,14 +1,14 @@
 ---
-import heroImage from '../assets/sliding-wind.webp';
+import heroImage from '../assets/hero-totalis.png';
 import { Image } from 'astro:assets';
 import Button from '../components/button.astro';
-import StaggerText from './stagger-text.astro';
+import StaggerText from '../components/stagger-text.astro';
 import { Download } from '@lucide/astro';
 ---
 
 <section
   id="hero"
-  class="relative w-full min-h-[85vh] max-h-[95vh] overflow-hidden flex items-center"
+  class="relative w-full min-h-[500px] h-[90vh] overflow-hidden flex items-center"
 >
   <div class="absolute inset-0 w-full h-full z-0">
     <Image
@@ -24,34 +24,44 @@ import { Download } from '@lucide/astro';
       alt="Hero Background"
       class="w-full h-full object-cover"
     />
-    <div class="absolute inset-0 bg-black/60"></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.85)] to-[rgba(0,0,0,0.15)]"
+    >
+    </div>
   </div>
-  <div class="relative z-10 text-white px-4 md:ml-16 max-w-2xl">
+
+  <div
+    class="relative w-full pt-[clamp(4.25rem,8vh,6rem)] pb-[clamp(2rem,4vh,3rem)] z-10 text-white px-[clamp(1rem,4vw,4rem)] md:ml-16 max-w-4xl"
+  >
     <h1
-      class="text-6xl md:text-8xl text-shadow-md text-primary font-bold mb-4 tracking-tight"
+      class="text-[clamp(3.5rem,8vw,6rem)] text-shadow-md text-primary font-bold mb-[clamp(1rem,3vh,2rem)] tracking-tight leading-[0.9]"
     >
       <StaggerText text="TESTED HAI" baseDelay={0} step={120} />
       <br />
       <StaggerText text="TRUSTED HAI" baseDelay={400} step={120} />
     </h1>
+
     <p
-      class="text-2xl lg:text-4xl mb-6 max-w-lg text-wrap text-shadow-sm reveal"
+      class="text-[clamp(1.725rem,3.5vw,2.25rem)] mb-[clamp(1.5rem,4vh,3rem)] max-w-[clamp(20ch,60vw,32ch)] text-wrap text-shadow-sm reveal leading-tight"
       data-delay={870}
     >
       System aluminium windows made for Indian homes
     </p>
-    <div class="flex flex-col sm:flex-row gap-4">
+
+    <div class="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1rem)]">
       <Button
         title="Book a free consultation"
         reveal={true}
         animationDelay={800}
         variant="primary"
+        classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)]"
       />
       <Button
         title="Download Brochure"
         reveal={true}
         animationDelay={1000}
         variant="secondary"
+        classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)]"
       >
         <Download slot={'startIcon'} size={16} />
       </Button>

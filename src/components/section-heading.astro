@@ -2,9 +2,14 @@
 const { title, description } = Astro.props;
 ---
 
-<h2 class="text-4xl text-gray-800 font-semibold reveal">
+<h2
+  class="text-[clamp(1.75rem,4vw,2.75rem)] text-gray-800 font-semibold reveal"
+>
   {title}
 </h2>
-<p class="text-lg text-gray-700 mt-2 reveal" data-delay="100">
+<p
+  class="text-[clamp(1rem,2vw,1.25rem)] text-gray-700 mt-2 reveal"
+  data-delay="100"
+>
   {description}
 </p>

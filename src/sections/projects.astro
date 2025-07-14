@@ -49,9 +49,9 @@ const properties = [
 const brands = [demoBrand, demoBrand, demoBrand];
 ---
 
-<section class="w-full">
+<section id="projects" class="w-full">
   <!-- Properties Section -->
-  <div class="bg-indigo-800 py-16 px-4 z-0">
+  <div class="bg-secondary md:py-24 py-16 px-4 z-0">
     <div class="px-4 max-w-6xl mx-auto">
       <!-- Header with Navigation -->
       <div class="flex items-center justify-between mb-12">
@@ -61,14 +61,14 @@ const brands = [demoBrand, demoBrand, demoBrand];
         <div class="flex items-center gap-3 reveal" data-delay="200">
           <button
             id="embla-prev"
-            class="text-white hover:text-indigo-300 transition-colors disabled:opacity-50"
+            class="text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
             aria-label="Previous slide"
           >
             <CircleArrowLeft size={48} stroke-width={1.5} />
           </button>
           <button
             id="embla-next"
-            class="text-white hover:text-indigo-300 transition-colors disabled:opacity-50"
+            class="text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
             aria-label="Next slide"
           >
             <CircleArrowRight size={48} stroke-width={1.5} />
@@ -114,10 +114,10 @@ const brands = [demoBrand, demoBrand, demoBrand];
   </div>
 
   <!-- Smooth Marquee Section -->
-  <div class="bg-white h-28 z-10 flex items-center overflow- relative">
+  <div class="h-28 z-10 flex items-center relative">
     <!-- Trust Badge -->
     <span
-      class="absolute z-20 top-0 rounded-full backdrop-blur-sm bg-white px-8 py-2 -translate-y-6 -translate-x-1/2 left-1/2 text-center text-indigo-700 text-lg font-light shadow-sm drop-shadow-xs"
+      class="absolute z-20 top-0 rounded-full backdrop-blur-sm bg-white px-8 py-2 -translate-y-6 -translate-x-1/2 left-1/2 text-center text-secondary text-md lg:text-lg font-light shadow-sm drop-shadow-xs text-nowrap"
     >
       Our Trusted Project
     </span>
@@ -144,20 +144,6 @@ const brands = [demoBrand, demoBrand, demoBrand];
           ))
         }
       </div>
-    </div>
-  </div>
-
-  <!-- Testimonials Section -->
-  <div class="bg-gradient-to-r from-green-400 to-green-600 py-16 px-4">
-    <div class="max-w-7xl mx-auto text-center">
-      <h3 class="text-lg font-semibold text-white/90 mb-4">Testimonials</h3>
-      <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-        Real Voices, Genuine Experiences
-      </h2>
-      <p class="text-white/90 text-lg max-w-2xl mx-auto">
-        Discover what our clients say about their transformative experiences
-        working with us
-      </p>
     </div>
   </div>
 </section>
