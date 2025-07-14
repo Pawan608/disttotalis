@@ -58,15 +58,17 @@ const climaticCapsules = [
         src={hindalcoLogo}
         alt="Hindalco"
         layout="constrained"
+        id={'hindalco-logo'}
         class="reveal justify-self-center"
-        data-delay="100"
+        data-delay="800"
         loading="eager"
         decoding="async"
       />
 
       <div
-        class="relative bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl reveal"
-        data-delay="100"
+        class="relative reveal backed-card bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl"
+        id="backed-card"
+        data-delay="800"
       >
         <Sparkle class="absolute top-6 right-4 stroke-0 fill-amber-300" />
         <h3 class="py-2 font-semibold text-[clamp(1.5rem,2.5vw,2rem)]">
@@ -90,7 +92,7 @@ const climaticCapsules = [
           <div class="p-6 rounded-xl not-lg:bg-modal-blue not-lg:reveal flex flex-col gap-2">
             <h2
               class="text-4xl font-bold text-modal-blue-dark reveal"
-              data-delay={i * 50}
+              data-delay={75}
             >
               {capsule.title}
             </h2>
@@ -101,62 +103,62 @@ const climaticCapsules = [
     </div>
 
     <!-- Climatic Capsule Section -->
-    <div class="text-center py-8 lg:py-16">
-      <SectionHeading
-        title="Tested and Certified for Indian Climatic Conditions"
-        description="Totalis system aluminium windows are built for performance. Certified for peace of mind."
-      />
+    <section id="climatic-conditions">
+      <div class="text-center py-8 lg:py-16">
+        <SectionHeading
+          title="Tested and Certified for Indian Climatic Conditions"
+          description="Totalis system aluminium windows are built for performance. Certified for peace of mind."
+        />
 
-      <div
-        class="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left"
-      >
-        {
-          climaticCapsules.map((item, i) => (
-            <div data-delay={(i + 1) * 200} class="reveal relative">
-              <div class="glow-card hover:shadow-lg flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden h-72 bg-white">
-                <svg
-                  width="118"
-                  height="187"
-                  viewBox="0 0 118 187"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="z-0 absolute top-0 right-0"
-                >
-                  <defs>
-                    <linearGradient
-                      id="gradient"
-                      x1="126.863"
-                      y1="150.703"
-                      x2="-35.4923"
-                      y2="98.7256"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#61B636" />
-                      <stop offset="1" stop-color="#2C2A7C" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    opacity="0.3"
-                    d="M6.04808 0.5C-1.11859 22.3333 -6.15192 70.3 31.0481 87.5C77.5481 109 99.5479 55.5 78.5479 42.5C57.5479 29.5 27.5479 93 53.0479 135C73.4479 168.6 104.215 183 117.048 186"
-                    stroke="url(#gradient)"
-                  />
-                </svg>
+        <div
+          class="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left"
+        >
+          {
+            climaticCapsules.map((item, i) => (
+              <div data-delay={75 * i} class="reveal relative">
+                <div class="glow-card hover:shadow-lg flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden md:h-72 h-60 bg-white">
+                  <svg
+                    width="118"
+                    height="187"
+                    viewBox="0 0 118 187"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="z-0 absolute top-0 right-0"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="gradient"
+                        x1="126.863"
+                        y1="150.703"
+                        x2="-35.4923"
+                        y2="98.7256"
+                        gradientUnits="userSpaceOnUse"
+                      >
+                        <stop stop-color="#61B636" />
+                        <stop offset="1" stop-color="#2C2A7C" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      opacity="0.3"
+                      d="M6.04808 0.5C-1.11859 22.3333 -6.15192 70.3 31.0481 87.5C77.5481 109 99.5479 55.5 78.5479 42.5C57.5479 29.5 27.5479 93 53.0479 135C73.4479 168.6 104.215 183 117.048 186"
+                      stroke="url(#gradient)"
+                    />
+                  </svg>
 
-                <div class="mb-4 grow z-10">
-                  <item.icon
-                    size={64}
-                    stroke-width={1}
-                    class="stroke-primary"
-                  />
+                  <div class="mb-4 grow z-10">
+                    <item.icon class="stroke-primary size-16 stroke-1" />
+                  </div>
+                  <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
+                  <p class="text-gray-700 text-sm max-w-xs">
+                    {item.description}
+                  </p>
                 </div>
-                <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
-                <p class="text-gray-700 text-sm">{item.description}</p>
               </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
-    </div>
+    </section>
   </section>
 
   <TableComparisonSection />
@@ -172,6 +174,16 @@ const climaticCapsules = [
     import { initRevealObserver } from '../scripts/reveal';
 
     document.addEventListener('DOMContentLoaded', () => {
+      const hindalcoLogo = document.getElementById('hindalco-logo');
+      const backedCard = document.getElementById('backed-card');
+      const isWideScreen = window.innerWidth > 768;
+      const isHeightLarge = window.innerHeight > 650;
+      const hindalcoLogoAnimDelay = isHeightLarge ? 700 : 100;
+      const backedCardAnimDelay = isHeightLarge && isWideScreen ? 750 : 100;
+
+      hindalcoLogo?.setAttribute('data-delay', `${hindalcoLogoAnimDelay}`);
+      backedCard?.setAttribute('data-delay', `${backedCardAnimDelay}`);
+
       initRevealObserver();
       initCardGlowEffect();
     });
