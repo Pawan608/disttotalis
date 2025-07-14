@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Hero from '../sections/hero.astro';
 import Layout from '../layouts/layout.astro';
-import hindalcoLogo from '../assets/hindalco.jpg';
+import hindalcoLogo from '../assets/hindalco-logo.svg';
 
 import { Sparkle, Settings, Wind, Droplet, AirVent } from '@lucide/astro';
 import Projects from '../sections/projects.astro';
@@ -54,16 +54,18 @@ const climaticCapsules = [
   <section id="content" class="px-4 max-w-6xl mx-auto">
     <!-- Hero Section -->
     <div class="my-4 grid md:grid-cols-2 not-md:gap-4 py-4 items-center">
-      <Image
+      <div class="reveal flex item-center pt-8 pb-14">
+        <Image
         src={hindalcoLogo}
         alt="Hindalco"
         layout="constrained"
         id={'hindalco-logo'}
-        class="reveal justify-self-center"
+        class="justify-self-center mx-auto"
         data-delay="800"
         loading="eager"
         decoding="async"
-      />
+        />
+      </div>
 
       <div
         class="relative reveal backed-card bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl"
