@@ -60,17 +60,7 @@ if (classList) {
       role="button"
       tabindex={disabled ? -1 : 0}
     >
-      <slot name="startIcon" />
       <slot />
-      <slot name="endIcon" />
     </button>
   )
 }
-
-<style>
-  /* Ensure icons don't shrink during animations */
-  button [slot='startIcon'],
-  button [slot='endIcon'] {
-    flex-shrink: 0;
-  }
-</style>

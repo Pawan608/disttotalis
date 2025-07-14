@@ -5,15 +5,13 @@ const { text, baseDelay = 0, step = 100, className } = Astro.props;
 const words = text.split(' ');
 ---
 
-<span aria-label={text} role="presentation">
-  {
-    words.map((word: string, i: number) => (
-      <span
-        class={`reveal inline-block whitespace-nowrap ${className}`}
-        data-delay={baseDelay + i * step}
-      >
-        {word}&nbsp;
-      </span>
-    ))
-  }
-</span>
+{
+  words.map((word: string, i: number) => (
+    <span
+      class={`reveal inline-block whitespace-nowrap ${className}`}
+      data-delay={baseDelay + i * step}
+    >
+      {word}&nbsp;
+    </span>
+  ))
+}
