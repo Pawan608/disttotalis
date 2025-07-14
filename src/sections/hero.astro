@@ -50,20 +50,21 @@ import { Download } from '@lucide/astro';
 
     <div class="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1rem)]">
       <Button
-        title="Book a free consultation"
         reveal={true}
         animationDelay={700}
         variant="primary"
         classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)] font-medium"
-      />
+        >Book a Free Consultation</Button
+      >
+
       <Button
-        title="Download Brochure"
         reveal={true}
         animationDelay={900}
         variant="secondary"
         classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)] font-medium"
       >
         <Download slot={'startIcon'} size={16} />
+        Download Brochure
       </Button>
     </div>
   </div>

@@ -1,0 +1,68 @@
+---
+import SectionHeading from '../components/section-heading.astro';
+import CardVectorSvg from '../assets/card-vector.svg';
+
+import { Settings, Wind, Droplet, AirVent } from '@lucide/astro';
+import { Image } from 'astro:assets';
+
+// Climatic performance features
+const climaticCapsules = [
+  {
+    title: 'Engineered Strength',
+    description:
+      'Precision-engineered for structural integrity and long-term durability—even in harsh climates.',
+    icon: Settings,
+  },
+  {
+    title: 'Wind Resistance',
+    description:
+      'Tested for high wind loads to ensure safety in high-rises and coastal zones.',
+    icon: Wind,
+  },
+  {
+    title: 'Water Tightness',
+    description:
+      'Sealed to resist rainwater penetration—protects your interiors during monsoons.',
+    icon: Droplet,
+  },
+  {
+    title: 'Air Infiltration',
+    description:
+      'Engineered to prevent air leakage and enhance energy efficiency indoors.',
+    icon: AirVent,
+  },
+];
+---
+
+<section id="climatic-conditions" class="px-4 max-w-6xl mx-auto">
+  <div class="text-center py-8 lg:py-16">
+    <SectionHeading
+      title="Tested and Certified for Indian Climatic Conditions"
+      description="Totalis system aluminium windows are built for performance. Certified for peace of mind."
+    />
+
+    <div
+      class="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left"
+    >
+      {
+        climaticCapsules.map((item, i) => (
+          <div data-delay={75 * i} class="reveal relative">
+            <div class="glow-card hover:shadow-lg flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden md:h-72 h-60 bg-white">
+              <Image
+                src={CardVectorSvg}
+                alt={'card decoration vector'}
+                class={'z-0 top-0 right-0 absolute'}
+                format="svg"
+              />
+              <div class="mb-4 grow z-10">
+                <item.icon class="stroke-primary size-16 stroke-1" />
+              </div>
+              <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
+              <p class="text-gray-700 text-sm max-w-xs">{item.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

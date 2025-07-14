@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import hindalcoLogo from '../assets/hindalco-logo.svg';
+import { Sparkle } from '@lucide/astro';
+
+// General performance stats
+const capsules = [
+  { title: 'No. 1', description: 'Aluminium Producer Globally' },
+  { title: '52', description: 'Manufacturing Facilities Globally' },
+  { title: '85', description: 'Extrusion Plants in INDIA' },
+  { title: '12', description: 'Global R&D Centres' },
+];
+---
+
+<section id="Credibility" class="px-4 max-w-6xl mx-auto">
+  <div class="my-4 grid md:grid-cols-2 not-md:gap-4 py-4 items-center">
+    <div class="reveal flex item-center pt-8 pb-14">
+      <Image
+        src={hindalcoLogo}
+        alt="Hindalco"
+        format="svg"
+        layout="constrained"
+        id={'hindalco-logo'}
+        class="justify-self-center mx-auto"
+        data-delay="800"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+
+    <div
+      class="relative reveal backed-card bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl"
+      id="backed-card"
+      data-delay="800"
+    >
+      <Sparkle class="absolute top-6 right-4 stroke-0 fill-amber-300" />
+      <h3 class="py-2 font-semibold text-[clamp(1.5rem,2.5vw,2rem)]">
+        Backed by a Legacy of Material Excellence
+      </h3>
+      <p
+        class="font-light py-2 tracking-wide text-[clamp(0.95rem,1.8vw,1.05rem)]"
+      >
+        Totalis is crafted by Hindalco, a global aluminium leader and part of
+        the Aditya Birla Group — a name trusted for generations.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="my-4 grid grid-cols-1 sm:grid-cols-2 lg:bg-modal-blue lg:rounded-2xl lg:grid-cols-4 lg:gap-1.5 gap-2 sm:gap-2.5 text-center"
+  >
+    {
+      capsules.map((capsule, i) => (
+        <div class="p-6 rounded-xl not-lg:bg-modal-blue not-lg:reveal flex flex-col gap-2">
+          <h4
+            class="text-4xl font-bold text-modal-blue-dark reveal"
+            data-delay={75}
+          >
+            {capsule.title}
+          </h4>
+          <p class="text-gray-700 text-sm font-medium">{capsule.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

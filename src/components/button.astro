@@ -4,6 +4,7 @@ const {
   onClick,
   variant = 'default',
   reveal,
+  link,
   animationDelay,
   classList,
   disabled = false,
@@ -40,21 +41,31 @@ if (classList) {
 }
 ---
 
-<button
-  onclick={onClick}
-  class={className}
-  data-delay={animationDelay}
-  type={type}
-  disabled={disabled}
-  aria-label={ariaLabel || title}
-  aria-pressed={ariaPressed}
-  role="button"
-  tabindex={disabled ? -1 : 0}
->
-  <slot name="startIcon" />
-  {title && <span>{title}</span>}
-  <slot name="endIcon" />
-</button>
+{
+  link ? (
+    <a href={link} class={className} data-delay={animationDelay}>
+      <slot name="startIcon" />
+      <slot />
+      <slot name="endIcon" />
+    </a>
+  ) : (
+    <button
+      onclick={onClick}
+      class={className}
+      data-delay={animationDelay}
+      type={type}
+      disabled={disabled}
+      aria-label={ariaLabel || title}
+      aria-pressed={ariaPressed}
+      role="button"
+      tabindex={disabled ? -1 : 0}
+    >
+      <slot name="startIcon" />
+      <slot />
+      <slot name="endIcon" />
+    </button>
+  )
+}
 
 <style>
   /* Ensure icons don't shrink during animations */

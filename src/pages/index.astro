@@ -1,180 +1,27 @@
 ---
-import { Image } from 'astro:assets';
-import Hero from '../sections/hero.astro';
 import Layout from '../layouts/layout.astro';
-import hindalcoLogo from '../assets/hindalco-logo.svg';
 
-import { Sparkle, Settings, Wind, Droplet, AirVent } from '@lucide/astro';
+import Hero from '../sections/hero.astro';
 import Projects from '../sections/projects.astro';
-import SectionHeading from '../components/section-heading.astro';
 import FeaturesSection from '../sections/features.astro';
 import TableComparisonSection from '../sections/table-comparison.astro';
 import CtaEnd from '../sections/cta-end.astro';
-
-// General performance stats
-const capsules = [
-  { title: 'No. 1', description: 'Aluminium Producer Globally' },
-  { title: '52', description: 'Manufacturing Facilities Globally' },
-  { title: '85', description: 'Extrusion Plants in INDIA' },
-  { title: '12', description: 'Global R&D Centres' },
-];
-
-// Climatic performance features
-const climaticCapsules = [
-  {
-    title: 'Engineered Strength',
-    description:
-      'Precision-engineered for structural integrity and long-term durability—even in harsh climates.',
-    icon: Settings,
-  },
-  {
-    title: 'Wind Resistance',
-    description:
-      'Tested for high wind loads to ensure safety in high-rises and coastal zones.',
-    icon: Wind,
-  },
-  {
-    title: 'Water Tightness',
-    description:
-      'Sealed to resist rainwater penetration—protects your interiors during monsoons.',
-    icon: Droplet,
-  },
-  {
-    title: 'Air Infiltration',
-    description:
-      'Engineered to prevent air leakage and enhance energy efficiency indoors.',
-    icon: AirVent,
-  },
-];
+import CredibilitySection from '../sections/credibility.astro';
 ---
 
 <Layout title="Totalis - By Hindalco" htmlClassName="no-js">
   <Hero />
-
-  <section id="content" class="px-4 max-w-6xl mx-auto">
-    <!-- Hero Section -->
-    <div class="my-4 grid md:grid-cols-2 not-md:gap-4 py-4 items-center">
-      <div class="reveal flex item-center pt-8 pb-14">
-        <Image
-        src={hindalcoLogo}
-        alt="Hindalco"
-        layout="constrained"
-        id={'hindalco-logo'}
-        class="justify-self-center mx-auto"
-        data-delay="800"
-        loading="eager"
-        decoding="async"
-        />
-      </div>
-
-      <div
-        class="relative reveal backed-card bg-primary flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl"
-        id="backed-card"
-        data-delay="800"
-      >
-        <Sparkle class="absolute top-6 right-4 stroke-0 fill-amber-300" />
-        <h3 class="py-2 font-semibold text-[clamp(1.5rem,2.5vw,2rem)]">
-          Backed by a Legacy of Material Excellence
-        </h3>
-        <p
-          class="font-light py-2 tracking-wide text-[clamp(0.95rem,1.8vw,1.05rem)]"
-        >
-          Totalis is crafted by Hindalco, a global aluminium leader and part of
-          the Aditya Birla Group — a name trusted for generations.
-        </p>
-      </div>
-    </div>
-
-    <!-- Global Stats -->
-    <div
-      class="my-4 grid grid-cols-1 sm:grid-cols-2 lg:bg-modal-blue lg:rounded-2xl lg:grid-cols-4 lg:gap-1.5 gap-2 sm:gap-2.5 text-center"
-    >
-      {
-        capsules.map((capsule, i) => (
-          <div class="p-6 rounded-xl not-lg:bg-modal-blue not-lg:reveal flex flex-col gap-2">
-            <h2
-              class="text-4xl font-bold text-modal-blue-dark reveal"
-              data-delay={75}
-            >
-              {capsule.title}
-            </h2>
-            <p class="text-gray-700 text-sm">{capsule.description}</p>
-          </div>
-        ))
-      }
-    </div>
-
-    <!-- Climatic Capsule Section -->
-    <section id="climatic-conditions">
-      <div class="text-center py-8 lg:py-16">
-        <SectionHeading
-          title="Tested and Certified for Indian Climatic Conditions"
-          description="Totalis system aluminium windows are built for performance. Certified for peace of mind."
-        />
-
-        <div
-          class="mt-6 lg:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left"
-        >
-          {
-            climaticCapsules.map((item, i) => (
-              <div data-delay={75 * i} class="reveal relative">
-                <div class="glow-card hover:shadow-lg flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden md:h-72 h-60 bg-white">
-                  <svg
-                    width="118"
-                    height="187"
-                    viewBox="0 0 118 187"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="z-0 absolute top-0 right-0"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="gradient"
-                        x1="126.863"
-                        y1="150.703"
-                        x2="-35.4923"
-                        y2="98.7256"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#61B636" />
-                        <stop offset="1" stop-color="#2C2A7C" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      opacity="0.3"
-                      d="M6.04808 0.5C-1.11859 22.3333 -6.15192 70.3 31.0481 87.5C77.5481 109 99.5479 55.5 78.5479 42.5C57.5479 29.5 27.5479 93 53.0479 135C73.4479 168.6 104.215 183 117.048 186"
-                      stroke="url(#gradient)"
-                    />
-                  </svg>
-
-                  <div class="mb-4 grow z-10">
-                    <item.icon class="stroke-primary size-16 stroke-1" />
-                  </div>
-                  <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
-                  <p class="text-gray-700 text-sm max-w-xs">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-  </section>
-
+  <CredibilitySection />
   <TableComparisonSection />
-
   <FeaturesSection />
-
   <Projects />
-
   <CtaEnd />
 
   <script>
     import { initCardGlowEffect } from '../scripts/glow';
     import { initRevealObserver } from '../scripts/reveal';
 
+    // All DOMContentLoaded centralized logic
     document.addEventListener('DOMContentLoaded', () => {
       const hindalcoLogo = document.getElementById('hindalco-logo');
       const backedCard = document.getElementById('backed-card');
