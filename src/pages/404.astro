@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/layout.astro';
+import { AlertCircle } from '@lucide/astro'; // Optional icon
+---
+
+<Layout title="404 - Oops! Not Found">
+  <section
+    class="min-h-screen flex items-center justify-center bg-gray-50 px-6"
+  >
+    <div class="max-w-xl text-center space-y-6">
+      <div class="flex justify-center">
+        <AlertCircle class="size-20 stroke-1 text-red-500" />
+      </div>
+      <h1 class="text-6xl font-bold text-gray-800">404</h1>
+      <p class="text-xl text-gray-600">
+        Oops! The page you're looking for doesn't exist.
+      </p>
+      <a
+        href="/"
+        class="inline-block px-6 py-3 bg-primary text-white text-sm font-medium rounded-2xl shadow hover:bg-primary/90 transition"
+      >
+        Back to Home
+      </a>
+    </div>
+  </section>
+</Layout>

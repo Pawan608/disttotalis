@@ -1,0 +1,48 @@
+---
+import { ChevronUp } from '@lucide/astro';
+---
+
+<script>
+  if (typeof window !== 'undefined') {
+    const btnId = 'scroll-to-top-btn';
+
+    // Scroll monitoring using requestAnimationFrame
+    let lastScrollY = 0;
+    let ticking = false;
+
+    const updateButtonVisibility = () => {
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
+      btn.style.display = window.scrollY > 200 ? 'flex' : 'none';
+    };
+
+    window.addEventListener('scroll', () => {
+      lastScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateButtonVisibility();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Attach click handler
+    window.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById(btnId);
+      if (btn) {
+        btn.onclick = () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+      }
+    });
+  }
+</script>
+
+<button
+  id="scroll-to-top-btn"
+  class="hidden fixed bottom-18 lg:bottom-20 right-4 lg:right-6 z-40 bg-black/50 p-3 border border-black/55 backdrop-blur-md rounded-full drop-shadow-md hover:bg-gray-700 transition-all"
+  aria-label="Scroll to top"
+>
+  <ChevronUp class="size-5 text-white" />
+</button>

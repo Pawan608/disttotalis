@@ -47,7 +47,7 @@ const climaticCapsules = [
       {
         climaticCapsules.map((item, i) => (
           <div data-delay={75 * i} class="reveal relative">
-            <div class="glow-card hover:shadow-lg flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden md:h-72 h-60 bg-white">
+            <article class="glow-card hover:shadow-lg flex flex-col relative p-6 rounded-2xl border border-primary/20 overflow-hidden md:h-72 h-60 bg-white">
               <Image
                 src={CardVectorSvg}
                 alt={'card decoration vector'}
@@ -57,9 +57,9 @@ const climaticCapsules = [
               <div class="mb-4 grow z-10">
                 <item.icon class="stroke-primary size-16 stroke-1" />
               </div>
-              <h4 class="font-semibold text-lg mb-1">{item.title}</h4>
+              <h5 class="font-semibold text-lg mb-1">{item.title}</h5>
               <p class="text-gray-700 text-sm max-w-xs">{item.description}</p>
-            </div>
+            </article>
           </div>
         ))
       }
