@@ -8,7 +8,7 @@ import { Download } from '@lucide/astro';
 
 <section
   id="hero"
-  class="relative w-full min-h-[625px] overflow-hidden flex items-center"
+  class="relative w-full min-h-[625px] h-full max-h-[70vh] overflow-hidden flex items-center"
 >
   <div class="absolute inset-0 w-full h-full z-0">
     <Image
@@ -34,24 +34,24 @@ import { Download } from '@lucide/astro';
     class="relative w-full pt-[clamp(4.25rem,8vh,6rem)] pb-[clamp(2rem,4vh,3rem)] z-10 text-white px-[clamp(1rem,4vw,4rem)] md:ml-16 max-w-4xl"
   >
     <h1
-      class="text-[clamp(3.5rem,8vw,6rem)] text-shadow-md text-primary font-bold mb-[clamp(1rem,3vh,2rem)] tracking-tight leading-[0.9]"
+      class="text-[clamp(3.5rem,8vw,6rem)] transition-smooth text-shadow-md text-primary font-bold mb-[clamp(1rem,3vh,2rem)] tracking-tight leading-[0.9]"
     >
       <StaggerText text="TESTED HAI" baseDelay={0} step={100} />
       <br />
-      <StaggerText text="TRUSTED HAI" baseDelay={300} step={100} />
+      <StaggerText text="TRUSTED HAI" baseDelay={200} step={100} />
     </h1>
 
     <p
       class="text-[clamp(1.725rem,3.5vw,2.25rem)] mb-[clamp(1.5rem,4vh,3rem)] max-w-[clamp(20ch,60vw,32ch)] text-wrap text-shadow-sm reveal leading-tight"
-      data-delay={600}
+      data-delay={525}
     >
-      System aluminium <em>windows</em> made for Indian homes
+      System aluminium <em class="inline-block">windows</em> made for Indian homes
     </p>
 
     <div class="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1rem)]">
       <Button
         reveal={true}
-        animationDelay={700}
+        animationDelay={675}
         variant="primary"
         classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)] font-medium"
         >Book a Free Consultation</Button
@@ -59,7 +59,7 @@ import { Download } from '@lucide/astro';
 
       <Button
         reveal={true}
-        animationDelay={900}
+        animationDelay={800}
         variant="secondary"
         classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)] font-medium"
       >

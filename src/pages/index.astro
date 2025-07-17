@@ -29,9 +29,9 @@ import FloatingContactButton from '../components/floating-contact.astro';
       const hindalcoLogo = document.getElementById('hindalco-logo');
       const backedCard = document.getElementById('backed-card');
       const isWideScreen = window.innerWidth > 768;
-      const isHeightLarge = window.innerHeight > 650;
-      const hindalcoLogoAnimDelay = isHeightLarge ? 700 : 100;
-      const backedCardAnimDelay = isHeightLarge && isWideScreen ? 750 : 100;
+      const isHeightLarge = window.innerHeight > 640;
+      const hindalcoLogoAnimDelay = isHeightLarge ? 1100 : 100;
+      const backedCardAnimDelay = isHeightLarge && isWideScreen ? 1200 : 100;
 
       hindalcoLogo?.setAttribute('data-delay', `${hindalcoLogoAnimDelay}`);
       backedCard?.setAttribute('data-delay', `${backedCardAnimDelay}`);

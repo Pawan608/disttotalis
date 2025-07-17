@@ -15,8 +15,8 @@
 @layer utilities {
   .transition-smooth {
     @apply transition-all;
-    transition-duration: 1s;
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.7s;
+    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   @keyframes scroll-left {
@@ -29,8 +29,8 @@
 @layer components {
   /* REVEAL ANIMATION */
   .reveal {
-    @apply opacity-0 translate-y-12 rotate-[2deg] blur-md;
-    transition: all .75s cubic-bezier(0.22, 1, 0.36, 1);
+    @apply opacity-0 translate-y-12 blur-md;
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .reveal.visible,
