@@ -1,9 +1,10 @@
 ---
-import { ChevronLeft, CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
+import { CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import demoImage from '../assets/building.jpeg';
 import demoBrand from '../assets/hindalco-logo.svg';
 import demoBuilding from '../assets/hotel-building.jpg';
+import demoBuilding1 from '../assets/building-placeholder.jpg';
 
 // Property data array
 const properties = [
@@ -11,7 +12,7 @@ const properties = [
     id: 1,
     name: 'Supreme, Pune',
     area: '88544 Sqft.',
-    image: demoImage,
+    image: demoBuilding1,
   },
   {
     id: 2,
@@ -60,14 +61,14 @@ const brands = [demoBrand, demoBrand, demoBrand];
         </h2>
         <div class="flex items-center gap-3">
           <button
-            id="embla-prev"
+            id="project-prev"
             class="text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
             aria-label="Previous slide"
           >
             <CircleArrowLeft size={48} stroke-width={1.5} />
           </button>
           <button
-            id="embla-next"
+            id="project-next"
             class="text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
             aria-label="Next slide"
           >
@@ -153,8 +154,8 @@ const brands = [demoBrand, demoBrand, demoBrand];
 
   document.addEventListener('DOMContentLoaded', () => {
     const emblaNode = document.getElementById('embla');
-    const prevBtn = document.getElementById('embla-prev');
-    const nextBtn = document.getElementById('embla-next');
+    const prevBtn = document.getElementById('project-prev');
+    const nextBtn = document.getElementById('project-next');
 
     if (!emblaNode || !prevBtn || !nextBtn) return;
 

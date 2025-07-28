@@ -8,6 +8,14 @@ import {
   Palette,
   Lock,
   Recycle,
+  Sparkles,
+  ShieldBan,
+  InspectionPanel,
+  AudioWaveform,
+  Vault,
+  LockKeyhole,
+  Cog,
+  Sprout,
 } from '@lucide/astro';
 import SectionHeading from '../components/section-heading.astro';
 
@@ -21,37 +29,37 @@ const totalisFeatures = [
   {
     title: 'Rollers & Locks',
     description: 'Superior quality rollers and hassle-free operations.',
-    icon: RotateCcw,
+    icon: Cog,
   },
   {
     title: 'Leak-Proof Sealing',
     description: 'Keeps interiors dry even in heavy monsoons.',
-    icon: Droplet,
+    icon: ShieldBan,
   },
   {
     title: 'Laminated and DGU Glass',
     description: 'Helps maintain room temperature efficiently.',
-    icon: Zap,
+    icon: Vault,
   },
   {
     title: 'Acoustic Control',
     description: 'Blocks outdoor noise for peaceful indoors.',
-    icon: VolumeX,
+    icon: AudioWaveform,
   },
   {
     title: 'Custom Finishes',
     description: 'Choose from a range of premium colours.',
-    icon: Palette,
+    icon: Sparkles,
   },
   {
     title: 'Superior Quality Locks',
     description: 'Enhanced safety with secure locking system',
-    icon: Lock,
+    icon: LockKeyhole,
   },
   {
-    title: 'Eco-Friendly Build',
+    title: 'Sustainable materials',
     description: '100% recyclable, made with green metal.',
-    icon: Recycle,
+    icon: Sprout,
   },
 ];
 ---
@@ -70,23 +78,24 @@ const totalisFeatures = [
       {
         totalisFeatures.map((feature, i) => (
           // <div class="reveal" data-delay={i * 50}>
-            <article class="glow-card bg-white rounded-2xl border border-gray-200 p-6 text-center hover:shadow-lg">
-              <div class="mb-4 flex justify-center">
-                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                  <feature.icon
-                    size={32}
-                    class="stroke-primary"
-                    stroke-width={1.5}
-                  />
-                </div>
+          <article class="glow-card bg-white rounded-2xl border border-gray-200 p-6 text-center hover:shadow-lg">
+            <div class="mb-4 flex justify-center">
+              <div class="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center">
+                <feature.icon
+                  size={40}
+                  size={32}
+                  class="stroke-primary"
+                  stroke-width={1.5}
+                />
               </div>
-              <h5 class="font-semibold text-lg mb-2 text-secondary">
-                {feature.title}
-              </h5>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </article>
+            </div>
+            <h5 class="font-semibold text-lg mb-2 text-secondary">
+              {feature.title}
+            </h5>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              {feature.description}
+            </p>
+          </article>
           // </div>
         ))
       }

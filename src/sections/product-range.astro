@@ -1,0 +1,341 @@
+---
+import { CircleArrowLeft, CircleArrowRight, ArrowRight } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import SectionHeading from '../components/section-heading.astro';
+import demoImage from '../assets/placeholder-product.jpg';
+import demoImage2 from '../assets/placeholder-product-2.jpg';
+import demoImage3 from '../assets/placeholder-product-3.jpg';
+import demoImage4 from '../assets/placeholder-product-4.jpg';
+
+// Product categories
+const categories = [
+  { id: 'sliding', name: 'Sliding Series' },
+  { id: 'casemate', name: 'Casemate Series' },
+  { id: 'railing', name: 'Railing' },
+];
+
+// Product data organized by category
+const productsByCategory = {
+  sliding: [
+    {
+      id: 1,
+      name: 'TOT SD LITE',
+      subtitle: 'total Service 00',
+      image: demoImage,
+    },
+    {
+      id: 2,
+      name: 'TOT SD PLUS',
+      subtitle: 'total Service 00',
+      image: demoImage2,
+    },
+    {
+      id: 3,
+      name: 'TOT SD NEXGEN',
+      subtitle: 'total Service 00',
+      image: demoImage3,
+    },
+    {
+      id: 4,
+      name: 'TOT SD PREMIUM',
+      subtitle: 'total Service 00',
+      image: demoImage4,
+    },
+    {
+      id: 5,
+      name: 'TOT SD ULTRA',
+      subtitle: 'total Service 00',
+      image: demoImage,
+    },
+  ],
+  casemate: [
+    {
+      id: 6,
+      name: 'CM CLASSIC',
+      subtitle: 'casemate Series A1',
+      image: demoImage,
+    },
+    {
+      id: 7,
+      name: 'CM MODERN',
+      subtitle: 'casemate Series B2',
+      image: demoImage,
+    },
+    {
+      id: 8,
+      name: 'CM ELITE',
+      subtitle: 'casemate Series C3',
+      image: demoImage,
+    },
+  ],
+  railing: [
+    {
+      id: 9,
+      name: 'RAIL SECURE',
+      subtitle: 'railing Type X1',
+      image: demoImage,
+    },
+    {
+      id: 10,
+      name: 'RAIL PREMIUM',
+      subtitle: 'railing Type Y2',
+      image: demoImage,
+    },
+    {
+      id: 11,
+      name: 'RAIL LUXURY',
+      subtitle: 'railing Type Z3',
+      image: demoImage,
+    },
+    {
+      id: 12,
+      name: 'RAIL MASTER',
+      subtitle: 'railing Type A4',
+      image: demoImage,
+    },
+    {
+      id: 13,
+      name: 'RAIL SUPREME',
+      subtitle: 'railing Type B5',
+      image: demoImage,
+    },
+    {
+      id: 14,
+      name: 'RAIL ULTRA',
+      subtitle: 'railing Type C6',
+      image: demoImage,
+    },
+    {
+      id: 15,
+      name: 'RAIL NEXGEN',
+      subtitle: 'railing Type D7',
+      image: demoImage,
+    },
+  ],
+};
+---
+
+<section id="product-range" class="w-full mb-8">
+  <div class="px-4 max-w-6xl mx-auto flex pt-8 flex-col items-center">
+    <div class="text-center">
+      <SectionHeading
+        title="Our Product Range"
+        description="Every detail engineered for performance, durability, and design."
+      />
+    </div>
+
+    <div class="inline-flex mt-8 w-fit bg-gray-100 rounded-full p-1">
+      {
+        categories.map((category, index) => (
+          <button
+            class="px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 text-gray-700 hover:text-gray-800 data-[active=true]:bg-secondary data-[active=true]:text-white data-[active=true]:shadow-lg data-[active=true]:hover:text-white cursor-pointer hover:data-[active=false]:bg-gray-200"
+            data-category={category.id}
+            data-active={index === 0 ? 'true' : 'false'}
+          >
+            {category.name}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center w-full justify-end py-8 gap-2">
+      <button
+        id="product-prev"
+        class="text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
+        aria-label="Previous product"
+      >
+        <CircleArrowLeft size={40} stroke-width={1.5} />
+      </button>
+      <button
+        id="product-next"
+        class="text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
+        aria-label="Next product"
+      >
+        <CircleArrowRight size={40} stroke-width={1.5} />
+      </button>
+    </div>
+  </div>
+
+  {
+    Object.entries(productsByCategory).map(([categoryKey, products]) => (
+      <div
+        class="overflow-hidden data-[active=false]:hidden"
+        id={`embla-product-${categoryKey}`}
+        data-category={categoryKey}
+        data-active={categoryKey === 'sliding' ? 'true' : 'false'}
+      >
+        <div class="flex gap-4 sm:gap-6">
+          {products.map((product) => (
+            <div class="flex-none w-sm first-of-type:ml-8">
+              <div class="group cursor-pointer">
+                <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary 5% z-10" />
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  <div class="absolute bottom-4 left-4 z-20">
+                    <h3 class="text-white text-lg md:text-xl font-bold mb-1">
+                      {product.name}
+                    </h3>
+                    <p class="text-white/80 text-xs md:text-sm">
+                      {product.subtitle}
+                    </p>
+                  </div>
+
+                  <div class="absolute bottom-4 right-4 z-20">
+                    <CircleArrowRight class="text-white group-hover:text-white transition-colors duration-300 size-10 stroke-[1.5]" />
+                  </div>
+
+                  <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  import type { EmblaCarouselType } from 'embla-carousel';
+  import EmblaCarousel from 'embla-carousel';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const prevBtn = document.getElementById(
+      'product-prev'
+    ) as HTMLButtonElement;
+    const nextBtn = document.getElementById(
+      'product-next'
+    ) as HTMLButtonElement;
+    const categoryButtons = document.querySelectorAll('[data-category]');
+    const carouselContainers = document.querySelectorAll(
+      '[id^="embla-product-"]'
+    );
+
+    if (!prevBtn || !nextBtn) return;
+
+    const emblaInstances: Record<string, EmblaCarouselType> = {};
+    let currentCategory = 'sliding';
+
+    // Embla options
+    const options = {
+      //   align: 'start',
+      slidesToScroll: 1,
+      //   containScroll: 'trimSnaps',
+      dragFree: false,
+      loop: false,
+      skipSnaps: false,
+      breakpoints: {
+        '(min-width: 640px)': { slidesToScroll: 1 },
+        '(min-width: 768px)': { slidesToScroll: 2 },
+        '(min-width: 1280px)': { slidesToScroll: 3 },
+      },
+    };
+
+    // Initialize all embla instances
+    const initAllEmblas = () => {
+      carouselContainers.forEach((container) => {
+        const category = container.getAttribute('data-category') as string;
+        if (category && !emblaInstances[category]) {
+          emblaInstances[category] = EmblaCarousel(
+            container as HTMLElement,
+            options
+          );
+        }
+      });
+    };
+
+    // Update navigation buttons for current embla
+    const updateButtons = () => {
+      const currentEmbla = emblaInstances[currentCategory];
+      if (currentEmbla) {
+        prevBtn.disabled = !currentEmbla.canScrollPrev();
+        nextBtn.disabled = !currentEmbla.canScrollNext();
+      }
+    };
+
+    // Navigation button handlers
+    const handlePrev = () => {
+      const currentEmbla = emblaInstances[currentCategory];
+      if (currentEmbla) {
+        currentEmbla.scrollPrev();
+      }
+    };
+
+    const handleNext = () => {
+      const currentEmbla = emblaInstances[currentCategory];
+      if (currentEmbla) {
+        currentEmbla.scrollNext();
+      }
+    };
+
+    // Attach navigation handlers
+    prevBtn.addEventListener('click', handlePrev);
+    nextBtn.addEventListener('click', handleNext);
+
+    // Category button functionality
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const category = button.getAttribute('data-category') as string;
+
+        // Update button states
+        categoryButtons.forEach((btn) => {
+          btn.setAttribute('data-active', 'false');
+        });
+        button.setAttribute('data-active', 'true');
+
+        // Update carousel visibility
+        carouselContainers.forEach((container) => {
+          const containerCategory = container.getAttribute('data-category');
+          if (containerCategory === category) {
+            container.setAttribute('data-active', 'true');
+          } else {
+            container.setAttribute('data-active', 'false');
+          }
+        });
+
+        currentCategory = category;
+
+        // Update buttons for new active category
+        setTimeout(() => {
+          updateButtons();
+          // Re-initialize current embla to ensure it's working
+          const currentEmbla = emblaInstances[currentCategory];
+          if (currentEmbla) {
+            currentEmbla.reInit();
+          }
+        }, 150);
+      });
+    });
+
+    // Initialize all emblas and set up event listeners
+    initAllEmblas();
+
+    // Set up select event listeners for all emblas
+    Object.values(emblaInstances).forEach((embla) => {
+      embla.on('select', () => {
+        // Only update buttons if this is the current active embla
+        if (embla === emblaInstances[currentCategory]) {
+          updateButtons();
+        }
+      });
+      embla.on('init', () => {
+        if (embla === emblaInstances[currentCategory]) {
+          updateButtons();
+        }
+      });
+    });
+
+    // Initial button state
+    updateButtons();
+  });
+</script>
