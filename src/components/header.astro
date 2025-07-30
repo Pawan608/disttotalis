@@ -5,10 +5,10 @@ import { X } from '@lucide/astro';
 import abgLogo from '../assets/abg-logo-no-bg.png';
 
 const links = [
-  { href: '/', label: 'Home' },
-  { href: '/why', label: 'Why Totalis' },
-  { href: '/products', label: 'Products' },
-  { href: '/brochure', label: 'Brochure' },
+  { href: '/', label: 'Home', desktop: false },
+  { href: '/why', label: 'Why Totalis', desktop: true },
+  { href: '/products', label: 'Products', desktop: true },
+  { href: '/brochure', label: 'Brochure', desktop: true },
 ];
 
 const { pathname } = Astro.url;
@@ -18,21 +18,23 @@ const { pathname } = Astro.url;
   <nav
     class="h-16 bg-[rgba(255,255,255,0.95)] drop-shadow-sm backdrop-blur-sm px-4 sm:px-6 lg:px-8 flex justify-between items-center"
   >
-    <div class="flex flex-row items-center">
+    <a class="flex flex-row items-center" href="/" aria-label="Totalis Home">
       <Image
         src={totalisLogo}
-        format="avif"
+        loading={'eager'}
+        format="webp"
         alt="Totalis Brand Logo"
         layout="constrained"
         class="w-30"
       />
-    </div>
+    </a>
 
     <!-- Mobile menu button -->
     <div class="md:hidden flex items-center gap-2">
       <Image
         src={abgLogo}
-        format="avif"
+        format="webp"
+        loading={'eager'}
         alt={'Aditya Birla Group Brand Logo'}
         layout="constrained"
         class={'w-10'}
@@ -61,22 +63,26 @@ const { pathname } = Astro.url;
     <div class="hidden md:flex gap-6 items-center">
       <ul class="flex gap-2 text-gray-700 font-medium">
         {
-          links.map(({ href, label }) => (
-            <li>
-              <a
-                href={href}
-                class={`block pl-3 pr-1 relative text-sm before:absolute before:left-0 before:translate-x-1/2 before:top-1/2 before:-translate-y-1/2 before:h-1 before:w-1 before before:rounded-full transition-colors duration-200 
+          links.map(
+            ({ href, label, desktop }) =>
+              desktop && (
+                <li>
+                  <a
+                    href={href}
+                    class={`block pl-3 pr-1 relative text-sm before:absolute before:left-0 before:translate-x-1/2 before:top-1/2 before:-translate-y-1/2 before:h-1 before:w-1 before before:rounded-full transition-colors duration-200 
             ${pathname === href ? 'text-primary font-semibold before:bg-primary before:content[""] hover:text-primary-dark hover:underline hover:underline-offset-4 decoration-primary' : 'hover:text-primary hover:underline underline-offset-4 decoration-primary'}`}
-              >
-                {label}
-              </a>
-            </li>
-          ))
+                  >
+                    {label}
+                  </a>
+                </li>
+              )
+          )
         }
       </ul>
       <Image
         src={abgLogo}
-        format="avif"
+        format="webp"
+        loading={'eager'}
         alt={'Aditya Birla Group Brand Logo'}
         layout="constrained"
         class={'w-10'}
@@ -89,15 +95,16 @@ const { pathname } = Astro.url;
     id="mobile-overlay"
     class="fixed inset-0 bg-white/75 backdrop-blur-3xl z-50 transform -translate-y-full transition-transform duration-500 ease-in-out md:hidden"
   >
-    <div class="w-32 absolute top-6 left-6">
+    <a class="w-32 absolute top-6 left-6" href="/" aria-label="Totalis Home">
       <Image
         src={totalisLogo}
-        format="avif"
+        format="webp"
+        loading={'eager'}
         alt="Totalis Brand Logo"
         layout="constrained"
         class="w-40 opacity-90"
       />
-    </div>
+    </a>
 
     <!-- Close Button -->
     <button

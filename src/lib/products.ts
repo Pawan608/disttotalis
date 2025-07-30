@@ -9,7 +9,7 @@ import {
   UsersRound,
 } from '@lucide/astro';
 import mainImage1 from '../assets/product-demo.jpg';
-import thumb1 from '../assets/product-demo.jpg';
+import thumb1 from '../assets/building.jpeg';
 import thumb2 from '../assets/product-demo.jpg';
 
 import type { ImageMetadata } from 'astro';

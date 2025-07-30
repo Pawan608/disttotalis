@@ -17,35 +17,39 @@ const { product } = Astro.props;
 ---
 
 <Layout title={product.name}>
-  <section class="bg-white">
+  <!-- Breadcrumb -->
+  <div
+    class="h-12 border-b border-gray-200 sticky top-16 bg-white z-10 flex items-center justify-center"
+  >
     <div
-      class="h-12 border-b border-gray-200 sticky top-16 bg-white z-10 flex items-center justify-center"
+      class="w-full text-gray-500 flex items-center px-4 max-w-6xl text-sm font-light"
     >
-      <div
-        class="w-full text-gray-500 flex items-center px-4 max-w-6xl text-sm font-light"
-      >
-        <span class="font-medium flex items-center gap-1 text-gray-700">
-          <!-- <Home class="stroke-1.5 size-4" /> -->
-          <span>Home</span>
-        </span>
-        <ChevronRight class="size-4 mx-0.5" />
-        <span class="">Product</span>
-        <ChevronRight class="size-4 mx-0.5" />
-        <span>Sliding Windows</span>
-        <ChevronRight class="size-4 mx-0.5" />
-        <span class="text-secondary font-normal">{product.name}</span>
-      </div>
+      <span class="font-medium flex items-center gap-1 text-gray-700">
+        <span>Home</span>
+      </span>
+      <ChevronRight class="size-4 mx-0.5" />
+      <span>Product</span>
+      <ChevronRight class="size-4 mx-0.5" />
+      <span>Sliding Windows</span>
+      <ChevronRight class="size-4 mx-0.5" />
+      <span class="text-secondary font-normal">{product.name}</span>
     </div>
+  </div>
+  <section class="bg-white">
     <div class="max-w-6xl mt-8 mx-auto px-4 grid md:grid-cols-2 gap-16">
-      <!-- Main Image -->
+      <!-- Image Gallery -->
       <div class="space-y-8">
+        <!-- Main Image Display -->
         <div
           class="aspect-square w-full max-w-lg mx-auto rounded-2xl overflow-hidden border border-gray-200 shadow-md relative"
         >
           <Image
+            id="main-product-image"
+            loading={'eager'}
+            format="webp"
             src={product.mainImage}
             alt={product.name}
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition-opacity duration-300"
           />
           <div
             class="absolute top-4 left-4 bg-primary text-white text-sm px-2 py-0.5 rounded-md"
@@ -53,24 +57,46 @@ const { product } = Astro.props;
             BIS Certified
           </div>
         </div>
+
+        <!-- Thumbnail Gallery -->
         <div class="flex gap-4 justify-center">
+          <!-- Main image thumbnail -->
+          <button
+            class="thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-200 hover:border-secondary/80"
+            data-image-src={product.mainImage.src}
+            data-image-alt={product.name}
+          >
+            <Image
+              src={product.mainImage}
+              alt={`${product.name} main`}
+              class="w-full h-full object-cover"
+            />
+          </button>
+
+          <!-- Additional thumbnails -->
           {
             product.thumbnails.map((img, i) => (
-              <div class="aspect-square w-16 rounded-lg overflow-hidden border border-gray-300">
+              <button
+                class="thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-200 hover:brightness-50 active:outline-gray-300 outline-2 outline-offset-2 outline-transparent"
+                data-image-src={img.src}
+                data-image-alt={`${product.name} view ${i + 1}`}
+              >
                 <Image
                   src={img}
-                  alt={`Thumb ${i + 1}`}
+                  loading={'lazy'}
+                  alt={`${product.name} thumbnail ${i + 1}`}
                   class="w-full h-full object-cover"
                 />
-              </div>
+              </button>
             ))
           }
         </div>
       </div>
 
-      <!-- Product Info -->
+      <!-- Product Information -->
       <div class="flex flex-col justify-between space-y-8">
         <div class="space-y-4">
+          <!-- Product Header -->
           <div class="space-y-4">
             <p
               class="uppercase text-xs text-secondary border border-secondary px-2 shadow-xs shadow-secondary/35 rounded max-w-fit"
@@ -81,6 +107,7 @@ const { product } = Astro.props;
             <p class="text-base text-gray-600">{product.description}</p>
           </div>
 
+          <!-- Quality Badge -->
           <div
             class="p-4 flex gap-2 items-center border border-green-200 bg-green-50 rounded-xl text-green-700"
           >
@@ -92,20 +119,22 @@ const { product } = Astro.props;
               </p>
             </div>
           </div>
+
+          <!-- Key Features -->
           <div class="space-y-4">
-            <h2 class="text-2xl font-semibold">Key Feature</h2>
+            <h2 class="text-2xl font-semibold">Key Features</h2>
             <div class="grid grid-cols-1 gap-2">
               {
-                product.features.map((f) => (
+                product.features.map((feature) => (
                   <div class="flex p-4 items-start gap-4 rounded-xl shadow-xs border border-gray-200">
                     <div class="bg-secondary/10 border border-secondary/15 rounded-lg p-2 self-center">
-                      <f.icon class="w-6 h-6 stroke-secondary" />
+                      <feature.icon class="w-6 h-6 stroke-secondary" />
                     </div>
                     <div>
                       <p class="text-base font-semibold text-gray-800">
-                        {f.title}
+                        {feature.title}
                       </p>
-                      <p class="text-sm text-gray-500">{f.text}</p>
+                      <p class="text-sm text-gray-500">{feature.text}</p>
                     </div>
                   </div>
                 ))
@@ -114,36 +143,30 @@ const { product } = Astro.props;
           </div>
         </div>
 
-        <!-- <div class="space-y-2"> -->
+        <!-- Action Buttons -->
         <div class="flex gap-4">
-          <Button
-            variant="secondary-blue"
-            class="transition-smooth"
-            reveal={'true'}>Request Quote</Button
-          >
-          <Button
-            variant="outline"
-            class="transition-smooth transition-all"
-            reveal="true"
-            animationDelay="100">Download Catalog</Button
-          >
-          <!-- </div> -->
+          <Button variant="secondary-blue" classList="transition-smooth grow">
+            Request Quote
+          </Button>
+          <Button variant="outline" classList="transition-smooth grow">
+            Download Catalog
+          </Button>
         </div>
       </div>
     </div>
 
-    <!-- Stats -->
+    <!-- Statistics -->
     <div
       class="max-w-6xl mx-auto px-4 mt-16 mb-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center"
     >
       {
-        product.stats.map((s) => (
-          <div class="border glow-card overflow-hidden border-gray-200 shadow py-8 rounded-2xl flex flex-col items-center">
+        product.stats.map((stat) => (
+          <div class="border glow-card z-5 overflow-hidden border-gray-200 shadow py-8 rounded-2xl flex flex-col items-center">
             <div class="w-12 aspect-square flex items-center mb-2 justify-center rounded-xl bg-secondary border border-secondary-light">
-              <s.icon class="size-8 stroke-[1.7] stroke-white" />
+              <stat.icon class="size-8 stroke-[1.7] stroke-white" />
             </div>
-            <p class="text-2xl font-bold text-secondary">{s.value}</p>
-            <p class="text-sm text-gray-500">{s.label}</p>
+            <p class="text-2xl font-bold text-secondary">{stat.value}</p>
+            <p class="text-sm text-gray-500">{stat.label}</p>
           </div>
         ))
       }
@@ -156,10 +179,50 @@ const { product } = Astro.props;
     import { initCardGlowEffect } from '../../scripts/glow';
     import { initRevealObserver } from '../../scripts/reveal';
 
-    // All DOMContentLoaded centralized logic
+    // Image gallery functionality
+    function initImageGallery() {
+      const mainImage = document.getElementById(
+        'main-product-image'
+      ) as HTMLImageElement;
+      const thumbnailButtons = document.querySelectorAll(
+        '.thumbnail-btn'
+      ) as NodeListOf<HTMLButtonElement>;
+
+      if (!mainImage || !thumbnailButtons.length) return;
+
+      thumbnailButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          const imageSrc = button.dataset.imageSrc;
+          const imageAlt = button.dataset.imageAlt;
+
+          if (imageSrc && imageAlt) {
+            // Update main image with fade effect
+            mainImage.style.opacity = '0';
+
+            setTimeout(() => {
+              mainImage.src = imageSrc;
+              mainImage.alt = imageAlt;
+              mainImage.style.opacity = '1';
+            }, 150);
+
+            // Update thumbnail borders (active state)
+            thumbnailButtons.forEach((btn) => {
+              btn.classList.remove('border-secondary');
+              btn.classList.add('border-gray-300');
+            });
+
+            button.classList.remove('border-gray-300');
+            button.classList.add('border-secondary');
+          }
+        });
+      });
+    }
+
+    // Initialize all functionality when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
       initRevealObserver();
       initCardGlowEffect();
+      initImageGallery();
     });
   </script>
 </Layout>

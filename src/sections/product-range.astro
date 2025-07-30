@@ -1,5 +1,5 @@
 ---
-import { CircleArrowLeft, CircleArrowRight, ArrowRight } from '@lucide/astro';
+import { CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import SectionHeading from '../components/section-heading.astro';
 import demoImage from '../assets/placeholder-product.jpg';
@@ -124,13 +124,14 @@ const productsByCategory = {
       />
     </div>
 
+    <!-- Category Tabs -->
     <div
       class="inline-flex mt-8 mb-8 md:mb-0 w-fit bg-gray-100 rounded-full p-1"
     >
       {
         categories.map((category, index) => (
           <button
-            class="px-4 lg:px-8 py-2 lg:py-3 rounded-full text-sm font-medium transition-all duration-300 text-gray-700 hover:text-gray-800 data-[active=true]:bg-secondary data-[active=true]:text-white data-[active=true]:shadow-lg data-[active=true]:hover:text-white cursor-pointer hover:data-[active=false]:bg-gray-200"
+            class="category-tab px-4 lg:px-8 py-2 lg:py-3 rounded-full text-sm font-medium transition-all duration-300 text-gray-700 hover:text-gray-800 data-[active=true]:bg-secondary data-[active=true]:text-white data-[active=true]:shadow-lg data-[active=true]:hover:text-white cursor-pointer hover:data-[active=false]:bg-gray-200"
             data-category={category.id}
             data-active={index === 0 ? 'true' : 'false'}
           >
@@ -140,6 +141,7 @@ const productsByCategory = {
       }
     </div>
 
+    <!-- Navigation Controls -->
     <div class="hidden md:flex items-center w-full justify-end py-8 gap-2">
       <button
         id="product-prev"
@@ -158,6 +160,7 @@ const productsByCategory = {
     </div>
   </div>
 
+  <!-- Product Carousels -->
   {
     Object.entries(productsByCategory).map(([categoryKey, products]) => (
       <div
@@ -168,10 +171,10 @@ const productsByCategory = {
       >
         <div class="flex gap-4 sm:gap-6">
           {products.map((product) => (
-            <div class="flex-none md:w-sm w-xs first-of-type:md:ml-8 first-of-type:ml-4">
-              <div class="group cursor-pointer">
+            <div class="flex-none md:w-sm w-xs first-of-type:md:ml-8 first-of-type:ml-4 last-of-type:mr-4">
+              <a href="/product/nexgen" class="group block">
                 <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
-                  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary 5% z-10" />
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 z-10" />
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -195,7 +198,7 @@ const productsByCategory = {
 
                   <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>
@@ -215,7 +218,7 @@ const productsByCategory = {
     const nextBtn = document.getElementById(
       'product-next'
     ) as HTMLButtonElement;
-    const categoryButtons = document.querySelectorAll('[data-category]');
+    const categoryTabs = document.querySelectorAll('.category-tab');
     const carouselContainers = document.querySelectorAll(
       '[id^="embla-product-"]'
     );
@@ -225,11 +228,9 @@ const productsByCategory = {
     const emblaInstances: Record<string, EmblaCarouselType> = {};
     let currentCategory = 'sliding';
 
-    // Embla options
+    // Embla configuration
     const options = {
-      //   align: 'start',
       slidesToScroll: 1,
-      //   containScroll: 'trimSnaps',
       dragFree: false,
       loop: false,
       skipSnaps: false,
@@ -240,7 +241,7 @@ const productsByCategory = {
       },
     };
 
-    // Initialize all embla instances
+    // Initialize all carousel instances
     const initAllEmblas = () => {
       carouselContainers.forEach((container) => {
         const category = container.getAttribute('data-category') as string;
@@ -253,7 +254,7 @@ const productsByCategory = {
       });
     };
 
-    // Update navigation buttons for current embla
+    // Update navigation button states
     const updateButtons = () => {
       const currentEmbla = emblaInstances[currentCategory];
       if (currentEmbla) {
@@ -262,7 +263,7 @@ const productsByCategory = {
       }
     };
 
-    // Navigation button handlers
+    // Navigation handlers
     const handlePrev = () => {
       const currentEmbla = emblaInstances[currentCategory];
       if (currentEmbla) {
@@ -277,40 +278,37 @@ const productsByCategory = {
       }
     };
 
-    // Attach navigation handlers
+    // Attach navigation event listeners
     prevBtn.addEventListener('click', handlePrev);
     nextBtn.addEventListener('click', handleNext);
 
-    // Category button functionality
-    categoryButtons.forEach((button) => {
-      button.addEventListener('click', (e) => {
+    // Category tab functionality
+    categoryTabs.forEach((tab) => {
+      tab.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        const category = button.getAttribute('data-category') as string;
+        const category = tab.getAttribute('data-category') as string;
+        if (!category) return;
 
-        // Update button states
-        categoryButtons.forEach((btn) => {
-          btn.setAttribute('data-active', 'false');
-        });
-        button.setAttribute('data-active', 'true');
+        // Update tab states
+        categoryTabs.forEach((btn) => btn.setAttribute('data-active', 'false'));
+        tab.setAttribute('data-active', 'true');
 
         // Update carousel visibility
         carouselContainers.forEach((container) => {
           const containerCategory = container.getAttribute('data-category');
-          if (containerCategory === category) {
-            container.setAttribute('data-active', 'true');
-          } else {
-            container.setAttribute('data-active', 'false');
-          }
+          container.setAttribute(
+            'data-active',
+            containerCategory === category ? 'true' : 'false'
+          );
         });
 
         currentCategory = category;
 
-        // Update buttons for new active category
+        // Update navigation buttons after category switch
         setTimeout(() => {
           updateButtons();
-          // Re-initialize current embla to ensure it's working
           const currentEmbla = emblaInstances[currentCategory];
           if (currentEmbla) {
             currentEmbla.reInit();
@@ -319,13 +317,12 @@ const productsByCategory = {
       });
     });
 
-    // Initialize all emblas and set up event listeners
+    // Initialize everything
     initAllEmblas();
 
-    // Set up select event listeners for all emblas
+    // Set up event listeners for all embla instances
     Object.values(emblaInstances).forEach((embla) => {
       embla.on('select', () => {
-        // Only update buttons if this is the current active embla
         if (embla === emblaInstances[currentCategory]) {
           updateButtons();
         }
@@ -337,7 +334,7 @@ const productsByCategory = {
       });
     });
 
-    // Initial button state
+    // Set initial button state
     updateButtons();
   });
 </script>
