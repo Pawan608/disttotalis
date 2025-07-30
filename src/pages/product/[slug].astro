@@ -35,7 +35,7 @@ const { product } = Astro.props;
       <span class="text-secondary font-normal">{product.name}</span>
     </div>
   </div>
-  <section class="bg-white">
+  <section id="product-introduction" class="">
     <div class="max-w-6xl mt-8 mx-auto px-4 grid md:grid-cols-2 gap-16">
       <!-- Image Gallery -->
       <div class="space-y-8">
@@ -99,7 +99,7 @@ const { product } = Astro.props;
           <!-- Product Header -->
           <div class="space-y-4">
             <p
-              class="uppercase text-xs text-secondary border border-secondary px-2 shadow-xs shadow-secondary/35 rounded max-w-fit"
+              class="uppercase text-xs text-neutral-500 border border-neutral-400 px-2 bg-neutral-50 rounded-full max-w-fit leading-none py-0.5"
             >
               Sliding Window
             </p>
@@ -109,15 +109,17 @@ const { product } = Astro.props;
 
           <!-- Quality Badge -->
           <div
-            class="p-4 flex gap-2 items-center border border-green-200 bg-green-50 rounded-xl text-green-700"
+            class="p-4 flex gap-2 items-center border border-green-200 bg-primary/5 rounded-xl text-green-600"
           >
-            <Star class="w-6 h-6 mt-1 stroke-transparent fill-green-600" />
-            <div>
-              <h5 class="font-semibold">Premium Quality Assured</h5>
+            <Star class="w-6 h-6 mt-1 fill-current stroke-transparent" />
+            <article>
+              <h5 class="font-semibold text-green-700">
+                Premium Quality Assured
+              </h5>
               <p class="text-sm">
                 Tested & Certified for Indian Climate Conditions
               </p>
-            </div>
+            </article>
           </div>
 
           <!-- Key Features -->
@@ -126,7 +128,7 @@ const { product } = Astro.props;
             <div class="grid grid-cols-1 gap-2">
               {
                 product.features.map((feature) => (
-                  <div class="flex p-4 items-start gap-4 rounded-xl shadow-xs border border-gray-200">
+                  <article class="flex inset-shadow-xs inset-shadow-white bg-[#fdfdfd] p-4 items-start gap-4 rounded-xl shadow-xs border border-gray-200">
                     <div class="bg-secondary/10 border border-secondary/15 rounded-lg p-2 self-center">
                       <feature.icon class="w-6 h-6 stroke-secondary" />
                     </div>
@@ -136,7 +138,7 @@ const { product } = Astro.props;
                       </p>
                       <p class="text-sm text-gray-500">{feature.text}</p>
                     </div>
-                  </div>
+                  </article>
                 ))
               }
             </div>
@@ -145,10 +147,18 @@ const { product } = Astro.props;
 
         <!-- Action Buttons -->
         <div class="flex gap-4">
-          <Button variant="secondary-blue" classList="transition-smooth grow">
+          <Button
+            variant="primary"
+            color="blue"
+            classList="transition-smooth grow"
+          >
             Request Quote
           </Button>
-          <Button variant="outline" classList="transition-smooth grow">
+          <Button
+            variant="secondary"
+            color="blue"
+            classList="transition-smooth grow"
+          >
             Download Catalog
           </Button>
         </div>
@@ -173,11 +183,44 @@ const { product } = Astro.props;
     </div>
   </section>
 
+  <section id="brief-overview">
+    <div
+      class="tab-group max-w-6xl mx-auto my-16 overflow-hidden rounded-xl shadow-sm border border-gray-100"
+    >
+      <div
+        class="grid grid-cols-3 border-b h-12 group  bg-neutral-50 border-gray-200 text-gray-600"
+      >
+        <button
+          class="tab-button cursor-pointer inline-flex data-[active=true]:border-b data-[active=true]:text-primary border-primary items-center justify-center"
+          data-tab="technical-specs">Technical Specifications</button
+        >
+        <button
+          class="tab-button inline-flex data-[active=true]:border-b data-[active=true]:text-primary border-primary items-center justify-center data-[active=true]:bg-primary/5"
+          data-tab="perf-parameters">Performance Parameters</button
+        >
+        <button
+          class="tab-button inline-flex data-[active=true]:border-b data-[active=true]:text-primary border-primary items-center justify-center data-[active=true]:bg-primary/5"
+          data-tab="joining-details">Joining Details</button
+        >
+        <div class="glider absolute top-0 left-0 bg-white"></div>
+      </div>
+
+      <div class="tab-content h-72">
+        <div class="tab-pane p-4" data-tab="technical-specs">
+          <p class="text-xl font-semibold">Product Specifications</p>
+        </div>
+        <div class="tab-pane" data-tab="perf-parameters">Bello</div>
+        <div class="tab-pane" data-tab="joining-details">Trello</div>
+      </div>
+    </div>
+  </section>
+
   <CtaEnd />
 
   <script>
     import { initCardGlowEffect } from '../../scripts/glow';
     import { initRevealObserver } from '../../scripts/reveal';
+    import { initTabManager } from '../../scripts/tab';
 
     // Image gallery functionality
     function initImageGallery() {
@@ -223,6 +266,7 @@ const { product } = Astro.props;
       initRevealObserver();
       initCardGlowEffect();
       initImageGallery();
+      initTabManager();
     });
   </script>
 </Layout>

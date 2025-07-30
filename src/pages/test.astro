@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/layout.astro';
+---
+
+<Layout title="test" htmlClassName="no-js">
+  <h1 class="text-3xl font-bold">Test Page</h1>
+  <p>This is a test page to verify the layout and components.</p>
+
+  <div class="tab-group border border-gray-300 p-2 rounded m-4 max-w-md">
+    <button
+      class="tab-button data-[active=true]:bg-blue-300 bg-lime-500 text-white px-6 py-2 inset-shadow-xs inset-shadow-lime-400 leading-none rounded-md"
+      data-tab="tab1">Tab 1</button
+    >
+    <button
+      class="tab-button data-[active=true]:bg-blue-300 bg-lime-500 text-white px-6 py-2 inset-shadow-xs inset-shadow-lime-400 leading-none rounded-md"
+      data-tab="tab2">Tab 2</button
+    >
+    <button
+      class="tab-button bg-lime-500 text-white px-6 py-2 inset-shadow-xs inset-shadow-lime-400 leading-none rounded-md"
+      data-tab="tab3">Tab 3</button
+    >
+
+    <div class="tab-content mt-6 relative h-20 w-sm">
+      <div
+        class="tab-pane overflow-hidden rounded-xl px-6 py-3 bg-red-200"
+        data-tab="tab1"
+      >
+        <h2>Content for Tab 1</h2>
+        <p>This is the content for the first tab.</p>
+      </div>
+      <div
+        class="tab-pane overflow-hidden rounded-xl px-6 py-3 bg-green-200"
+        data-tab="tab2"
+      >
+        <h2>Content for Tab 2</h2>
+        <p>This is the content for the second tab.</p>
+      </div>
+      <div
+        class="tab-pane overflow-hidden rounded-xl px-6 py-3 bg-pink-200"
+        data-tab="tab3"
+      >
+        <h2>Content for Tab 3</h2>
+        <p>This is the content for the third tab.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tab-group border p-2 border-gray-300 rounded max-w-md m-4">
+    <button
+      class="tab-button text-white bg-cyan-600 px-6 py-2 leading-none inset-shadow-xs inset-shadow-cyan-400 rounded-md"
+      data-tab="tabA"
+      data-active="true">Overview</button
+    >
+    <button
+      class="tab-button text-white bg-cyan-600 px-6 py-2 leading-none inset-shadow-xs inset-shadow-cyan-400 rounded-md"
+      data-tab="tabB"
+      data-active="false">Details</button
+    >
+    <button
+      class="tab-button text-white bg-cyan-600 px-6 py-2 leading-none inset-shadow-xs inset-shadow-cyan-400 rounded-md"
+      data-tab="tabC"
+      data-active="false">More Info</button
+    >
+
+    <div class="tab-content z-based mt-6 relative w-sm h-20">
+      <div
+        class="tab-pane bg-blue-200 px-6 py-3 rounded-xl overflow-hidden"
+        data-tab="tabA"
+      >
+        <h2>Overview Section</h2>
+        <p>Here's a brief summary of this section's content.</p>
+      </div>
+      <div
+        class="tab-pane bg-indigo-200 px-6 py-3 rounded-xl overflow-hidden"
+        data-tab="tabB"
+      >
+        <h2>Detailed View</h2>
+        <p>This section provides more in-depth information.</p>
+      </div>
+      <div
+        class="tab-pane bg-cyan-200 px-6 py-3 rounded-xl overflow-hidden"
+        data-tab="tabC"
+      >
+        <h2>Additional Information</h2>
+        <p>Further insights and extra content go here.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative h-40 w-40 mt-8">
+    <div class="absolute top-0 left-0 w-full h-full bg-lime-300 z-5"></div>
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-violet-700 z-0 animate-poof"
+    >
+    </div>
+  </div>
+
+  <script>
+    import { initTabManager } from '../scripts/tab';
+    document.addEventListener('DOMContentLoaded', initTabManager);
+  </script>
+</Layout>
