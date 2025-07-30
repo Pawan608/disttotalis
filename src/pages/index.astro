@@ -30,15 +30,15 @@ import ClimaticConditionsSection from '../sections/climatic-conditions.astro';
 
     // All DOMContentLoaded centralized logic
     document.addEventListener('DOMContentLoaded', () => {
-      const hindalcoLogo = document.getElementById('hindalco-logo');
-      const backedCard = document.getElementById('backed-card');
-      const isWideScreen = window.innerWidth > 768;
-      const isHeightLarge = window.innerHeight > 640;
-      const hindalcoLogoAnimDelay = isHeightLarge ? 1100 : 100;
-      const backedCardAnimDelay = isHeightLarge && isWideScreen ? 1200 : 100;
+      // const hindalcoLogo = document.getElementById('hindalco-logo');
+      // const backedCard = document.getElementById('backed-card');
+      // const isWideScreen = window.innerWidth > 768;
+      // const isHeightLarge = window.innerHeight > 640;
+      // const hindalcoLogoAnimDelay = isHeightLarge ? 1100 : 100;
+      // const backedCardAnimDelay = isHeightLarge && isWideScreen ? 1200 : 100;
 
-      hindalcoLogo?.setAttribute('data-delay', `${hindalcoLogoAnimDelay}`);
-      backedCard?.setAttribute('data-delay', `${backedCardAnimDelay}`);
+      // hindalcoLogo?.setAttribute('data-delay', `${hindalcoLogoAnimDelay}`);
+      // backedCard?.setAttribute('data-delay', `${backedCardAnimDelay}`);
 
       initRevealObserver();
       initCardGlowEffect();

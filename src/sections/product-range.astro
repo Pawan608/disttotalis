@@ -9,8 +9,8 @@ import demoImage4 from '../assets/placeholder-product-4.jpg';
 
 // Product categories
 const categories = [
-  { id: 'sliding', name: 'Sliding Series' },
-  { id: 'casemate', name: 'Casemate Series' },
+  { id: 'sliding', name: 'Sliding' },
+  { id: 'casemate', name: 'Casemate' },
   { id: 'railing', name: 'Railing' },
 ];
 
@@ -124,11 +124,13 @@ const productsByCategory = {
       />
     </div>
 
-    <div class="inline-flex mt-8 w-fit bg-gray-100 rounded-full p-1">
+    <div
+      class="inline-flex mt-8 mb-8 md:mb-0 w-fit bg-gray-100 rounded-full p-1"
+    >
       {
         categories.map((category, index) => (
           <button
-            class="px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 text-gray-700 hover:text-gray-800 data-[active=true]:bg-secondary data-[active=true]:text-white data-[active=true]:shadow-lg data-[active=true]:hover:text-white cursor-pointer hover:data-[active=false]:bg-gray-200"
+            class="px-4 lg:px-8 py-2 lg:py-3 rounded-full text-sm font-medium transition-all duration-300 text-gray-700 hover:text-gray-800 data-[active=true]:bg-secondary data-[active=true]:text-white data-[active=true]:shadow-lg data-[active=true]:hover:text-white cursor-pointer hover:data-[active=false]:bg-gray-200"
             data-category={category.id}
             data-active={index === 0 ? 'true' : 'false'}
           >
@@ -138,7 +140,7 @@ const productsByCategory = {
       }
     </div>
 
-    <div class="flex items-center w-full justify-end py-8 gap-2">
+    <div class="hidden md:flex items-center w-full justify-end py-8 gap-2">
       <button
         id="product-prev"
         class="text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
@@ -166,7 +168,7 @@ const productsByCategory = {
       >
         <div class="flex gap-4 sm:gap-6">
           {products.map((product) => (
-            <div class="flex-none w-sm first-of-type:ml-8">
+            <div class="flex-none md:w-sm w-xs first-of-type:md:ml-8 first-of-type:ml-4">
               <div class="group cursor-pointer">
                 <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
                   <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary 5% z-10" />
