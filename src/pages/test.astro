@@ -81,6 +81,160 @@ const faqItems: AccordionItem[] = [
       }
     </div>
   </div>
+
+  <div class="">
+    <div class="stat-card meteor-card p-4">
+      <div class="meteor-container">
+        <div class="meteor"></div>
+        <div class="meteor meteor-2"></div>
+        <div class="meteor meteor-3"></div>
+      </div>
+      <div class="content">
+        <div class="icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17L9 11L13 15L21 7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+            <path
+              d="M14 7H21V14"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="number">100+</div>
+        <div class="label">Projects Completed</div>
+      </div>
+    </div>
+
+    <style>
+      .meteor-card {
+        position: relative;
+        width: 280px;
+        height: 200px;
+        background: linear-gradient(135deg, #0f0f23, #1a1a3e);
+        border-radius: 24px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .meteor-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .meteor-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .meteor {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: linear-gradient(45deg, #60a5fa, #3b82f6);
+        border-radius: 50%;
+        box-shadow:
+          0 0 10px #60a5fa,
+          0 0 20px #3b82f6,
+          0 0 30px #1d4ed8;
+        animation: meteorFall 3s linear infinite;
+      }
+
+      .meteor::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 2px;
+        width: 40px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+        transform: rotate(-45deg);
+        transform-origin: left center;
+      }
+
+      .meteor-2 {
+        animation-delay: -1s;
+        animation-duration: 2.5s;
+      }
+
+      .meteor-3 {
+        animation-delay: -2s;
+        animation-duration: 3.5s;
+      }
+
+      @keyframes meteorFall {
+        0% {
+          top: -10px;
+          left: 100%;
+          opacity: 1;
+        }
+        70% {
+          opacity: 1;
+        }
+        100% {
+          top: 100%;
+          left: -10px;
+          opacity: 0;
+        }
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        color: white;
+        box-shadow: 0 8px 32px rgba(96, 165, 250, 0.3);
+      }
+
+      .icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .number {
+        font-size: 48px;
+        font-weight: 800;
+        color: #f1f5f9;
+        margin-bottom: 8px;
+      }
+
+      .label {
+        font-size: 16px;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+    </style>
+  </div>
 </Layout>
 
 <script>

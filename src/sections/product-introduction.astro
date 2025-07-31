@@ -39,7 +39,11 @@ const { product } = Astro.props;
           <Image
             src={product.mainImage}
             alt={`${product.name} main`}
-            widths={[64]}
+            widths={[64, 96]}
+            layout="constrained"
+            format="webp"
+            loading={'lazy'}
+            decoding={'async'}
             class="w-full h-full object-cover"
           />
         </button>
@@ -80,11 +84,13 @@ const { product } = Astro.props;
 
         <!-- Quality Badge -->
         <div
-          class="p-4 flex gap-2 items-center border border-green-200 bg-primary/5 rounded-xl text-green-600"
+          class="p-4 flex gap-2 items-center border border-green-200 bg-primary/5 rounded-2xl text-green-600"
         >
           <Star class="w-6 h-6 mt-1 fill-current stroke-transparent" />
           <article>
-            <p class="font-semibold text-green-700">Premium Quality Assured</p>
+            <h2 class="font-semibold text-green-700">
+              Premium Quality Assured
+            </h2>
             <p class="text-sm">
               Tested & Certified for Indian Climate Conditions
             </p>
@@ -97,8 +103,8 @@ const { product } = Astro.props;
           <div class="grid grid-cols-1 gap-2">
             {
               product.features.map((feature) => (
-                <article class="flex inset-shadow-xs inset-shadow-white bg-[#fdfdfd] p-4 items-start gap-4 rounded-xl shadow-xs border border-gray-200">
-                  <div class="bg-secondary/10 border border-secondary/15 rounded-lg p-2 self-center">
+                <article class="flex inset-shadow-xs inset-shadow-white bg-[#fdfdfd] p-4 items-start gap-4 rounded-2xl shadow-xs border border-gray-200">
+                  <div class="bg-gradient-to-br from-secondary/5 to-secondary/20 border border-secondary/15 rounded-lg p-2 self-center">
                     <feature.icon class="w-6 h-6 stroke-secondary" />
                   </div>
                   <div>
@@ -136,12 +142,12 @@ const { product } = Astro.props;
 
   <!-- Statistics -->
   <div
-    class="max-w-6xl mx-auto px-4 mt-16 mb-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center"
+    class="max-w-6xl mx-auto px-4 mt-16 mb-8 justify-items-center grid grid-cols-2 md:grid-cols-4 gap-4 text-center"
   >
     {
       product.stats.map((stat) => (
-        <div class="border glow-card z-5 overflow-hidden border-gray-200 shadow py-8 rounded-2xl flex flex-col items-center">
-          <div class="w-12 aspect-square flex items-center mb-2 justify-center rounded-xl bg-secondary border border-secondary-light">
+        <div class="border max-w-64 w-full glow-card z-5 overflow-hidden border-gray-200 shadow py-8 rounded-2xl flex flex-col items-center">
+          <div class="w-12 aspect-square flex items-center mb-2 justify-center rounded-xl bg-gradient from-secondary-light to-secondary bg-gradient-to-br border border-secondary-light">
             <stat.icon class="size-8 stroke-[1.7] stroke-white" />
           </div>
           <p class="text-2xl font-bold text-secondary">{stat.value}</p>
