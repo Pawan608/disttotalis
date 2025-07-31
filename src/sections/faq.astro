@@ -1,7 +1,9 @@
 ---
 import { ChevronDown } from '@lucide/astro';
-import Accordion, { type AccordionItem } from '../components/accordion.astro';
 import SectionHeading from '../components/section-heading.astro';
+
+import type { AccordionItem } from '../types';
+import Button from '../components/button.astro';
 
 const faqItems: AccordionItem[] = [
   {
@@ -53,26 +55,41 @@ const faqItems: AccordionItem[] = [
       title="Frequently Asked Questions"
       description="Get answers to the most common questions about our TOT SD NEXGEN sliding windows"
     />
-    <div
-      class="flex text-left my-8 flex-col gap-2 md:gap-4 rounded-2xl bg-gray-50 p-2 md:p-4"
-    >
-      {
-        faqItems.map((item) => (
-          <div class="overflow-hidden rounded-2xl border border-neutral-200 text-neutral-700 bg-white">
-            <button class="peer group/trigger flex w-full justify-between items-center px-4 py-2">
-              <h3 class="text-neutral-600 font-medium md:text-lg text-left">
-                {item.question}
-              </h3>
+    <div class="rounded-2xl overflow-hidden my-8">
+      <div class="flex text-left flex-col gap-2 md:gap-4 bg-gray-50 p-2 md:p-4">
+        {
+          faqItems.map((item) => (
+            <div class="overflow-hidden rounded-2xl border border-neutral-200 text-neutral-700 bg-white">
+              <button class="peer group/trigger flex w-full justify-between items-center px-4 py-2">
+                <h3 class="text-neutral-600 font-medium md:text-lg text-left">
+                  {item.question}
+                </h3>
 
-              <ChevronDown class="size-8 shrink-0 group-focus/trigger:rotate-180 transition-smooth md:size-10 p-1 border border-neutral-200 rounded-full stroke-1 stroke-neutral-600" />
-            </button>
+                <ChevronDown class="size-8 shrink-0 group-focus/trigger:rotate-180 transition-smooth md:size-10 p-1 border border-neutral-200 rounded-full stroke-1 stroke-neutral-600" />
+              </button>
 
-            <p class="max-h-0 translate-y-4 transform px-4 text-neutral-600 opacity-0 transition-all duration-300 ease-out peer-focus:max-h-[200px] peer-focus:translate-y-0 peer-focus:pb-4 peer-focus:opacity-100">
-              {item.answer}
-            </p>
-          </div>
-        ))
-      }
+              <p class="max-h-0 translate-y-4 transform px-4 text-neutral-600 opacity-0 transition-all duration-300 ease-out peer-focus:max-h-[200px] peer-focus:translate-y-0 peer-focus:pb-4 peer-focus:opacity-100">
+                {item.answer}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="bg-secondary w-full py-8 md:py-12 px-8">
+        <div class="flex flex-col gap-1 md:gap-2 mb-4">
+          <h3 class="text-xl md:text-2xl text-gray-50">
+            Still have Questions?
+          </h3>
+          <p class="text-gray-200">
+            Our experts are here to help you make the right choice for your
+            project.
+          </p>
+        </div>
+        <div class="flex gap-4 items-center justify-center mb-2">
+          <Button variant="primary" reveal="true">Talk to An Expert</Button>
+          <Button variant="default" reveal="true">Send Inquiry</Button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
