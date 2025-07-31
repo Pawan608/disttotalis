@@ -16,7 +16,10 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 ---
 
-<Layout title={product.name}>
+<Layout
+  title={product.name}
+  description={`Totalis By Hindalco - ${product.name} - ${product.description}`}
+>
   <!-- Breadcrumb -->
   <div
     class="h-12 border-b border-gray-200 sticky top-16 bg-white z-10 flex items-center justify-center"
