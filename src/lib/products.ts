@@ -12,6 +12,10 @@ import mainImage1 from '../assets/product-demo.jpg';
 import thumb1 from '../assets/building.jpeg';
 import thumb2 from '../assets/product-demo.jpg';
 
+import px1 from '../assets/px1.jpg';
+import px2 from '../assets/px2.jpg';
+import px3 from '../assets/px3.jpg';
+
 import type { ImageMetadata } from 'astro';
 
 export interface Product {
@@ -32,8 +36,8 @@ export const products: Product[] = [
     description:
       'Tested windows built for enhanced sturdiness—an ideal choice for every home.',
     price: 17999,
-    mainImage: mainImage1,
-    thumbnails: [thumb1, thumb2],
+    mainImage: px1,
+    thumbnails: [px2, px3],
     features: [
       {
         icon: Lock,

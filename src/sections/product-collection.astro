@@ -43,7 +43,7 @@ const products = [
     {
       products.map(({ title, description, image, alt }, i) => (
         <ExpandingCard
-          cardClass="aspect-square w-xs shrink-0 rounded-2xl relative shadow-lg"
+          cardClass="aspect-square group w-xs shrink-0 rounded-2xl relative shadow-lg"
           contentContainerClass="px-4 py-2 bg-white rounded-2xl border-neutral-100 border"
           expandingContentClass="text-sm text-neutral-600 mb-1"
         >
@@ -52,7 +52,7 @@ const products = [
             src={image}
             alt={alt}
             layout="full-width"
-            class={'h-full w-full'}
+            class={'h-full w-full group-hover:scale-105 transition-smooth'}
           />
           <h3 slot="HeadingText" class="text-lg font-semibold">
             {title}

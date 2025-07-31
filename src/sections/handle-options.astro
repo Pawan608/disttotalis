@@ -25,14 +25,14 @@ const handleOptions = [
       handleOptions.map(({ title, image, alt }) => (
         <div class="relative">
           <article
-            class="w-xs transition-all duration-300 rounded-2xl overflow-hidden shadow-sm border border-gray-200 bg-white
+            class="w-xs transition-all group duration-300 rounded-2xl overflow-hidden shadow-sm border border-gray-200 bg-white
                         hover:scale-105 hover:shadow-xl"
           >
             <div class="h-48 overflow-hidden">
               <Image
                 src={image}
                 alt={alt}
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover scale-105 transition duration-300 group-hover:scale-100"
                 loading="lazy"
               />
             </div>
