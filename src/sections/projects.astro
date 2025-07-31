@@ -6,26 +6,15 @@ import demoBrand from '../assets/hindalco-logo.svg';
 import demoBuilding from '../assets/hotel-building.jpg';
 import demoBuilding1 from '../assets/building-placeholder.jpg';
 
-// Property data array
 const properties = [
-  {
-    id: 1,
-    name: 'Supreme, Pune',
-    area: '88544 Sqft.',
-    image: demoBuilding1,
-  },
+  { id: 1, name: 'Supreme, Pune', area: '88544 Sqft.', image: demoBuilding1 },
   {
     id: 2,
     name: 'Shalimar Mannat, Lucknow',
     area: '88544 Sqft.',
     image: demoBuilding,
   },
-  {
-    id: 3,
-    name: 'Eldeco Luxa',
-    area: '30000 Sqft.',
-    image: demoImage,
-  },
+  { id: 3, name: 'Eldeco Luxa', area: '30000 Sqft.', image: demoImage },
   {
     id: 4,
     name: 'Natura by One Oak, Lucknow',
@@ -46,30 +35,25 @@ const properties = [
   },
 ];
 
-// Brand logos for marquee
 const brands = [demoBrand, demoBrand, demoBrand];
 ---
 
 <section id="projects" class="w-full">
-  <!-- Properties Section -->
   <div class="bg-secondary md:py-24 py-16 z-0">
-    <div class="md:px-4 max-w-6xl mx-auto">
-      <!-- Header with Navigation -->
+    <div class="md:px-4 max-w-6xl mx-auto embla">
       <div class="flex px-4 items-center justify-between mb-12">
         <h2 class="lg:text-4xl text-3xl font-bold text-white">
           Shaping Skylines with excellence
         </h2>
         <div class="items-center gap-3 hidden md:flex">
           <button
-            id="project-prev"
-            class="text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
+            class="embla-prev text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
             aria-label="Previous slide"
           >
             <CircleArrowLeft size={48} stroke-width={1.5} />
           </button>
           <button
-            id="project-next"
-            class="text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
+            class="embla-next text-white hover:text-secondary-light disabled:cursor-not-allowed transition-colors disabled:text-white/50 cursor-pointer"
             aria-label="Next slide"
           >
             <CircleArrowRight size={48} stroke-width={1.5} />
@@ -77,34 +61,29 @@ const brands = [demoBrand, demoBrand, demoBrand];
         </div>
       </div>
 
-      <!-- Embla Carousel Container -->
-      <div class="embla" id="embla">
-        <div class="embla__container">
+      <div class="embla-viewport">
+        <div class="embla-container">
           {
             properties.map((property) => (
-              <div class="embla__slide first-of-type:md:ml-4 md:ml-6 ml-4 last-of-type:mr-4">
-                <div class="w-64 flex-shrink-0">
-                  <div class="aspect-[8/9] overflow-hidden">
-                    <div class="rounded-xl reveal w-full bg-radial from-indigo-500 to-indigo-600 overflow-hidden h-full">
-                      <Image
-                        src={property.image}
-                        alt={property.name}
-                        loading={'lazy'}
-                        decoding="async"
-                        layout="full-width"
-                        format="webp"
-                        class="h-full object-cover hover:scale-105 transition-transform duration-400"
-                      />
-                    </div>
-                  </div>
-                  <div class="p-2">
-                    <p class="text-md font-semibold text-white">
-                      {property.name}
-                    </p>
-                    <p class="text-gray-100 font-medium text-sm">
-                      {property.area}
-                    </p>
-                  </div>
+              <div class="embla-slide reveal w-64 first-of-type:md:pl-4 md:pl-6 pl-4 last-of-type:pr-4">
+                <div class="aspect-[8/9] overflow-hidden rounded-xl bg-radial from-indigo-500 to-indigo-600">
+                  <Image
+                    src={property.image}
+                    alt={property.name}
+                    loading="lazy"
+                    decoding="async"
+                    layout="full-width"
+                    format="webp"
+                    class="h-full w-full object-cover hover:scale-105 transition-transform duration-400"
+                  />
+                </div>
+                <div class="p-2">
+                  <h3 class="text-md font-semibold text-white">
+                    {property.name}
+                  </h3>
+                  <p class="text-gray-100 font-medium text-sm">
+                    {property.area}
+                  </p>
                 </div>
               </div>
             ))
@@ -114,18 +93,16 @@ const brands = [demoBrand, demoBrand, demoBrand];
     </div>
   </div>
 
-  <!-- Smooth Marquee Section -->
   <div class="h-28 z-10 flex items-center relative">
-    <!-- Trust Badge -->
     <span
       class="absolute z-20 top-0 rounded-full backdrop-blur-sm bg-white px-8 py-2 -translate-y-6 -translate-x-1/2 left-1/2 text-center text-secondary text-md lg:text-lg font-light shadow-sm drop-shadow-xs text-nowrap"
     >
       Our Trusted Project
     </span>
     <div class="marquee-container relative w-full pt-4">
-      <div class="marquee-content">
+      <div class="marquee-content flex">
         {
-          brands.map((brand, index) => (
+          brands.map((brand) => (
             <Image
               src={brand}
               alt="Brand logo"
@@ -134,9 +111,9 @@ const brands = [demoBrand, demoBrand, demoBrand];
           ))
         }
       </div>
-      <div class="marquee-content" aria-hidden="true">
+      <div class="marquee-content flex" aria-hidden="true">
         {
-          brands.map((brand, index) => (
+          brands.map((brand) => (
             <Image
               src={brand}
               alt="Brand logo"
@@ -148,79 +125,3 @@ const brands = [demoBrand, demoBrand, demoBrand];
     </div>
   </div>
 </section>
-
-<script>
-  import EmblaCarousel from 'embla-carousel';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const emblaNode = document.getElementById('embla');
-    const prevBtn = document.getElementById('project-prev');
-    const nextBtn = document.getElementById('project-next');
-
-    if (!emblaNode || !prevBtn || !nextBtn) return;
-
-    // Embla options
-    const options = {
-      // align: 'start' as const,
-      slidesToScroll: 1,
-      containScroll: 'trimSnaps' as const,
-      dragFree: false,
-      loop: false,
-      skipSnaps: false,
-      // Responsive breakpoints
-      breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1024px)': { slidesToScroll: 3 },
-      },
-    };
-
-    // Initialize Embla with autoplay plugin (optional)
-    const embla = EmblaCarousel(emblaNode, options);
-
-    // Button functionality
-    const updateButtons = () => {
-      const prevButton = prevBtn as HTMLButtonElement;
-      const nextButton = nextBtn as HTMLButtonElement;
-
-      prevButton.disabled = !embla.canScrollPrev();
-      nextButton.disabled = !embla.canScrollNext();
-    };
-
-    prevBtn.addEventListener('click', () => {
-      embla.scrollPrev();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      embla.scrollNext();
-    });
-
-    // Update buttons on slide change
-    embla.on('select', updateButtons);
-    embla.on('init', updateButtons);
-
-    // Keyboard navigation
-    emblaNode.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        embla.scrollPrev();
-      } else if (e.key === 'ArrowRight') {
-        embla.scrollNext();
-      }
-    });
-  });
-</script>
-
-<style>
-  .embla {
-    overflow: hidden;
-  }
-
-  .embla__container {
-    display: flex;
-    /* gap: 1.5rem; */
-  }
-
-  .embla__slide {
-    flex: 0 0 auto;
-    min-width: 0;
-  }
-</style>

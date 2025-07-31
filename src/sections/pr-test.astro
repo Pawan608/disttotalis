@@ -1,0 +1,193 @@
+---
+import { ArrowLeft, ArrowRight, CircleArrowRight } from '@lucide/astro';
+import { Image } from 'astro:assets';
+import SectionHeading from '../components/section-heading.astro';
+import demoImage from '../assets/placeholder-product.jpg';
+import demoImage2 from '../assets/placeholder-product-2.jpg';
+import demoImage3 from '../assets/placeholder-product-3.jpg';
+import demoImage4 from '../assets/placeholder-product-4.jpg';
+
+const categories = [
+  { id: 'sliding', name: 'Sliding' },
+  { id: 'casemate', name: 'Casemate' },
+  { id: 'railing', name: 'Railing' },
+];
+
+const productsByCategory = {
+  sliding: [
+    {
+      id: 1,
+      name: 'TOT SD LITE',
+      subtitle: 'total Service 00',
+      image: demoImage,
+    },
+    {
+      id: 2,
+      name: 'TOT SD PLUS',
+      subtitle: 'total Service 00',
+      image: demoImage2,
+    },
+    {
+      id: 3,
+      name: 'TOT SD NEXGEN',
+      subtitle: 'total Service 00',
+      image: demoImage3,
+    },
+    {
+      id: 4,
+      name: 'TOT SD PREMIUM',
+      subtitle: 'total Service 00',
+      image: demoImage4,
+    },
+    {
+      id: 5,
+      name: 'TOT SD ULTRA',
+      subtitle: 'total Service 00',
+      image: demoImage,
+    },
+  ],
+  casemate: [
+    {
+      id: 6,
+      name: 'CM CLASSIC',
+      subtitle: 'casemate Series A1',
+      image: demoImage,
+    },
+    {
+      id: 7,
+      name: 'CM MODERN',
+      subtitle: 'casemate Series B2',
+      image: demoImage,
+    },
+    {
+      id: 8,
+      name: 'CM ELITE',
+      subtitle: 'casemate Series C3',
+      image: demoImage,
+    },
+  ],
+  railing: [
+    {
+      id: 9,
+      name: 'RAIL SECURE',
+      subtitle: 'railing Type X1',
+      image: demoImage,
+    },
+    {
+      id: 10,
+      name: 'RAIL PREMIUM',
+      subtitle: 'railing Type Y2',
+      image: demoImage,
+    },
+    {
+      id: 11,
+      name: 'RAIL LUXURY',
+      subtitle: 'railing Type Z3',
+      image: demoImage,
+    },
+    {
+      id: 12,
+      name: 'RAIL MASTER',
+      subtitle: 'railing Type A4',
+      image: demoImage,
+    },
+    {
+      id: 13,
+      name: 'RAIL SUPREME',
+      subtitle: 'railing Type B5',
+      image: demoImage,
+    },
+    {
+      id: 14,
+      name: 'RAIL ULTRA',
+      subtitle: 'railing Type C6',
+      image: demoImage,
+    },
+    {
+      id: 15,
+      name: 'RAIL NEXGEN',
+      subtitle: 'railing Type D7',
+      image: demoImage,
+    },
+  ],
+};
+---
+
+<section id="product-range" class="w-full mb-8">
+  <div class="px-4 max-w-6xl mx-auto pt-8 flex flex-col items-center">
+    <SectionHeading
+      title="Our Product Range"
+      description="Every detail engineered for performance, durability, and design."
+    />
+  </div>
+  <div class="tab-group space-y-4 w-full">
+    <div class="flex justify-center">
+      <div
+        class="tab-glider flex gap-2 bg-neutral-100 relative px-1 rounded-lg before:content-[''] before:bg-white before:absolute before:w-[var(--glider-tab-group-width)] before:left-[var(--glider-tab-group-left)] before:top-1 before:bottom-1 before:z-5 *:z-10 z-0 before:rounded-md before:transition-all before:duration-300"
+      >
+        {
+          categories.map((tab, i) => (
+            <button
+              class="tab-button text-sm text-gray-800 px-6 py-3 grow leading-none rounded-md"
+              data-tab={tab.id}
+              data-active={i === 0}
+            >
+              {tab.name}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="tab-content">
+      {
+        Object.entries(productsByCategory).map(([key, products]) => (
+          <div class="tab-pane embla" data-tab={key}>
+            <div class="flex gap-2 justify-end mb-2 px-4">
+              <ArrowLeft class="embla-prev cursor-pointer" />
+              <ArrowRight class="embla-next cursor-pointer" />
+            </div>
+
+            <div class="embla-viewport">
+              <div class="gap-4 sm:gap-6 px-4">
+                {products.map((p) => (
+                  <div class="flex-none embla-slide md:w-sm w-xs first:ml-2 last:mr-2">
+                    <a href="/product/nexgen" class="group block">
+                      <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 z-10" />
+                        <Image
+                          src={p.image}
+                          alt={p.name}
+                          loading="lazy"
+                          decoding="async"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div class="absolute bottom-4 left-4 z-20">
+                          <h3 class="text-white text-lg md:text-xl font-bold mb-1">
+                            {p.name}
+                          </h3>
+                          <p class="text-white/80 text-xs md:text-sm">
+                            {p.subtitle}
+                          </p>
+                        </div>
+                        <div class="absolute bottom-4 right-4 z-20">
+                          <CircleArrowRight class="text-white group-hover:text-white transition-colors duration-300 size-10 stroke-[1.5]" />
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                      </div>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <script>
+    import { initEmblas } from '../scripts/embla';
+    document.addEventListener('DOMContentLoaded', initEmblas);
+  </script>
+</section>

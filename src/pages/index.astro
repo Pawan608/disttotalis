@@ -29,6 +29,7 @@ import ClimaticConditionsSection from '../sections/climatic-conditions.astro';
   <!-- <ScrollToTop /> -->
 
   <script>
+    import { initEmblas } from '../scripts/embla';
     import { initCardGlowEffect } from '../scripts/glow';
     import { initRevealObserver } from '../scripts/reveal';
 
@@ -46,6 +47,7 @@ import ClimaticConditionsSection from '../sections/climatic-conditions.astro';
 
       initRevealObserver();
       initCardGlowEffect();
+      initEmblas();
     });
   </script>
 </Layout>

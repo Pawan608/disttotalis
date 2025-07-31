@@ -48,6 +48,19 @@
     animation: fade-up 300ms cubic-bezier(0.25, 1, 0.5, 1);
   }
 
+  .embla-viewport {
+    overflow: hidden;
+  }
+
+  .embla-container {
+    display: flex;
+  }
+
+  .embla-slide {
+    flex: 0 0 auto;
+    /* min-width: 0; */
+  }
+
   .reveal.visible,
   .no-js .reveal {
     @apply opacity-100 translate-y-0 rotate-0 blur-none;

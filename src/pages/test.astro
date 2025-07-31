@@ -1,24 +1,29 @@
 ---
 import Layout from '../layouts/layout.astro';
+import PrTest from '../sections/pr-test.astro';
 ---
 
-<Layout title="test" htmlClassName="no-js">
+<Layout title="Test Page" htmlClassName="no-js">
   <h1 class="text-3xl font-bold">Test Page</h1>
   <p>This is a test page to verify the layout and components.</p>
 
+  <!-- Tab Group 1 -->
   <div class="tab-group border border-gray-300 p-2 rounded m-4 max-w-md">
-    <button
-      class="tab-button data-[active=true]:bg-blue-300 bg-lime-500 text-white px-6 py-2 inset-shadow-xs inset-shadow-lime-400 leading-none rounded-md"
-      data-tab="tab1">Tab 1</button
+    <div
+      class="flex tab-glider gap-2 bg-gray-300 relative before:content[''] before:bg-white before:absolute before:w-[var(--glider-tab-group-width)] before:left-[var(--glider-tab-group-left)] before:top-1 before:bottom-1 before:z-5 *:z-10 z-0 px-1 before:rounded-md before:transition-all before:duration-300 rounded-lg"
     >
-    <button
-      class="tab-button data-[active=true]:bg-blue-300 bg-lime-500 text-white px-6 py-2 inset-shadow-xs inset-shadow-lime-400 leading-none rounded-md"
-      data-tab="tab2">Tab 2</button
-    >
-    <button
-      class="tab-button bg-lime-500 text-white px-6 py-2 inset-shadow-xs inset-shadow-lime-400 leading-none rounded-md"
-      data-tab="tab3">Tab 3</button
-    >
+      {
+        ['tab1', 'tab2', 'tab3'].map((tab, i) => (
+          <button
+            class="tab-button text-gray-800 px-6 py-2 grow leading-none rounded-md"
+            data-tab={tab}
+            data-active={i === 0}
+          >
+            Tab {i + 1}
+          </button>
+        ))
+      }
+    </div>
 
     <div class="tab-content mt-6 relative h-20 w-sm">
       <div
@@ -44,58 +49,16 @@ import Layout from '../layouts/layout.astro';
       </div>
     </div>
   </div>
-  <div class="tab-group border p-2 border-gray-300 rounded max-w-md m-4">
-    <button
-      class="tab-button text-white bg-cyan-600 px-6 py-2 leading-none inset-shadow-xs inset-shadow-cyan-400 rounded-md"
-      data-tab="tabA"
-      data-active="true">Overview</button
-    >
-    <button
-      class="tab-button text-white bg-cyan-600 px-6 py-2 leading-none inset-shadow-xs inset-shadow-cyan-400 rounded-md"
-      data-tab="tabB"
-      data-active="false">Details</button
-    >
-    <button
-      class="tab-button text-white bg-cyan-600 px-6 py-2 leading-none inset-shadow-xs inset-shadow-cyan-400 rounded-md"
-      data-tab="tabC"
-      data-active="false">More Info</button
-    >
 
-    <div class="tab-content z-based mt-6 relative w-sm h-20">
-      <div
-        class="tab-pane bg-blue-200 px-6 py-3 rounded-xl overflow-hidden"
-        data-tab="tabA"
-      >
-        <h2>Overview Section</h2>
-        <p>Here's a brief summary of this section's content.</p>
-      </div>
-      <div
-        class="tab-pane bg-indigo-200 px-6 py-3 rounded-xl overflow-hidden"
-        data-tab="tabB"
-      >
-        <h2>Detailed View</h2>
-        <p>This section provides more in-depth information.</p>
-      </div>
-      <div
-        class="tab-pane bg-cyan-200 px-6 py-3 rounded-xl overflow-hidden"
-        data-tab="tabC"
-      >
-        <h2>Additional Information</h2>
-        <p>Further insights and extra content go here.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative h-40 w-40 mt-8">
-    <div class="absolute top-0 left-0 w-full h-full bg-lime-300 z-5"></div>
-    <div
-      class="absolute top-0 left-0 w-full h-full bg-violet-700 z-0 animate-poof"
-    >
-    </div>
-  </div>
+  <PrTest />
 
   <script>
+    import { initRevealObserver } from '../scripts/reveal';
     import { initTabManager } from '../scripts/tab';
-    document.addEventListener('DOMContentLoaded', initTabManager);
+    initTabManager();
+    document.addEventListener('DOMContentLoaded', () => {
+      initTabManager();
+      initRevealObserver();
+    });
   </script>
 </Layout>
