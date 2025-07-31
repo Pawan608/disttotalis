@@ -6,50 +6,6 @@ import PrTest from '../sections/pr-test.astro';
 <Layout title="Test Page" htmlClassName="no-js">
   <h1 class="text-3xl font-bold">Test Page</h1>
   <p>This is a test page to verify the layout and components.</p>
-
-  <!-- Tab Group 1 -->
-  <div class="tab-group border border-gray-300 p-2 rounded m-4 max-w-md">
-    <div
-      class="flex tab-glider gap-2 bg-gray-300 relative before:content[''] before:bg-white before:absolute before:w-[var(--glider-tab-group-width)] before:left-[var(--glider-tab-group-left)] before:top-1 before:bottom-1 before:z-5 *:z-10 z-0 px-1 before:rounded-md before:transition-all before:duration-300 rounded-lg"
-    >
-      {
-        ['tab1', 'tab2', 'tab3'].map((tab, i) => (
-          <button
-            class="tab-button text-gray-800 px-6 py-2 grow leading-none rounded-md"
-            data-tab={tab}
-            data-active={i === 0}
-          >
-            Tab {i + 1}
-          </button>
-        ))
-      }
-    </div>
-
-    <div class="tab-content mt-6 relative h-20 w-sm">
-      <div
-        class="tab-pane overflow-hidden rounded-xl px-6 py-3 bg-red-200"
-        data-tab="tab1"
-      >
-        <h2>Content for Tab 1</h2>
-        <p>This is the content for the first tab.</p>
-      </div>
-      <div
-        class="tab-pane overflow-hidden rounded-xl px-6 py-3 bg-green-200"
-        data-tab="tab2"
-      >
-        <h2>Content for Tab 2</h2>
-        <p>This is the content for the second tab.</p>
-      </div>
-      <div
-        class="tab-pane overflow-hidden rounded-xl px-6 py-3 bg-pink-200"
-        data-tab="tab3"
-      >
-        <h2>Content for Tab 3</h2>
-        <p>This is the content for the third tab.</p>
-      </div>
-    </div>
-  </div>
-
   <PrTest />
 
   <script>

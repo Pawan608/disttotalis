@@ -1,0 +1,154 @@
+---
+import { X, CheckCircle } from '@lucide/astro';
+---
+
+<div
+  class="fixed inset-0 z-50 items-center justify-center hidden bg-black/50 backdrop-blur-sm transition-opacity duration-300 overflow-y-auto p-4 md:p-6"
+  id="contact-form-modal"
+>
+  <div
+    class="relative max-w-xl w-full bg-white rounded-2xl p-6 md:p-8 shadow-xl"
+  >
+    <button
+      class="absolute top-4 right-4 text-gray-500 hover:text-black focus:outline-none"
+      onclick="toggleContactForm(false)"
+    >
+      <X class="w-5 h-5" />
+    </button>
+
+    <h2 class="text-xl font-semibold mb-2">Basic Details</h2>
+    <p class="text-sm text-gray-500 mb-4">Please provide your details</p>
+
+    <form id="contact-form" class="space-y-4">
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        class="form-input"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        class="form-input"
+        required
+      />
+      <input
+        type="tel"
+        name="whatsapp"
+        placeholder="WhatsApp Number"
+        class="form-input"
+        required
+      />
+      <input
+        type="text"
+        name="pincode"
+        placeholder="Pincode"
+        class="form-input"
+        required
+      />
+
+      <select name="state" id="state" class="form-input" required></select>
+      <select name="city" id="city" class="form-input" required></select>
+
+      <input
+        type="text"
+        name="intent"
+        placeholder="I am looking to..."
+        class="form-input"
+        required
+      />
+      <input
+        type="text"
+        name="role"
+        placeholder="I am a..."
+        class="form-input"
+        required
+      />
+
+      <label class="flex items-center gap-2">
+        <input type="checkbox" required />
+        <span class="text-sm"
+          >I agree with the <a href="/privacy" class="underline"
+            >privacy policy</a
+          > and <a href="/terms" class="underline">terms and conditions</a> of Totalis</span
+        >
+      </label>
+
+      <div class="pt-2">
+        <slot name="submitButton">
+          <button
+            type="submit"
+            class="bg-primary/90 border border-primary text-white py-2 px-6 rounded-xl w-full hover:scale-[0.98] transition"
+          >
+            Submit
+          </button>
+        </slot>
+      </div>
+    </form>
+
+    <button
+      class="block text-center text-sm text-gray-500 mt-4 w-full"
+      onclick="toggleContactForm(false)"
+    >
+      Skip
+    </button>
+  </div>
+</div>
+
+<style>
+  .form-input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary text-sm;
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('contact-form-modal') as HTMLElement;
+
+  document.querySelectorAll('[data-contact-form-active]').forEach((el) => {
+    el.addEventListener('click', () => toggleContactForm(true));
+  });
+
+  function toggleContactForm(show: boolean) {
+    if (!modal) return;
+    modal.classList.toggle('hidden', !show);
+    modal.classList.toggle('flex', show);
+  }
+
+  // States + cities
+  const stateSelect = document.getElementById('state') as HTMLSelectElement;
+  const citySelect = document.getElementById('city') as HTMLSelectElement;
+
+  const indianStates: { [key: string]: string[] } = {
+    Maharashtra: ['Mumbai', 'Pune', 'Nagpur'],
+    Delhi: ['New Delhi', 'Dwarka', 'Saket'],
+    Karnataka: ['Bengaluru', 'Mysuru'],
+    'West Bengal': ['Kolkata', 'Howrah'],
+    'Tamil Nadu': ['Chennai', 'Coimbatore'],
+    'Uttar Pradesh': ['Lucknow', 'Noida', 'Varanasi'],
+    Bihar: ['Patna', 'Gaya'],
+    Jharkhand: ['Ranchi', 'Lohardaga'],
+    // Add more states & cities as needed
+  };
+
+  Object.keys(indianStates).forEach((state) => {
+    const opt = document.createElement('option');
+    opt.value = state;
+    opt.textContent = state;
+    stateSelect.appendChild(opt);
+  });
+
+  stateSelect.addEventListener('change', () => {
+    const selected = stateSelect.value;
+    citySelect.innerHTML = '';
+    if (indianStates[selected]) {
+      indianStates[selected].forEach((city) => {
+        const opt = document.createElement('option');
+        opt.value = city;
+        opt.textContent = city;
+        citySelect.appendChild(opt);
+      });
+    }
+  });
+</script>
