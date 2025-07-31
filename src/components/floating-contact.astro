@@ -3,10 +3,52 @@ import { Phone } from '@lucide/astro';
 ---
 
 <a
+  id="contactBtn"
   href="/contact"
-  class="fixed bottom-4 right-4 lg:bottom-6 flex items-center justify-center lg:px-6 gap-2 lg:right-6 z-40 bg-green-500 text-white p-3 rounded-full border-green-400 border shadow-lg transition-all duration-200"
+  class="fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-40 flex items-center justify-center bg-green-500 text-white p-2 px-4 border-green-400 border shadow-lg transition-all duration-300 ease-in-out rounded-full overflow-hidden"
   aria-label="Contact Us"
 >
-  <Phone class="size-5" />
-  <span class="hidden lg:inline-flex">Contact Us </span>
+  <Phone class="size-5 fill-current stroke-0 transition-all duration-300" />
+  <span
+    id="contactText"
+    class="ml-2 hidden lg:inline-block whitespace-nowrap transition-all duration-300"
+  >
+    Contact Us
+  </span>
+
+  <script type="module">
+    const btn = document.getElementById('contactBtn');
+    const text = document.getElementById('contactText');
+
+    let scrollTimeout = null;
+    let isCompressed = false;
+
+    function compress() {
+      if (isCompressed) return;
+      isCompressed = true;
+      text.style.maxWidth = '0px';
+      text.style.opacity = '0';
+      text.style.marginLeft = '0';
+    }
+
+    function expand() {
+      if (!isCompressed) return;
+      isCompressed = false;
+      text.style.maxWidth = '200px'; // enough for full text
+      text.style.opacity = '1';
+      text.style.marginLeft = '0.5rem'; // Tailwind’s `ml-2`
+    }
+
+    window.addEventListener('scroll', () => {
+      compress();
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(expand, 200);
+    });
+
+    // Initial expanded state
+    text.style.transition = 'all 0.7s ease';
+    text.style.maxWidth = '200px';
+    text.style.opacity = '1';
+    text.style.marginLeft = '0.5rem';
+  </script>
 </a>
