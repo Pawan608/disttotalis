@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import liteImage from '../assets/sdlite.jpg';
+import sdImage from '../assets/building.jpeg';
+import plusImage from '../assets/building.jpeg';
+import SectionHeading from '../components/section-heading.astro';
+import ExpandingCard from '../components/expanding-card.astro';
+
+const products = [
+  {
+    title: 'TOT SD Lite',
+    description:
+      'High-performance sliding window solution engineered for modern spaces.',
+    image: liteImage,
+    alt: 'TOT SD Lite',
+  },
+  {
+    title: 'TOT SD',
+    description:
+      'High-performance sliding window solution engineered for seamless views. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias nobis excepturi quos!',
+    image: sdImage,
+    alt: 'TOT SD',
+  },
+  {
+    title: 'TOT SD Plus',
+    description:
+      'High-performance sliding window solution engineered for luxury and efficiency.',
+    image: plusImage,
+    alt: 'TOT SD Plus',
+  },
+];
+---
+
+<section class="py-16 bg-white" id="product-collection">
+  <div class="max-w-6xl mx-auto px-4 text-center mb-12">
+    <SectionHeading
+      title="Explore Our Product Collection"
+      description="Discover more innovative aluminum solutions engineered for modern living"
+    />
+  </div>
+
+  <div class="max-w-6xl mx-auto flex justify-center flex-wrap gap-6 px-4">
+    {
+      products.map(({ title, description, image, alt }, i) => (
+        <ExpandingCard
+          cardClass="aspect-square w-xs shrink-0 rounded-2xl relative shadow-lg"
+          contentContainerClass="px-4 py-2 bg-white rounded-2xl border-neutral-100 border"
+          expandingContentClass="text-sm text-neutral-600 mb-1"
+        >
+          <Image
+            slot={'ImageSlot'}
+            src={image}
+            alt={alt}
+            layout="full-width"
+            class={'h-full w-full'}
+          />
+          <h3 slot="HeadingText" class="text-lg font-semibold">
+            {title}
+          </h3>
+          <p slot="Description">{description}</p>
+        </ExpandingCard>
+      ))
+    }
+  </div>
+</section>

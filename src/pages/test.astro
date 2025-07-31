@@ -1,20 +1,87 @@
 ---
+import { Plus } from '@lucide/astro';
 import Layout from '../layouts/layout.astro';
-import PrTest from '../sections/pr-test.astro';
+
+import { Image } from 'astro:assets';
+import demoImage from '../assets/building.jpeg';
+import ExpandingCard from '../components/expanding-card.astro';
 ---
 
 <Layout title="Test Page" htmlClassName="no-js">
   <h1 class="text-3xl font-bold">Test Page</h1>
   <p>This is a test page to verify the layout and components.</p>
-  <PrTest />
+  <div class="flex gap-4 flex-wrap my-8 p-8">
+    {
+      [1, 2, 3, 4].map(() => (
+        <article class="expanding-card overflow-hidden aspect-square w-xs shrink-0 relative border-neutral-200 shadow rounded-2xl transition-all duration-300">
+          <Image
+            src={demoImage}
+            alt={'Demo Image'}
+            layout="full-width"
+            class={'h-full w-full'}
+          />
+          <div class="px-4 py-2 absolute bottom-0 left-0 bg-white rounded-t-2xl border-neutral-300 w-full">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold">TOT SD Lite</h3>
+              <button class="expanding-button transition-all duration-300 data-[content-expanded=true]:rotate-45 shrink-0 p-1 rounded-full shadow border-1 border-neutral-200">
+                <Plus class="stroke-neutral-700" />
+              </button>
+            </div>
+            <div class="content text-neutral-600">
+              <div
+                class="expanding-content mb-1 line-clamp-1 overflow-hidden transition-all text-sm text-neutral-600"
+                data-max-height="180px"
+              >
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ipsum, quo saepe aliquam corporis est, sapiente odio
+                  necessitatibus dignissimos quod iusto assumenda vero,
+                  perferendis atque laudantium adipisci libero dolor excepturi
+                  obcaecati
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+    {
+      [1, 2].map(() => (
+        <ExpandingCard
+          cardClass="aspect-square w-xs shrink-0 rounded-2xl relative border-neutral-200 shadow"
+          contentContainerClass="px-4 py-2 bg-white rounded-t-2xl border-neutral-300 bg-red-500"
+          expandingContentClass="text-sm text-neutral-600 mb-1"
+        >
+          <Image
+            slot={'ImageSlot'}
+            src={demoImage}
+            alt={'Demo Image'}
+            layout="full-width"
+            class={'h-full w-full'}
+          />
+          <h3 slot="HeadingText" class="text-lg font-semibold">
+            Heading
+          </h3>
+          <p slot="Description">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia, vero
+            dolorum ullam veritatis accusantium a doloremque quisquam quas illum
+            at molestiae! Similique deleniti id repudiandae? Aliquam consequatur
+            alias vitae in.
+          </p>
+        </ExpandingCard>
+      ))
+    }
+  </div>
 
   <script>
     import { initEmblas } from '../scripts/embla';
     import { initRevealObserver } from '../scripts/reveal';
     import { initTabManager } from '../scripts/tab';
+    import { initExpandingCards } from '../scripts/expanding-cards';
     document.addEventListener('DOMContentLoaded', () => {
       initTabManager();
       initEmblas();
+      initExpandingCards();
       initRevealObserver();
     });
   </script>

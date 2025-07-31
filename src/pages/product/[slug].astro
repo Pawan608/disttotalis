@@ -5,6 +5,9 @@ import { products } from '../../lib/products';
 import { Image } from 'astro:assets';
 import Button from '../../components/button.astro';
 import CtaEnd from '../../sections/cta-end.astro';
+import ProductCollection from '../../sections/slug-product-collection.astro';
+import HandleOptions from '../../sections/handle-options.astro';
+import SectionHeading from '../../components/section-heading.astro';
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -187,40 +190,53 @@ const { product } = Astro.props;
   </section>
 
   <section id="brief-overview">
-    <div
-      class="tab-group max-w-6xl mx-auto my-16 overflow-hidden rounded-xl shadow-sm border border-gray-100"
-    >
+    <div class="max-w-6xl mx-auto relative text-center">
+      <SectionHeading
+        title="Overview"
+        description="Let's look at some core features"
+      />
       <div
-        class="grid grid-cols-3 border-b h-12 group bg-neutral-50 border-gray-200 text-gray-600"
+        class="tab-group mx-4 my-16 overflow-hidden rounded-xl shadow-sm border border-gray-100"
       >
-        <button
-          class="tab-button cursor-pointer inline-flex data-[active=true]:border-b data-[active=true]:text-primary border-primary items-center justify-center"
-          data-tab="technical-specs">Technical Specifications</button
+        <div
+          class="tab-glider before:border-1 before:border-primary/40 rounded-xl before:rounded-lg mt-1 mx-1 grid grid-cols-3 h group bg-neutral-100 p-1"
         >
-        <button
-          class="tab-button inline-flex data-[active=true]:border-b data-[active=true]:text-primary border-primary items-center justify-center data-[active=true]:bg-primary/5"
-          data-tab="perf-parameters">Performance Parameters</button
-        >
-        <button
-          class="tab-button inline-flex data-[active=true]:border-b data-[active=true]:text-primary border-primary items-center justify-center data-[active=true]:bg-primary/5"
-          data-tab="joining-details">Joining Details</button
-        >
-        <div class="glider absolute top-0 left-0 bg-white"></div>
-      </div>
+          {
+            [
+              { title: 'Technical', key: 'technical-specs' },
+              { title: 'Performance', key: 'perf-parameters' },
+              { title: 'Joining', key: 'joining-details' },
+            ].map((b) => (
+              <button
+                class="tab-button py-2 text-neutral-500 inline-flex data-[active=true]:text-primary-dark items-center justify-center"
+                data-tab={b.key}
+              >
+                {b.title}
+              </button>
+            ))
+          }
 
-      <div class="tab-content h-72">
-        <div class="tab-pane p-4" data-tab="technical-specs">
-          <p class="text-xl font-semibold">Product Specifications</p>
+          <div class="glider absolute top-0 left-0 bg-white"></div>
         </div>
-        <div class="tab-pane" data-tab="perf-parameters">Bello</div>
-        <div class="tab-pane" data-tab="joining-details">Trello</div>
+
+        <div class="tab-content h-72">
+          <div class="tab-pane p-4" data-tab="technical-specs">
+            <p class="text-xl font-semibold">Product Specifications</p>
+          </div>
+          <div class="tab-pane" data-tab="perf-parameters">Bello</div>
+          <div class="tab-pane" data-tab="joining-details">Trello</div>
+        </div>
       </div>
     </div>
   </section>
 
+  <HandleOptions />
+  <ProductCollection />
+
   <CtaEnd />
 
   <script>
+    import { initExpandingCards } from '../../scripts/expanding-cards';
     import { initCardGlowEffect } from '../../scripts/glow';
     import { initRevealObserver } from '../../scripts/reveal';
     import { initTabManager } from '../../scripts/tab';
@@ -268,6 +284,7 @@ const { product } = Astro.props;
     document.addEventListener('DOMContentLoaded', () => {
       initRevealObserver();
       initCardGlowEffect();
+      initExpandingCards();
       initImageGallery();
       initTabManager();
     });

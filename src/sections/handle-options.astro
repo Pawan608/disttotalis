@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from '../components/section-heading.astro';
+import flushImg from '../assets/building.jpeg';
+import leverImg from '../assets/building.jpeg';
+import pullImg from '../assets/building.jpeg';
+
+const handleOptions = [
+  { title: 'Flush Lock', image: flushImg, alt: 'Flush Lock Handle' },
+  { title: 'Lever Handle', image: leverImg, alt: 'Lever Handle' },
+  { title: 'Pull Handle', image: pullImg, alt: 'Pull Handle' },
+];
+---
+
+<section class="py-16 bg-white" id="handle-options">
+  <div class="max-w-6xl mx-auto px-4 text-center mb-12">
+    <SectionHeading
+      title="Handle Options"
+      description="Select from our premium handle options designed for functionality, security, and aesthetics"
+    />
+  </div>
+
+  <div class="max-w-6xl mx-auto flex flex-wrap gap-6 px-4 justify-center">
+    {
+      handleOptions.map(({ title, image, alt }) => (
+        <div class="relative">
+          <article
+            class="w-xs transition-all duration-300 rounded-2xl overflow-hidden shadow-sm border border-gray-200 bg-white
+                        hover:scale-105 hover:shadow-xl"
+          >
+            <div class="h-48 overflow-hidden">
+              <Image
+                src={image}
+                alt={alt}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-3 text-center">
+              <h3 class="font-semibold text-sm text-gray-900">{title}</h3>
+            </div>
+          </article>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style></style>
