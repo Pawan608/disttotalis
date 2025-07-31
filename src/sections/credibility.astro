@@ -12,7 +12,7 @@ const capsules = [
 ];
 ---
 
-<section id="Credibility" class="px-4 max-w-6xl mx-auto">
+<section id="credibility" class="px-4 max-w-6xl mx-auto">
   <div class="my-4 grid md:grid-cols-2 not-md:gap-4 py-4 items-center">
     <div
       class="flex item-center pt-8 pb-14 reveal"
@@ -36,11 +36,11 @@ const capsules = [
       data-delay="50"
     >
       <Sparkle class="absolute top-6 right-4 stroke-0 fill-amber-300" />
-      <h3
+      <p
         class="py-2 font-semibold text-[clamp(1.5rem,2.5vw,2rem)] leading-tight"
       >
         Backed by a Legacy of Material Excellence
-      </h3>
+      </p>
       <p
         class="font-light py-2 tracking-wide text-[clamp(0.95rem,1.8vw,1.05rem)]"
       >
@@ -56,12 +56,12 @@ const capsules = [
     {
       capsules.map((capsule, i) => (
         <div class="p-6 rounded-xl not-lg:bg-modal-blue not-lg:reveal flex flex-col gap-2">
-          <h5
+          <p
             class="text-4xl font-bold text-modal-blue-dark reveal"
             data-delay={75}
           >
             {capsule.title}
-          </h5>
+          </p>
           <p class="text-gray-700 text-sm font-medium">{capsule.description}</p>
         </div>
       ))
