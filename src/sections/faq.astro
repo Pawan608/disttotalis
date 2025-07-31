@@ -1,17 +1,13 @@
 ---
-interface AccordionItem {
-  question: string;
-  answer: string;
-}
-import { ArrowDown, ChevronDown } from '@lucide/astro';
-import Layout from '../layouts/layout.astro';
+import { ChevronDown } from '@lucide/astro';
+import Accordion, { type AccordionItem } from '../components/accordion.astro';
 import SectionHeading from '../components/section-heading.astro';
 
 const faqItems: AccordionItem[] = [
   {
     question: 'What is the warranty period for TOT SD NEXGEN windows?',
     answer:
-      'We provide a comprehensive 25-year warranty on our TOT SD NEXGEN sliding windows, covering manufacturing defects, hardware functionality, and weather sealing performance. This warranty ensures peace of mind and long-term reliability for your investment. Our commitment to quality means you can trust the durability and performance of our windows for decades to come.',
+      'We provide a comprehensive 25-year warranty on our TOT SD NEXGEN sliding windows, covering manufacturing defects, hardware functionality, and weather sealing performance.',
   },
   {
     question: 'Are these windows suitable for high-rise buildings?',
@@ -51,17 +47,15 @@ const faqItems: AccordionItem[] = [
 ];
 ---
 
-<Layout title="Test Page" htmlClassName="no-js">
-  <h1 class="text-3xl font-bold">Test Page</h1>
-  <p>This is a test page to verify the layout and components.</p>
-  <div class="max-w-6xl py-8 mx-auto px-4 space-y-4">
-    <div class="text-center">
-      <SectionHeading
-        title="Frequently Asked Questions"
-        description="Yeah Yeah Yeah Young Boy, I'm the GOAT"
-      />
-    </div>
-    <div class="flex flex-col gap-2 md:gap-4 rounded-2xl bg-gray-50 p-2 md:p-4">
+<section id="faq">
+  <div class="px-4 max-w-6xl mx-auto text-center">
+    <SectionHeading
+      title="Frequently Asked Questions"
+      description="Get answers to the most common questions about our TOT SD NEXGEN sliding windows"
+    />
+    <div
+      class="flex text-left my-8 flex-col gap-2 md:gap-4 rounded-2xl bg-gray-50 p-2 md:p-4"
+    >
       {
         faqItems.map((item) => (
           <div class="overflow-hidden rounded-2xl border border-neutral-200 text-neutral-700 bg-white">
@@ -81,19 +75,4 @@ const faqItems: AccordionItem[] = [
       }
     </div>
   </div>
-</Layout>
-
-<script>
-  import { initEmblas } from '../scripts/embla';
-  import { initRevealObserver } from '../scripts/reveal';
-  import { initTabManager } from '../scripts/tab';
-  import { initExpandingCards } from '../scripts/expanding-cards';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    initTabManager();
-    initEmblas();
-
-    initExpandingCards();
-    initRevealObserver();
-  });
-</script>
+</section>

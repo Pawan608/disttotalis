@@ -1,6 +1,6 @@
 ---
-import clsx from 'clsx';
 import { Plus } from '@lucide/astro';
+import { cx } from '../scripts/cx';
 
 const {
   cardClass,
@@ -10,9 +10,9 @@ const {
 } = Astro.props;
 ---
 
-<article class={clsx('expanding-card relative overflow-hidden', cardClass)}>
+<article class={cx('expanding-card relative overflow-hidden', cardClass)}>
   <slot name="ImageSlot" />
-  <div class={clsx('absolute bottom-0 left-0 bg-white', contentContainerClass)}>
+  <div class={cx('absolute bottom-0 left-0 bg-white', contentContainerClass)}>
     <div class="flex justify-between items-center">
       <slot name="HeadingText" />
       <button
@@ -22,7 +22,7 @@ const {
       </button>
     </div>
     <div
-      class={clsx(
+      class={cx(
         'expanding-content line-clamp-1 overflow-hidden transition-all',
         expandingContentClass
       )}

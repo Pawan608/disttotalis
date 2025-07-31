@@ -1,4 +1,6 @@
 ---
+import { cx } from '../scripts/cx';
+
 const {
   title,
   onClick,
@@ -14,40 +16,33 @@ const {
   type = 'button',
 } = Astro.props;
 
-let className =
+const base =
   'inline-flex items-center justify-center gap-2 cursor-pointer py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
-className += ' ';
+const primary =
+  'bg-primary/90 backdrop-blur-sm backdrop-brightness-130 border border-primary text-white focus:ring-primary outline-transparent hover:outline-primary outline-offset-8 hover:outline-offset-4 outline-2 hover:scale-95';
+const primaryBlue =
+  'bg-secondary border border-secondary/70 hover:outline-secondary focus:ring-secondary';
 
-if (variant === 'primary') {
-  className +=
-    'bg-primary/90 backdrop-blur-sm backdrop-brightness-130 border border-primary text-white focus:ring-primary outline-transparent hover:outline-primary outline-offset-8 hover:outline-offset-4 outline-2 hover:scale-95';
-  if (color === 'blue') {
-    className +=
-      ' bg-secondary border border-secondary/70 hover:outline-secondary focus:ring-secondary';
-  }
-} else if (variant === 'secondary') {
-  className +=
-    'bg-primary/5 border-2 border-primary text-primary-glass-text backdrop-blur-sm backdrop-brightness-110 focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
-  if (color === 'blue') {
-    className +=
-      ' bg-transparent border-secondary text-secondary hover:outline-secondary focus:ring-secondary';
-  }
-} else if (variant === 'outline') {
-  className +=
-    'border-2 border-primary text-primary focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
-} else {
-  className +=
-    'bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-400';
-}
+const secondary =
+  'bg-primary/5 border-2 border-primary text-primary-glass-text backdrop-blur-sm backdrop-brightness-110 focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
+const secondaryBlue =
+  'bg-transparent border-secondary text-secondary hover:outline-secondary focus:ring-secondary';
 
-if (reveal) {
-  className += ' reveal inline-block whitespace-nowrap';
-}
+const outline =
+  'border-2 border-primary text-primary focus:ring-primary outline-transparent outline-offset-8 hover:outline-primary hover:outline-offset-4 outline-2 hover:scale-95';
 
-if (classList) {
-  className += ` ${classList}`;
-}
+const fallback =
+  'bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-400';
+
+const variantClass = cx(
+  variant === 'primary' && [primary, color === 'blue' && primaryBlue],
+  variant === 'secondary' && [secondary, color === 'blue' && secondaryBlue],
+  variant === 'outline' && outline,
+  variant === 'default' && fallback
+);
+
+const className = cx(base, variantClass, reveal && 'reveal', classList);
 ---
 
 {

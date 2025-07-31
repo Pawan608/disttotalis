@@ -1,16 +1,15 @@
 ---
-// Accepts: text, baseDelay (optional), stepDelay (optional)
+import { cx } from '../scripts/cx';
+
 const { text, baseDelay = 0, step = 100, className } = Astro.props;
 
 const words = text.split(' ');
+const baseClass = 'reveal inline-block whitespace-nowrap';
 ---
 
 {
   words.map((word: string, i: number) => (
-    <span
-      class={`reveal inline-block whitespace-nowrap ${className}`}
-      data-delay={baseDelay + i * step}
-    >
+    <span class={cx(baseClass, className)} data-delay={baseDelay + i * step}>
       {word}&nbsp;
     </span>
   ))

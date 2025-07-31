@@ -1,0 +1,44 @@
+---
+import SectionHeading from '../components/section-heading.astro';
+---
+
+<section id="brief-overview">
+  <div class="max-w-6xl mx-auto relative text-center">
+    <SectionHeading
+      title="Overview"
+      description="Let's look at some core features"
+    />
+    <div
+      class="tab-group mx-4 my-16 overflow-hidden rounded-xl shadow-sm border border-gray-100"
+    >
+      <div
+        class="tab-glider before:border-1 before:border-primary/40 rounded-xl before:rounded-lg mt-1 mx-1 grid grid-cols-3 h group bg-neutral-100 p-1"
+      >
+        {
+          [
+            { title: 'Technical', key: 'technical-specs' },
+            { title: 'Performance', key: 'perf-parameters' },
+            { title: 'Joining', key: 'joining-details' },
+          ].map((b) => (
+            <button
+              class="tab-button py-2 text-neutral-500 inline-flex data-[active=true]:text-primary-dark items-center justify-center"
+              data-tab={b.key}
+            >
+              {b.title}
+            </button>
+          ))
+        }
+
+        <div class="glider absolute top-0 left-0 bg-white"></div>
+      </div>
+
+      <div class="tab-content h-72">
+        <div class="tab-pane p-4" data-tab="technical-specs">
+          <p class="text-xl font-semibold">Product Specifications</p>
+        </div>
+        <div class="tab-pane" data-tab="perf-parameters">Bello</div>
+        <div class="tab-pane" data-tab="joining-details">Trello</div>
+      </div>
+    </div>
+  </div>
+</section>

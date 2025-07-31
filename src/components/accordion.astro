@@ -1,0 +1,81 @@
+---
+export interface AccordionItem {
+  question: string;
+  answer: string;
+}
+
+const { items, sectionTitle, sectionDescription } = Astro.props;
+import SectionHeading from './section-heading.astro';
+import Button from './button.astro';
+---
+
+<section class="py-16 bg-white accordion-root" id="faq">
+  <div class="max-w-4xl mx-auto px-4">
+    <SectionHeading title={sectionTitle} description={sectionDescription} />
+
+    <div class="mt-8 space-y-4">
+      {
+        items.map(({ question, answer }, i) => (
+          <div class="accordion-item border rounded-xl overflow-hidden">
+            <Button
+              type="button"
+              onClick={`toggleAccordion(${i})`}
+              classList="accordion-button w-full text-left bg-white px-4 py-3 text-lg font-medium text-gray-800 flex justify-between items-center"
+              ariaLabel={question}
+              ariaPressed="false"
+            >
+              {question}
+              <svg
+                class="w-5 h-5 transition-transform duration-200 accordion-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6" />
+              </svg>
+            </Button>
+
+            <div class="accordion-panel max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-gray-50 text-gray-700 px-4">
+              <p class="py-3">{answer}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script type="module">
+  export function initAccordions() {
+    const roots = document.querySelectorAll('.accordion-root');
+
+    roots.forEach((root) => {
+      const items = root.querySelectorAll('.accordion-item');
+
+      items.forEach((item) => {
+        const button = item.querySelector('.accordion-button');
+        const panel = item.querySelector('.accordion-panel');
+        const icon = item.querySelector('.accordion-icon');
+
+        button?.addEventListener('click', () => {
+          const isOpen = panel?.classList.contains('max-h-0') === false;
+
+          items.forEach((otherItem) => {
+            otherItem
+              .querySelector('.accordion-panel')
+              ?.classList.add('max-h-0');
+            otherItem
+              .querySelector('.accordion-icon')
+              ?.classList.remove('rotate-180');
+          });
+
+          if (!isOpen) {
+            panel?.classList.remove('max-h-0');
+            panel?.classList.add('max-h-96');
+            icon?.classList.add('rotate-180');
+          }
+        });
+      });
+    });
+  }
+</script>
