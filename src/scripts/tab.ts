@@ -1,5 +1,5 @@
 export function initTabManager() {
-  const resizeDebounce = (fn: () => void, delay = 100) => {
+  const resizeDebounce = (fn: () => void, delay = 50) => {
     let timeout: number;
     return () => {
       clearTimeout(timeout);
@@ -54,7 +54,9 @@ export function initTabManager() {
         });
       };
 
-      // activate(buttons[0], true);
+      if (!buttons.find((b) => b.dataset.active === 'true'))
+        activate(buttons[0], true);
+
       buttons.forEach((btn) => {
         btn.addEventListener('click', () => activate(btn, false));
       });
@@ -62,23 +64,17 @@ export function initTabManager() {
       // Resize handling (debounced)
       const handleResize = resizeDebounce(() => {
         const activeButton = buttons.find((b) => b.dataset.active === 'true');
-        if (activeButton && isGliderPresent)
-          setGliderStyles(activeButton, false);
+        if (activeButton) setGliderStyles(activeButton, false);
       });
 
       if (isGliderPresent && 'ResizeObserver' in window) {
         const observer = new ResizeObserver(() => handleResize());
         // Observe the tab container, not just the active button
         const tabContainer = group.querySelector('.tab-glider');
-        if (tabContainer) {
-          observer.observe(tabContainer);
-        }
+        if (tabContainer) observer.observe(tabContainer);
       }
 
-      // Also add window resize listener as fallback
-      if (isGliderPresent) {
-        window.addEventListener('resize', handleResize);
-      }
+      if (isGliderPresent) window.addEventListener('resize', handleResize);
     }
   );
 }

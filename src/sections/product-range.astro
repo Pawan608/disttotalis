@@ -123,220 +123,86 @@ const productsByCategory = {
         description="Every detail engineered for performance, durability, and design."
       />
     </div>
+  </div>
+  <div class="tab-group my-8 w-full space-y-8">
+    <div class="flex justify-center">
+      <div
+        class="tab-glider rounded-full flex gap-2 bg-neutral-100 relative px-1 before:content-[''] before:shadow-xs before:shadow-secondary/60 before:bg-secondary before:absolute before:w-[var(--glider-tab-group-width)] before:left-[var(--glider-tab-group-left)] before:top-1 before:bottom-1 before:z-5 *:z-10 z-0 before:rounded-full before:transition-all before:duration-300"
+      >
+        {
+          categories.map((tab, i) => (
+            <button
+              class="tab-button text-sm text-gray-600 data-[active=true]:text-white transition-all duration-300 px-4 lg:px-6 lg:py-4 cursor-pointer hover:text-gray-900 py-3 grow leading-none rounded-md data-[active=true]:font-medium"
+              data-tab={tab.id}
+              data-active={i === 0}
+            >
+              {tab.name}
+            </button>
+          ))
+        }
+      </div>
+    </div>
 
-    <!-- Category Tabs -->
-    <div
-      class="inline-flex mt-8 mb-8 md:mb-0 w-fit bg-gray-100 rounded-full p-1"
-    >
+    <div class="tab-content">
       {
-        categories.map((category, index) => (
-          <button
-            class="category-tab px-4 lg:px-8 py-2 lg:py-3 rounded-full text-sm font-medium transition-all duration-300 text-gray-700 hover:text-gray-800 data-[active=true]:bg-secondary data-[active=true]:text-white data-[active=true]:shadow-lg data-[active=true]:hover:text-white cursor-pointer hover:data-[active=false]:bg-gray-200"
-            data-category={category.id}
-            data-active={index === 0 ? 'true' : 'false'}
+        Object.entries(productsByCategory).map(([key, products]) => (
+          <div
+            class={
+              'tab-pane embla space-y-4 md:space-y-8' +
+              (key === 'sliding' ? ' tab-active' : '')
+            }
+            data-tab={key}
           >
-            {category.name}
-          </button>
+            <div class="hidden md:flex max-w-6xl mx-auto gap-2 justify-end px-4">
+              <button
+                class="embla-prev text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
+                aria-label="Previous product"
+              >
+                <CircleArrowLeft class="size-10 stroke-[1.5]" />
+              </button>
+              <button
+                class="embla-next text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
+                aria-label="Next product"
+              >
+                <CircleArrowRight class="size-10 stroke-[1.5]" />
+              </button>
+            </div>
+
+            <div class="embla-viewport">
+              <div class="embla-container gap-4 sm:gap-6 px-4">
+                {products.map((p) => (
+                  <div class="flex-none embla-slide md:w-sm w-xs first:ml-2 last:mr-2">
+                    <a href="/product/nexgen" class="group block">
+                      <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 z-10" />
+                        <Image
+                          src={p.image}
+                          alt={p.name}
+                          loading="lazy"
+                          decoding="async"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div class="absolute bottom-4 left-4 z-20">
+                          <h3 class="text-white text-lg md:text-xl font-bold mb-1">
+                            {p.name}
+                          </h3>
+                          <p class="text-white/80 text-xs md:text-sm">
+                            {p.subtitle}
+                          </p>
+                        </div>
+                        <div class="absolute bottom-4 right-4 z-20">
+                          <CircleArrowRight class="text-white group-hover:text-white transition-colors duration-300 size-10 stroke-[1.5]" />
+                        </div>
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                      </div>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         ))
       }
     </div>
-
-    <!-- Navigation Controls -->
-    <div class="hidden md:flex items-center w-full justify-end py-8 gap-2">
-      <button
-        id="product-prev"
-        class="text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
-        aria-label="Previous product"
-      >
-        <CircleArrowLeft size={40} stroke-width={1.5} />
-      </button>
-      <button
-        id="product-next"
-        class="text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
-        aria-label="Next product"
-      >
-        <CircleArrowRight size={40} stroke-width={1.5} />
-      </button>
-    </div>
   </div>
-
-  
-
-  <!-- Product Carousels -->
-  {
-    Object.entries(productsByCategory).map(([categoryKey, products]) => (
-      <div
-        class="overflow-hidden data-[active=false]:hidden"
-        id={`embla-product-${categoryKey}`}
-        data-category={categoryKey}
-        data-active={categoryKey === 'sliding' ? 'true' : 'false'}
-      >
-        <div class="flex gap-4 sm:gap-6">
-          {products.map((product) => (
-            <div class="flex-none md:w-sm w-xs first-of-type:md:ml-8 first-of-type:ml-4 last-of-type:mr-4">
-              <a href="/product/nexgen" class="group block">
-                <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
-                  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 z-10" />
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    decoding="async"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-
-                  <div class="absolute bottom-4 left-4 z-20">
-                    <h3 class="text-white text-lg md:text-xl font-bold mb-1">
-                      {product.name}
-                    </h3>
-                    <p class="text-white/80 text-xs md:text-sm">
-                      {product.subtitle}
-                    </p>
-                  </div>
-
-                  <div class="absolute bottom-4 right-4 z-20">
-                    <CircleArrowRight class="text-white group-hover:text-white transition-colors duration-300 size-10 stroke-[1.5]" />
-                  </div>
-
-                  <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-                </div>
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))
-  }
 </section>
-
-<script>
-  import type { EmblaCarouselType } from 'embla-carousel';
-  import EmblaCarousel from 'embla-carousel';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const prevBtn = document.getElementById(
-      'product-prev'
-    ) as HTMLButtonElement;
-    const nextBtn = document.getElementById(
-      'product-next'
-    ) as HTMLButtonElement;
-    const categoryTabs = document.querySelectorAll('.category-tab');
-    const carouselContainers = document.querySelectorAll(
-      '[id^="embla-product-"]'
-    );
-
-    if (!prevBtn || !nextBtn) return;
-
-    const emblaInstances: Record<string, EmblaCarouselType> = {};
-    let currentCategory = 'sliding';
-
-    // Embla configuration
-    const options = {
-      slidesToScroll: 1,
-      dragFree: false,
-      loop: false,
-      skipSnaps: false,
-      breakpoints: {
-        '(min-width: 640px)': { slidesToScroll: 1 },
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1280px)': { slidesToScroll: 3 },
-      },
-    };
-
-    // Initialize all carousel instances
-    const initAllEmblas = () => {
-      carouselContainers.forEach((container) => {
-        const category = container.getAttribute('data-category') as string;
-        if (category && !emblaInstances[category]) {
-          emblaInstances[category] = EmblaCarousel(
-            container as HTMLElement,
-            options
-          );
-        }
-      });
-    };
-
-    // Update navigation button states
-    const updateButtons = () => {
-      const currentEmbla = emblaInstances[currentCategory];
-      if (currentEmbla) {
-        prevBtn.disabled = !currentEmbla.canScrollPrev();
-        nextBtn.disabled = !currentEmbla.canScrollNext();
-      }
-    };
-
-    // Navigation handlers
-    const handlePrev = () => {
-      const currentEmbla = emblaInstances[currentCategory];
-      if (currentEmbla) {
-        currentEmbla.scrollPrev();
-      }
-    };
-
-    const handleNext = () => {
-      const currentEmbla = emblaInstances[currentCategory];
-      if (currentEmbla) {
-        currentEmbla.scrollNext();
-      }
-    };
-
-    // Attach navigation event listeners
-    prevBtn.addEventListener('click', handlePrev);
-    nextBtn.addEventListener('click', handleNext);
-
-    // Category tab functionality
-    categoryTabs.forEach((tab) => {
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const category = tab.getAttribute('data-category') as string;
-        if (!category) return;
-
-        // Update tab states
-        categoryTabs.forEach((btn) => btn.setAttribute('data-active', 'false'));
-        tab.setAttribute('data-active', 'true');
-
-        // Update carousel visibility
-        carouselContainers.forEach((container) => {
-          const containerCategory = container.getAttribute('data-category');
-          container.setAttribute(
-            'data-active',
-            containerCategory === category ? 'true' : 'false'
-          );
-        });
-
-        currentCategory = category;
-
-        // Update navigation buttons after category switch
-        setTimeout(() => {
-          updateButtons();
-          const currentEmbla = emblaInstances[currentCategory];
-          if (currentEmbla) {
-            currentEmbla.reInit();
-          }
-        }, 150);
-      });
-    });
-
-    // Initialize everything
-    initAllEmblas();
-
-    // Set up event listeners for all embla instances
-    Object.values(emblaInstances).forEach((embla) => {
-      embla.on('select', () => {
-        if (embla === emblaInstances[currentCategory]) {
-          updateButtons();
-        }
-      });
-      embla.on('init', () => {
-        if (embla === emblaInstances[currentCategory]) {
-          updateButtons();
-        }
-      });
-    });
-
-    // Set initial button state
-    updateButtons();
-  });
-</script>

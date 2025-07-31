@@ -32,6 +32,7 @@ import ClimaticConditionsSection from '../sections/climatic-conditions.astro';
     import { initEmblas } from '../scripts/embla';
     import { initCardGlowEffect } from '../scripts/glow';
     import { initRevealObserver } from '../scripts/reveal';
+    import { initTabManager } from '../scripts/tab';
 
     // All DOMContentLoaded centralized logic
     document.addEventListener('DOMContentLoaded', () => {
@@ -45,9 +46,10 @@ import ClimaticConditionsSection from '../sections/climatic-conditions.astro';
       // hindalcoLogo?.setAttribute('data-delay', `${hindalcoLogoAnimDelay}`);
       // backedCard?.setAttribute('data-delay', `${backedCardAnimDelay}`);
 
+      initTabManager();
+      initEmblas();
       initRevealObserver();
       initCardGlowEffect();
-      initEmblas();
     });
   </script>
 </Layout>

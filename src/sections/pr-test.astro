@@ -1,10 +1,5 @@
 ---
-import {
-  ArrowLeft,
-  ArrowRight,
-  CircleArrowLeft,
-  CircleArrowRight,
-} from '@lucide/astro';
+import { CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import SectionHeading from '../components/section-heading.astro';
 import demoImage from '../assets/placeholder-product.jpg';
@@ -128,7 +123,7 @@ const productsByCategory = {
   <div class="tab-group my-8 w-full space-y-8">
     <div class="flex justify-center">
       <div
-        class="tab-glider rounded-full flex gap-2 bg-neutral-100 relative px-1 before:content-[''] before:bg-secondary before:absolute before:w-[var(--glider-tab-group-width)] before:left-[var(--glider-tab-group-left)] before:top-1 before:bottom-1 before:z-5 *:z-10 z-0 before:rounded-full before:transition-all before:duration-300"
+        class="tab-glider rounded-full flex gap-2 bg-neutral-100 relative px-1 before:content-[''] before:shadow-xs before:shadow-secondary/60 before:bg-secondary before:absolute before:w-[var(--glider-tab-group-width)] before:left-[var(--glider-tab-group-left)] before:top-1 before:bottom-1 before:z-5 *:z-10 z-0 before:rounded-full before:transition-all before:duration-300"
       >
         {
           categories.map((tab, i) => (
@@ -206,9 +201,4 @@ const productsByCategory = {
       }
     </div>
   </div>
-
-  <script>
-    import { initEmblas } from '../scripts/embla';
-    document.addEventListener('DOMContentLoaded', initEmblas);
-  </script>
 </section>

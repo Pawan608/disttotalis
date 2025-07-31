@@ -9,11 +9,12 @@ import PrTest from '../sections/pr-test.astro';
   <PrTest />
 
   <script>
+    import { initEmblas } from '../scripts/embla';
     import { initRevealObserver } from '../scripts/reveal';
     import { initTabManager } from '../scripts/tab';
-    initTabManager();
     document.addEventListener('DOMContentLoaded', () => {
       initTabManager();
+      initEmblas();
       initRevealObserver();
     });
   </script>
