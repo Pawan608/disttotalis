@@ -1,86 +1,16 @@
 ---
-interface AccordionItem {
-  question: string;
-  answer: string;
-}
-import { ArrowDown, ChevronDown } from '@lucide/astro';
 import Layout from '../layouts/layout.astro';
-import SectionHeading from '../components/section-heading.astro';
-
-const faqItems: AccordionItem[] = [
-  {
-    question: 'What is the warranty period for TOT SD NEXGEN windows?',
-    answer:
-      'We provide a comprehensive 25-year warranty on our TOT SD NEXGEN sliding windows, covering manufacturing defects, hardware functionality, and weather sealing performance. This warranty ensures peace of mind and long-term reliability for your investment. Our commitment to quality means you can trust the durability and performance of our windows for decades to come.',
-  },
-  {
-    question: 'Are these windows suitable for high-rise buildings?',
-    answer:
-      'Yes, TOT SD NEXGEN windows are engineered for high wind loads and structural safety, making them suitable for high-rise buildings.',
-  },
-  {
-    question: 'What glass options are available?',
-    answer:
-      'We offer a variety of glass types, including clear, tinted, frosted, and laminated options depending on your privacy and insulation needs.',
-  },
-  {
-    question: 'How long does installation take?',
-    answer:
-      'Installation typically takes 2–5 hours per unit depending on site readiness and number of windows.',
-  },
-  {
-    question: 'Can I customize the window dimensions?',
-    answer:
-      'Yes, we support fully customized dimensions to suit your architectural requirements.',
-  },
-  {
-    question: 'What maintenance is required?',
-    answer:
-      'Routine cleaning and occasional lubrication of tracks is sufficient. No intensive maintenance needed.',
-  },
-  {
-    question: 'Are the windows energy efficient?',
-    answer:
-      'Yes, with multiple glass options and precision sealing, they significantly reduce energy loss.',
-  },
-  {
-    question: 'What colors and finishes are available?',
-    answer:
-      'A range of powder-coated and anodized finishes are available in various neutral and custom colors.',
-  },
-];
+import ContactUsForm from '../components/contact-us-form.astro';
 ---
 
 <Layout title="Test Page" htmlClassName="no-js">
   <h1 class="text-3xl font-bold">Test Page</h1>
   <p>This is a test page to verify the layout and components.</p>
-  <div class="max-w-6xl py-8 mx-auto px-4 space-y-4">
-    <div class="text-center">
-      <SectionHeading
-        title="Frequently Asked Questions"
-        description="Yeah Yeah Yeah Young Boy, I'm the GOAT"
-      />
-    </div>
-    <div class="flex flex-col gap-2 md:gap-4 rounded-2xl bg-gray-50 p-2 md:p-4">
-      {
-        faqItems.map((item) => (
-          <div class="overflow-hidden rounded-2xl border border-neutral-200 text-neutral-700 bg-white">
-            <button class="peer group/trigger flex w-full justify-between items-center px-4 py-2">
-              <h3 class="text-neutral-600 font-medium md:text-lg text-left">
-                {item.question}
-              </h3>
+  <ContactUsForm />
 
-              <ChevronDown class="size-8 shrink-0 group-focus/trigger:rotate-180 transition-smooth md:size-10 p-1 border border-neutral-200 rounded-full stroke-1 stroke-neutral-600" />
-            </button>
-
-            <p class="max-h-0 translate-y-4 transform px-4 text-neutral-600 opacity-0 transition-all duration-300 ease-out peer-focus:max-h-[200px] peer-focus:translate-y-0 peer-focus:pb-4 peer-focus:opacity-100">
-              {item.answer}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-  </div>
+  <button class="contact-form-trigger p-2 border border-neutral-200 shadow"
+    >Show Form</button
+  >
 
   <div class="">
     <div class="stat-card meteor-card p-4">
@@ -242,12 +172,13 @@ const faqItems: AccordionItem[] = [
   import { initRevealObserver } from '../scripts/reveal';
   import { initTabManager } from '../scripts/tab';
   import { initExpandingCards } from '../scripts/expanding-cards';
+  import { initContactFormTriggers } from '../scripts/contact-form';
 
   document.addEventListener('DOMContentLoaded', () => {
     initTabManager();
     initEmblas();
-
     initExpandingCards();
     initRevealObserver();
+    initContactFormTriggers();
   });
 </script>

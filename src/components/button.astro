@@ -3,7 +3,6 @@ import { cx } from '../scripts/cx';
 
 const {
   title,
-  onClick,
   variant = 'default',
   reveal,
   link,
@@ -54,7 +53,6 @@ const className = cx(base, variantClass, reveal && 'reveal', classList);
     </a>
   ) : (
     <button
-      onclick={onClick}
       class={className}
       data-delay={animationDelay}
       type={type}
