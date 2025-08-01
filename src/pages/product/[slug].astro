@@ -7,6 +7,8 @@ import ProductCollection from '../../sections/product-collection.astro';
 import HandleOptions from '../../sections/handle-options.astro';
 import Faq from '../../sections/faq.astro';
 import ProductIntroduction from '../../sections/product-introduction.astro';
+import WhyChooseUs from '../../sections/why-choose-us.astro';
+import ProductBriefOverview from '../../sections/product-brief-overview.astro';
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -42,10 +44,11 @@ const { product } = Astro.props;
   </div>
 
   <ProductIntroduction product={product} />
-
+  <ProductBriefOverview />
   <HandleOptions />
   <Faq />
   <ProductCollection />
+  <WhyChooseUs />
 
   <CtaEnd />
 

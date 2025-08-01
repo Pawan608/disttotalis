@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import demoBrand from '../assets/hindalco-logo.svg';
+
+const brands = [demoBrand, demoBrand, demoBrand];
+---
+
+<div class="h-28 z-10 flex items-center relative">
+  <span
+    class="absolute z-20 top-0 rounded-full backdrop-blur-sm bg-white px-8 py-2 -translate-y-6 -translate-x-1/2 left-1/2 text-center text-secondary text-md lg:text-lg font-light shadow-sm drop-shadow-xs text-nowrap"
+  >
+    Our Trusted Project
+  </span>
+  <div class="marquee-container relative w-full pt-4">
+    <div class="marquee-content flex">
+      {
+        brands.map((brand) => (
+          <Image
+            src={brand}
+            alt="Brand logo"
+            class="h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 mx-8"
+          />
+        ))
+      }
+    </div>
+    <div class="marquee-content flex" aria-hidden="true">
+      {
+        brands.map((brand) => (
+          <Image
+            src={brand}
+            alt="Brand logo"
+            class="h-12 w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 mx-8"
+          />
+        ))
+      }
+    </div>
+  </div>
+</div>
