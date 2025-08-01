@@ -3,12 +3,16 @@ import Header from '../components/header.astro';
 import Footer from '../components/footer.astro';
 
 import '../styles/global.css';
+import { cx } from '../scripts/cx';
 
-const { title, htmlClassName, description } = Astro.props;
+const {
+  frontmatter: { title, htmlClassName, description },
+} = Astro.props;
 ---
 
-<html lang="en" class={htmlClassName}>
+<html lang="en" class={cx('antialiased text-neutral-800', htmlClassName)}>
   <head>
+    {console.log(title, htmlClassName, description)}
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/totalis-favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +24,7 @@ const { title, htmlClassName, description } = Astro.props;
   </head>
   <body class="flex flex-col min-h-screen">
     <Header />
-    <main class="flex-grow">
+    <main class="mdx-content">
       <slot />
     </main>
     <Footer />

@@ -197,4 +197,65 @@
   .no-js .tab-group .tab-pane:first-child {
     @apply block;
   }
+  .mdx-content {
+    @apply relative px-4 md:px-8 py-8 max-w-3xl mx-auto text-neutral-900;
+
+    h1 {
+      @apply text-4xl font-bold mt-8 leading-tight relative inline-block;
+
+      &::after {
+        content: '';
+        @apply inline-block ml-0.5 w-1.5 h-1.5 bg-primary bottom-0 right-0;
+      }
+    }
+
+    h2 {
+      @apply text-2xl font-semibold mt-8 mb-2 leading-snug text-neutral-800;
+    }
+
+    h3 {
+      @apply text-lg font-semibold mt-4 mb-1 text-neutral-800;
+    }
+
+    p {
+      @apply leading-[1.65] mb-4 text-neutral-700;
+    }
+
+    h3 + p {
+      @apply mt-1;
+    }
+
+    ul,
+    ol {
+      @apply list-disc pl-5 mb-4;
+    }
+
+    li {
+      @apply mb-2 text-sm leading-normal text-neutral-700;
+    }
+
+    a {
+      @apply text-secondary underline underline-offset-2 hover:text-primary/80 transition;
+    }
+
+    blockquote {
+      @apply border-l-2 border-neutral-300 pl-4 italic text-neutral-600 my-4;
+    }
+
+    code {
+      @apply bg-neutral-100 text-xs px-1 py-0.5 rounded font-mono text-pink-600;
+    }
+
+    pre {
+      @apply bg-neutral-900 text-neutral-100 text-xs p-4 rounded mb-8 overflow-x-auto;
+    }
+
+    img {
+      @apply my-8 rounded;
+    }
+
+    hr {
+      @apply my-8 border-neutral-300;
+    }
+  }
 }
