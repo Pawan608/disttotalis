@@ -4,15 +4,13 @@ import SectionHeading from '../components/section-heading.astro';
 
 <section id="brief-overview">
   <div class="max-w-6xl mx-auto relative pt-16 text-center">
-    <SectionHeading
+    <!-- <SectionHeading
       title="Overview"
       description="Let's look at some core features"
-    />
-    <div
-      class="tab-group mx-4 my-8 overflow-hidden rounded-xl shadow-sm border border-gray-100"
-    >
+    /> -->
+    <div class="tab-group mx-4 my-8">
       <div
-        class="tab-glider before:border-1 before:border-primary/40 rounded-xl before:rounded-lg mt-1 mx-1 grid grid-cols-3 h group bg-neutral-100 p-1"
+        class="tab-glider before:border-1 before:border-primary/40 rounded-xl before:rounded-lg mt-1 grid grid-cols-3 mx-auto group bg-neutral-100 p-1 w-fit"
       >
         {
           [
@@ -21,7 +19,7 @@ import SectionHeading from '../components/section-heading.astro';
             { title: 'Joining', key: 'joining-details' },
           ].map((b) => (
             <button
-              class="tab-button py-2 text-neutral-500 inline-flex data-[active=true]:text-primary-dark items-center justify-center"
+              class="tab-button py-1 md:py-2 px-4 text-neutral-500 inline-flex data-[active=true]:text-primary-dark items-center justify-center text-sm"
               data-tab={b.key}
             >
               {b.title}
@@ -32,7 +30,9 @@ import SectionHeading from '../components/section-heading.astro';
         <div class="glider absolute top-0 left-0 bg-white"></div>
       </div>
 
-      <div class="tab-content h-72">
+      <div
+        class="tab-content h-96 border-gray-200 border shadow-sm text-left p-4 mt-4 rounded-2xl"
+      >
         <div class="tab-pane p-4" data-tab="technical-specs">
           <p class="text-xl font-semibold">Product Specifications</p>
         </div>
