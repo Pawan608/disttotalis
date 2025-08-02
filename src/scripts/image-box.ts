@@ -9,11 +9,9 @@ export const initImageBox = () => {
       if (index === activeIndex) {
         btn.classList.add('ring-primary');
         btn.classList.remove('ring-transparent');
-        btn.setAttribute('aria-selected', 'true');
       } else {
         btn.classList.add('ring-transparent');
         btn.classList.remove('ring-primary');
-        btn.setAttribute('aria-selected', 'false');
       }
     });
   };
