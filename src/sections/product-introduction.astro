@@ -1,9 +1,33 @@
 ---
-import { Image } from 'astro:assets';
 import Button from '../components/button.astro';
 import { Star } from '@lucide/astro';
+import { getImage } from 'astro:assets';
+import { cx } from '../scripts/cx';
+import type { Product } from '../lib/products';
+
+type Props = {
+  product: Product;
+};
 
 const { product } = Astro.props;
+
+const images = await Promise.all(
+  product.images.map((i) =>
+    getImage({
+      src: i,
+      widths: [512, 768, 960],
+      format: 'webp',
+    })
+  )
+);
+
+const thumbs = await Promise.all(
+  product.images.map((i) =>
+    getImage({ src: i, widths: [96, 128], format: 'webp' })
+  )
+);
+
+const productData = { ...product, thumbs, images };
 ---
 
 <section id="product-introduction">
@@ -12,13 +36,15 @@ const { product } = Astro.props;
       <div
         class="aspect-square w-full max-w-lg mx-auto rounded-2xl overflow-hidden border border-gray-200 shadow-md relative"
       >
-        <Image
-          id="main-product-image"
-          loading={'eager'}
-          format="webp"
-          src={product.mainImage}
-          alt={product.name}
-          widths={[400, 600, 800, 1200]}
+        <img
+          id="main-image"
+          src={productData.images[0].src}
+          srcset={productData.images[0].srcSet.values
+            .map((v) => `${v.url} ${v.descriptor}`)
+            .join(', ')}
+          alt={`${productData.name} Image`}
+          sizes="(max-width: 768px) 99vw, 50vw"
+          loading="eager"
           class="w-full h-full object-cover transition-opacity duration-300"
         />
         <div
@@ -30,37 +56,33 @@ const { product } = Astro.props;
 
       <!-- Thumbnail Gallery -->
       <div class="flex gap-4 justify-center">
-        <!-- Main image thumbnail -->
-        <button
-          class="thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-200 hover:border-secondary/80"
-          data-image-src={product.mainImage.src}
-          data-image-alt={product.name}
-        >
-          <Image
-            src={product.mainImage}
-            alt={`${product.name} main`}
-            widths={[64, 96]}
-            layout="constrained"
-            format="webp"
-            loading={'lazy'}
-            decoding={'async'}
-            class="w-full h-full object-cover"
-          />
-        </button>
-
-        <!-- Additional thumbnails -->
         {
-          product.thumbnails.map((img, i: number) => (
+          productData.thumbs.map((img, i: number) => (
             <button
-              class="thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-200 hover:brightness-50 active:outline-gray-300 outline-2 outline-offset-2 outline-transparent"
-              data-image-src={img.src}
-              data-image-alt={`${product.name} view ${i + 1}`}
+              class={cx(
+                'thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-300',
+                'hover:brightness-75 ring-2 ring-offset-2 cursor-pointer',
+                i === 0 ? 'ring-primary' : 'ring-transparent'
+              )}
+              data-src={productData.images[i].src}
+              data-srcset={productData.images[i].srcSet.values
+                .map((v) => `${v.url} ${v.descriptor}`)
+                .join(', ')}
+              data-alt={`${productData.name} view ${i + 1}`}
+              data-index={i}
+              aria-label={`View ${i + 1} of ${productData.name}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
             >
-              <Image
-                src={img}
-                loading={'lazy'}
-                alt={`${product.name} thumbnail ${i + 1}`}
+              <img
+                src={img.src}
+                srcset={img.srcSet.values
+                  .map((v) => `${v.url} ${v.descriptor}`)
+                  .join(', ')}
+                sizes="(max-width: 768px) 96px, 128px"
+                loading="lazy"
+                decoding="async"
                 class="w-full h-full object-cover"
+                alt=""
               />
             </button>
           ))
@@ -102,7 +124,7 @@ const { product } = Astro.props;
           <h2 class="text-2xl font-semibold">Key Features</h2>
           <div class="grid grid-cols-1 gap-2">
             {
-              product.features.map((feature) => (
+              productData.features.map((feature) => (
                 <article class="flex inset-shadow-xs inset-shadow-white bg-[#fdfdfd] p-4 items-start gap-4 rounded-2xl shadow-xs border border-gray-200">
                   <div class="bg-gradient-to-br from-secondary/5 to-secondary/20 border border-secondary/15 rounded-lg p-2 self-center">
                     <feature.icon class="w-6 h-6 stroke-secondary" />

@@ -70,9 +70,10 @@ const properties = [
                     alt={property.name}
                     loading="lazy"
                     decoding="async"
-                    layout="full-width"
+                    widths={[288, 320, 384]}
+                    sizes="(max-width: 640px) 288px, (max-width: 768px) 320px, 384px"
                     format="webp"
-                    class="h-full w-full object-cover hover:scale-105 transition-transform duration-400"
+                    class="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div class="p-2">

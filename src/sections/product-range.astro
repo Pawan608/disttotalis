@@ -180,6 +180,8 @@ const productsByCategory = {
                           alt={p.name}
                           loading="lazy"
                           decoding="async"
+                          widths={[384, 448]}
+                          sizes={'(max-width: 768px) 384px, 448px'}
                           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         <div class="absolute bottom-4 left-4 z-20">

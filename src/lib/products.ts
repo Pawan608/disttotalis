@@ -23,8 +23,7 @@ export interface Product {
   slug: string;
   description: string;
   price: number;
-  mainImage: ImageMetadata;
-  thumbnails: ImageMetadata[];
+  images: ImageMetadata[];
   features: { icon: AstroComponent; title: string; text: string }[];
   stats: { label: string; value: string; icon: AstroComponent }[];
 }
@@ -36,8 +35,7 @@ export const products: Product[] = [
     description:
       'Tested windows built for enhanced sturdiness—an ideal choice for every home.',
     price: 17999,
-    mainImage: px1,
-    thumbnails: [px2, px3],
+    images: [px1, px2, px3],
     features: [
       {
         icon: Lock,

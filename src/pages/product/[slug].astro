@@ -25,7 +25,6 @@ const { product } = Astro.props;
   title={product.name}
   description={`Totalis By Hindalco - ${product.name} - ${product.description}`}
 >
-  <!-- Breadcrumb -->
   <div
     class="h-12 border-gray-200 sticky top-16 bg-white z-10 flex items-center justify-center"
   >
@@ -59,52 +58,13 @@ const { product } = Astro.props;
     import { initCardGlowEffect } from '../../scripts/glow';
     import { initRevealObserver } from '../../scripts/reveal';
     import { initTabManager } from '../../scripts/tab';
+    import { initImageBox } from '../../scripts/image-box';
 
-    // Image gallery functionality
-    function initImageGallery() {
-      const mainImage = document.getElementById(
-        'main-product-image'
-      ) as HTMLImageElement;
-      const thumbnailButtons = document.querySelectorAll(
-        '.thumbnail-btn'
-      ) as NodeListOf<HTMLButtonElement>;
-
-      if (!mainImage || !thumbnailButtons.length) return;
-
-      thumbnailButtons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-          const imageSrc = button.dataset.imageSrc;
-          const imageAlt = button.dataset.imageAlt;
-
-          if (imageSrc && imageAlt) {
-            // Update main image with fade effect
-            mainImage.style.opacity = '0';
-
-            setTimeout(() => {
-              mainImage.src = imageSrc;
-              mainImage.alt = imageAlt;
-              mainImage.style.opacity = '1';
-            }, 150);
-
-            // Update thumbnail borders (active state)
-            thumbnailButtons.forEach((btn) => {
-              btn.classList.remove('border-secondary');
-              btn.classList.add('border-gray-300');
-            });
-
-            button.classList.remove('border-gray-300');
-            button.classList.add('border-secondary');
-          }
-        });
-      });
-    }
-
-    // Initialize all functionality when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
+      initImageBox();
       initRevealObserver();
       initCardGlowEffect();
       initExpandingCards();
-      initImageGallery();
       initTabManager();
     });
   </script>

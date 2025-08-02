@@ -17,8 +17,9 @@ const {
       <slot name="HeadingText" />
       <button
         class="expanding-button transition-all duration-300 data-[content-expanded=true]:rotate-45 shrink-0 p-1 rounded-full shadow border-1 border-neutral-200 cursor-pointer"
+        aria-label="Expand Card"
       >
-        <Plus class="stroke-neutral-600" />
+        <Plus class="stroke-neutral-600" aria-hidden />
       </button>
     </div>
     <div

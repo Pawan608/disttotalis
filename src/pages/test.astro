@@ -1,308 +1,194 @@
 ---
 import Layout from '../layouts/layout.astro';
 import ContactUsForm from '../components/contact-us-form.astro';
-import { stores } from '../data/stores';
-import { Building2, Mail, MapPin } from '@lucide/astro';
 import Button from '../components/button.astro';
+import { getImage } from 'astro:assets';
+import { cx } from '../scripts/cx';
+
+import {
+  Clock,
+  Lock,
+  Shield,
+  ThermometerSnowflake,
+  TrendingUp,
+  Zap,
+  UsersRound,
+} from '@lucide/astro';
+
+import px1 from '../assets/px1.jpg';
+import px2 from '../assets/px2.jpg';
+import px3 from '../assets/px3.jpg';
+
+const product = {
+  name: 'TOT SD NEXGEN',
+  slug: 'nexgen',
+  description:
+    'Tested windows built for enhanced sturdiness—an ideal choice for every home.',
+  price: 17999,
+  images: [px1, px2, px3],
+  features: [
+    {
+      icon: Lock,
+      title: 'Central Multi-Point Locking',
+      text: 'Ensures maximum safety',
+    },
+    {
+      icon: Shield,
+      title: 'Reinforced Handles',
+      text: 'Provides maximum sturdiness',
+    },
+    {
+      icon: ThermometerSnowflake,
+      title: 'BIS Tested',
+      text: 'Against all weather conditions',
+    },
+  ],
+  stats: [
+    { label: 'Projects Completed', value: '100+', icon: TrendingUp },
+    { label: 'Happy Customers', value: '80+', icon: UsersRound },
+    { label: 'Years of Experience', value: '5+', icon: Clock },
+    { label: 'Quick Installation', value: '1–2 Days', icon: Zap },
+  ],
+};
+
+const images = await Promise.all(
+  product.images.map((i) =>
+    getImage({
+      src: i,
+      widths: [512, 768, 960],
+      format: 'webp',
+    })
+  )
+);
+
+const thumbs = await Promise.all(
+  product.images.map((i) =>
+    getImage({ src: i, widths: [96, 128], format: 'webp' })
+  )
+);
+
+const productData = { ...product, thumbs, images };
 ---
 
 <Layout title="Test Page" htmlClassName="no-js">
   <ContactUsForm />
 
-  <button class="contact-form-trigger p-2 border border-neutral-200 shadow"
-    >Show Form</button
-  >
+  <button class="contact-form-trigger p-2 border border-neutral-200 shadow">
+    Show Form
+  </button>
 
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="flex justify-center mb-8">
-      <h1 class="text-4xl text-neutral-800 font-semibold">Locate us</h1>
-    </div>
-    <div class="px-8 py-4 w-fit mx-auto rounded-2xl">
-      <div class="flex gap-2 items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="url(#grad2)"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-map-pinned-icon lucide-map-pinned"
+  <section id="product-introduction">
+    <div class="max-w-6xl mt-8 mx-auto px-4 grid md:grid-cols-2 gap-16">
+      <div class="space-y-8">
+        <div
+          class="aspect-square w-full max-w-lg mx-auto rounded-2xl overflow-hidden border border-gray-200 shadow-md relative"
         >
-          <defs>
-            <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="rgb(160, 220, 120)"></stop>
-              <stop offset="100%" stop-color="rgba(97, 182, 54, 1)"></stop>
-            </linearGradient>
-          </defs>
-          <path
-            d="M18 8c0 3.613-3.869 7.429-5.393 8.795a1 1 0 0 1-1.214 0C9.87 15.429 6 11.613 6 8a6 6 0 0 1 12 0"
-          ></path><circle cx="12" cy="8" r="2"></circle><path
-            d="M8.714 14h-3.71a1 1 0 0 0-.948.683l-2.004 6A1 1 0 0 0 3 22h18a1 1 0 0 0 .948-1.316l-2-6a1 1 0 0 0-.949-.684h-3.712"
-          ></path></svg
-        >
-        <h2
-          class="text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary/80"
-        >
-          Find Your Nearest Distributor
-        </h2>
-      </div>
-      <div id="filter-form" class="flex flex-wrap gap-4 mt-4">
-        <div class="flex flex-col">
-          <label for="state" class="text-xs mb-2">Select State</label>
-          <select
-            id="select-state-dropdown"
-            class="border border-neutral-200 px-6 py-2 rounded-lg text-neutral-600"
+          <div class="aspect-square">
+            <img
+              id="main-image"
+              src={productData.images[0].src}
+              srcset={productData.images[0].srcSet.values
+                .map((v) => `${v.url} ${v.descriptor}`)
+                .join(', ')}
+              alt={`${productData.name} Image`}
+              sizes="(max-width: 768px) 99vw, 50vw"
+              loading="eager"
+              class="w-full h-full object-cover transition-opacity duration-300"
+            />
+          </div>
+
+          <div
+            class="absolute top-4 left-4 bg-primary inset-shadow-sm inset-primary-light text-white text-sm px-2 py-0.5 rounded-md"
           >
-            <option value="">Select one</option>
-            {
-              [...new Set(stores.map((store) => store.state))].map((state) => {
-                return <option value={state}>{state}</option>;
-              })
-            }
-          </select>
+            BIS Certified
+          </div>
         </div>
 
-        <div class="flex flex-col">
-          <label for="city" class="text-xs mb-2">Select City</label>
-          <select
-            id="select-city-dropdown"
-            class="border border-neutral-200 px-6 py-2 rounded-lg text-neutral-600"
-          >
-            <option value="">Select one</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 my-8">
-      {
-        stores.map((store) => {
-          return (
-            <div
-              class="p-6 group flex flex-col rounded-2xl border border-neutral-200 shadow hover:shadow-lg transition-all duration-300 text-neutral-800"
-              data-city={store.city}
-              data-state={store.state}
-            >
-              <div class="flex justify-between items-start mb-4 gap-2">
-                <div>
-                  <h3 class="text-xl font-semibold text-neutral-900">
-                    {store.storeName}
-                  </h3>
-                  <div class="w-6 h-0.5 bg-primary mt-1 transition-all duration-300 group-hover:w-full" />
-                </div>
-                <div class="p-2 bg-secondary/10 rounded-xl border border-secondary/20">
-                  <Building2 class="size-5 stroke-[1.5] stroke-secondary" />
-                </div>
-              </div>
-              <div class="grow">
-                <div class="flex items-start gap-3 mb-3">
-                  <div class="p-2 bg-secondary/10 rounded-xl border border-secondary/20">
-                    <MapPin class="size-5 stroke-[1.5] stroke-secondary" />
-                  </div>
-                  <div>
-                    <p class="text-sm text-neutral-500">Location</p>
-                    <p class="font-medium text-base text-neutral-800">
-                      {store.city}, {store.state}
-                    </p>
-                    <p class="text-sm text-neutral-700">{store.address}</p>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-3 mb-6">
-                  <div class="p-2 bg-primary-dark/10 rounded-xl border border-primary/20">
-                    <Mail class="size-5 stroke-[1.5] stroke-primary-dark" />
-                  </div>
-                  <a
-                    href={`mailto:${store.email}`}
-                    class="text-sm text-primary-dark"
-                  >
-                    {store.email}
-                  </a>
-                </div>
-              </div>
-              <Button
-                link="/contact"
-                variant="primary"
-                classList="transition-smooth"
+        <div
+          class="flex gap-4 justify-center"
+          role="group"
+          aria-label="Product images"
+        >
+          {
+            productData.thumbs.map((img, i: number) => (
+              <button
+                class={cx(
+                  'thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-300',
+                  'hover:brightness-75 ring-2 ring-offset-2 cursor-pointer',
+                  i === 0 ? 'ring-primary' : 'ring-transparent'
+                )}
+                data-src={productData.images[i].src}
+                data-srcset={productData.images[i].srcSet.values
+                  .map((v) => `${v.url} ${v.descriptor}`)
+                  .join(', ')}
+                data-alt={`${productData.name} view ${i + 1}`}
+                data-index={i}
+                aria-label={`View ${i + 1} of ${productData.name}`}
+                aria-selected={i === 0 ? 'true' : 'false'}
               >
-                Reach Out
-              </Button>
-            </div>
-          );
-        })
-      }
-    </div>
-  </div>
-</Layout>
-
-<script>
-  import { initEmblas } from '../scripts/embla';
-  import { initRevealObserver } from '../scripts/reveal';
-  import { initTabManager } from '../scripts/tab';
-  import { initExpandingCards } from '../scripts/expanding-cards';
-  import { initContactFormTriggers } from '../scripts/contact-form';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    initTabManager();
-    initEmblas();
-    initExpandingCards();
-    initRevealObserver();
-    initContactFormTriggers();
-  });
-</script>
-
-<!-- <div class="">
-    <div class="stat-card meteor-card p-4">
-      <div class="meteor-container">
-        <div class="meteor"></div>
-        <div class="meteor meteor-2"></div>
-        <div class="meteor meteor-3"></div>
-      </div>
-      <div class="content">
-        <div class="icon">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3 17L9 11L13 15L21 7"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path>
-            <path
-              d="M14 7H21V14"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path>
-          </svg>
+                <img
+                  src={img.src}
+                  srcset={img.srcSet.values
+                    .map((v) => `${v.url} ${v.descriptor}`)
+                    .join(', ')}
+                  sizes="(max-width: 768px) 96px, 128px"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover"
+                  alt=""
+                />
+              </button>
+            ))
+          }
         </div>
-        <div class="number">100+</div>
-        <div class="label">Projects Completed</div>
       </div>
     </div>
+  </section>
 
-    <style>
-      .meteor-card {
-        position: relative;
-        width: 280px;
-        height: 200px;
-        background: linear-gradient(135deg, #0f0f23, #1a1a3e);
-        border-radius: 24px;
-        padding: 32px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease;
-      }
+  <script>
+    import { initEmblas } from '../scripts/embla';
+    import { initRevealObserver } from '../scripts/reveal';
+    import { initTabManager } from '../scripts/tab';
+    import { initExpandingCards } from '../scripts/expanding-cards';
+    import { initContactFormTriggers } from '../scripts/contact-form';
 
-      .meteor-card:hover {
-        transform: translateY(-5px);
-      }
+    const initImageBox = () => {
+      const mainImg = document.getElementById('main-image') as HTMLImageElement;
+      const thumbs = [
+        ...document.querySelectorAll('.thumbnail-btn'),
+      ] as HTMLButtonElement[];
 
-      .meteor-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
+      const updateActiveStates = (activeIndex: number) => {
+        thumbs.forEach((btn, index) => {
+          if (index === activeIndex) {
+            btn.classList.add('ring-primary');
+            btn.classList.remove('ring-transparent');
+            btn.setAttribute('aria-selected', 'true');
+          } else {
+            btn.classList.add('ring-transparent');
+            btn.classList.remove('ring-primary');
+            btn.setAttribute('aria-selected', 'false');
+          }
+        });
+      };
 
-      .meteor {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: linear-gradient(45deg, #60a5fa, #3b82f6);
-        border-radius: 50%;
-        box-shadow:
-          0 0 10px #60a5fa,
-          0 0 20px #3b82f6,
-          0 0 30px #1d4ed8;
-        animation: meteorFall 3s linear infinite;
-      }
+      thumbs.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+          mainImg.src = btn.dataset.src!;
+          mainImg.srcset = btn.dataset.srcset!;
+          mainImg.alt = btn.dataset.alt!;
+          updateActiveStates(index);
+        });
+      });
+    };
 
-      .meteor::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 2px;
-        width: 40px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #60a5fa, transparent);
-        transform: rotate(-45deg);
-        transform-origin: left center;
-      }
-
-      .meteor-2 {
-        animation-delay: -1s;
-        animation-duration: 2.5s;
-      }
-
-      .meteor-3 {
-        animation-delay: -2s;
-        animation-duration: 3.5s;
-      }
-
-      @keyframes meteorFall {
-        0% {
-          top: -10px;
-          left: 100%;
-          opacity: 1;
-        }
-        70% {
-          opacity: 1;
-        }
-        100% {
-          top: 100%;
-          left: -10px;
-          opacity: 0;
-        }
-      }
-
-      .content {
-        position: relative;
-        z-index: 1;
-      }
-
-      .icon {
-        width: 64px;
-        height: 64px;
-        background: linear-gradient(135deg, #60a5fa, #3b82f6);
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 24px;
-        color: white;
-        box-shadow: 0 8px 32px rgba(96, 165, 250, 0.3);
-      }
-
-      .icon svg {
-        width: 28px;
-        height: 28px;
-      }
-
-      .number {
-        font-size: 48px;
-        font-weight: 800;
-        color: #f1f5f9;
-        margin-bottom: 8px;
-      }
-
-      .label {
-        font-size: 16px;
-        color: #94a3b8;
-        font-weight: 500;
-      }
-    </style>
-  </div> -->
+    document.addEventListener('DOMContentLoaded', () => {
+      initTabManager();
+      initImageBox();
+      initEmblas();
+      initExpandingCards();
+      initRevealObserver();
+      initContactFormTriggers();
+    });
+  </script>
+</Layout>
