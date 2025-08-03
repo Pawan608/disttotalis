@@ -9,6 +9,7 @@ type SelectProps = {
 
 type Props = {
   id: string;
+  fieldName: string;
   type: 'text' | 'email' | 'tel' | 'select';
   placeholder?: string;
   required?: boolean;
@@ -33,6 +34,7 @@ const {
   inputClass,
   minLength,
   containerClass,
+  fieldName,
 } = Astro.props;
 ---
 
@@ -45,7 +47,7 @@ const {
           <slot name="labelText" />
         </label>
         <select
-          name={id}
+          name={fieldName}
           id={id}
           class={cx('form-select', inputClass)}
           required={required}
@@ -67,7 +69,7 @@ const {
         </label>
         <input
           id={id}
-          name={id}
+          name={fieldName}
           type={type}
           class={cx('form-input', inputClass)}
           placeholder={placeholder}

@@ -1,108 +1,62 @@
 import type { PostalPincodeResponse } from '../types';
 
-export function initContactFormTriggers() {
-  const formTriggers = [
-    ...document.querySelectorAll('.contact-form-trigger'),
-  ] as HTMLElement[];
+type ContactFormPrefix = 'cmf' | 'cpf';
 
-  const closeTriggers = [
-    ...document.querySelectorAll('.close-contact-form-trigger'),
-  ] as HTMLElement[];
+const getFormContainer = (prefix: ContactFormPrefix) =>
+  document.getElementById(`${prefix}-container`) as HTMLDivElement;
 
-  const skipToBrochureDownload = [
-    ...document.querySelectorAll('.skip-to-download-brochure'),
-  ] as HTMLElement[];
+const getSuccessContainer = (prefix: ContactFormPrefix) =>
+  document.getElementById(`${prefix}-success`) as HTMLDivElement;
 
-  formTriggers.forEach((trigger) => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      showForm();
-    });
-  });
-
-  closeTriggers.forEach((trigger) => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      hideForm();
-    });
-  });
-
-  skipToBrochureDownload.forEach((trigger) => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      skipToDownloadBrochure();
-    });
-  });
-}
-
-export function showForm() {
-  const form = document.getElementById('contact-form-modal') as HTMLFormElement;
-
-  form.classList.remove('hidden');
-  form.classList.add('flex');
-  document.body.style.overflow = 'hidden';
-}
-
-export function hideForm() {
-  const form = document.getElementById('contact-form-modal') as HTMLFormElement;
-  form.classList.remove('flex');
-  form.classList.add('hidden');
-  document.body.style.overflow = '';
-}
-
-export function skipToDownloadBrochure() {
-  console.log('We reached here');
-  hideForm();
-  downloadBrochure();
-}
-
-export function downloadBrochure() {
-  window.open(
-    'https://www.hindalco.com/upload/pdf/totalis-brochure.pdf',
-    '_blank'
-  );
-}
-const resetStateAndCity = () => {
-  const stateInput = document.getElementById('state') as HTMLSelectElement;
-  const cityInput = document.getElementById('city') as HTMLSelectElement;
+const resetStateAndCity = (prefix: ContactFormPrefix) => {
+  const stateInput = document.getElementById(
+    `${prefix}-state`
+  ) as HTMLSelectElement;
+  const cityInput = document.getElementById(
+    `${prefix}-city`
+  ) as HTMLSelectElement;
 
   stateInput.innerHTML = `<option value="" selected>Select your state</option>`;
   cityInput.innerHTML = `<option value="" selected>Select your city</option>`;
-  stateInput.required = false;
-  cityInput.required = false;
-  stateInput.disabled = true;
-  cityInput.disabled = true;
+  stateInput.required = cityInput.required = false;
+  stateInput.disabled = cityInput.disabled = true;
 };
 
-const fillStateAndCity = (data: PostalPincodeResponse) => {
-  const stateInput = document.getElementById('state') as HTMLSelectElement;
-  const cityInput = document.getElementById('city') as HTMLSelectElement;
+const fillStateAndCity = (
+  prefix: ContactFormPrefix,
+  data: PostalPincodeResponse
+) => {
+  const stateInput = document.getElementById(
+    `${prefix}-state`
+  ) as HTMLSelectElement;
+  const cityInput = document.getElementById(
+    `${prefix}-city`
+  ) as HTMLSelectElement;
 
   const states = [...new Set(data.PostOffice.map((el) => el.State))];
   const cities = [...new Set(data.PostOffice.map((el) => el.District))];
-
   const selectedState = data.PostOffice[0].State;
   const selectedCity = data.PostOffice[0].District;
 
-  stateInput.required = true;
-  cityInput.required = true;
-  stateInput.disabled = false;
-  cityInput.disabled = false;
+  stateInput.required = cityInput.required = true;
+  stateInput.disabled = cityInput.disabled = false;
 
   stateInput.innerHTML = states
-    .map((state) => {
-      return `<option value="${state}" ${
-        state === selectedState ? 'selected' : ''
-      }>${state}</option>`;
-    })
+    .map(
+      (s) =>
+        `<option value="${s}" ${
+          s === selectedState ? 'selected' : ''
+        }>${s}</option>`
+    )
     .join('');
 
   cityInput.innerHTML = cities
-    .map((city) => {
-      return `<option value="${city}" ${
-        city === selectedCity ? 'selected' : ''
-      }>${city}</option>`;
-    })
+    .map(
+      (c) =>
+        `<option value="${c}" ${
+          c === selectedCity ? 'selected' : ''
+        }>${c}</option>`
+    )
     .join('');
 };
 
@@ -124,8 +78,9 @@ const hideError = (input: HTMLInputElement, el: HTMLParagraphElement) => {
 };
 
 const processPincode = async (
+  prefix: ContactFormPrefix,
   pincodeEl: HTMLInputElement,
-  errorMessageEl: HTMLParagraphElement
+  errorEl: HTMLParagraphElement
 ) => {
   try {
     const res = await fetch(
@@ -134,60 +89,125 @@ const processPincode = async (
     const data = (await res.json())[0] as PostalPincodeResponse;
 
     if (data.Status === 'Success') {
-      fillStateAndCity(data);
+      fillStateAndCity(prefix, data);
     } else {
-      showError(pincodeEl, errorMessageEl, 'Invalid Pincode');
+      showError(pincodeEl, errorEl, 'Invalid Pincode');
     }
-  } catch (err) {
-    showError(pincodeEl, errorMessageEl, 'Unable to validate Pincode');
+  } catch {
+    showError(pincodeEl, errorEl, 'Unable to validate Pincode');
   }
 };
 
-const handleFormSubmit = async (event: SubmitEvent) => {
-  event.preventDefault();
+const getFormSubmitHandler =
+  (prefix: ContactFormPrefix) => async (e: SubmitEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-  const form = event.target as HTMLFormElement;
-  const formData = new FormData(form);
-  const formPayload = Object.fromEntries(formData.entries());
+    try {
+      await fetch('/api/submit-form', {
+        method: 'POST',
+        body: formData,
+      });
 
-  try {
-    const response = await fetch('/api/submit-form', {
-      method: 'POST',
-      body: formData,
-    });
-    const formContainer = document.getElementById(
-      'form-container'
-    ) as HTMLDivElement;
+      getFormContainer(prefix)?.classList.add('hidden');
+      getSuccessContainer(prefix)?.classList.remove('hidden');
+    } catch (err) {
+      console.error(`Error submitting form for ${prefix}:`, err);
+    }
+  };
 
-    formContainer.classList.add('hidden');
-    const successContainer = document.getElementById(
-      'success-container'
-    ) as HTMLDivElement;
-    successContainer?.classList.remove('hidden');
-  } catch (err) {
-    console.error('Error processing form submission:', err);
-  } finally {
-  }
-};
-
-const initPincodeElement = () => {
-  const pincodeEl = document.getElementById('pincode') as HTMLInputElement;
-  const errorMessageEl = pincodeEl.parentElement?.querySelector(
+const initPincodeElement = (prefix: ContactFormPrefix) => {
+  const pincodeEl = document.getElementById(
+    `${prefix}-pincode`
+  ) as HTMLInputElement;
+  const errorEl = pincodeEl?.parentElement?.querySelector(
     '.error-message'
   ) as HTMLParagraphElement;
-  pincodeEl.addEventListener('blur', () => {
-    resetStateAndCity();
+
+  pincodeEl?.addEventListener('blur', () => {
+    resetStateAndCity(prefix);
     if (pincodeEl.checkValidity()) {
-      hideError(pincodeEl, errorMessageEl);
-      processPincode(pincodeEl, errorMessageEl);
+      hideError(pincodeEl, errorEl);
+      processPincode(prefix, pincodeEl, errorEl);
     } else {
-      showError(pincodeEl, errorMessageEl, 'Please enter a 6 digit Pincode');
+      showError(pincodeEl, errorEl, 'Please enter a 6 digit Pincode');
     }
   });
 };
 
-export const initContactForm = () => {
-  initPincodeElement();
-  const form = document.getElementById('contact-form') as HTMLFormElement;
-  form?.addEventListener('submit', handleFormSubmit);
+export const initContactForm = ({
+  contactFormPrefix,
+  formId,
+}: {
+  contactFormPrefix: ContactFormPrefix;
+  formId: string;
+}) => {
+  const form = document.getElementById(
+    `${contactFormPrefix}-${formId}`
+  ) as HTMLFormElement;
+  if (!form) return;
+
+  initPincodeElement(contactFormPrefix);
+  form.addEventListener('submit', getFormSubmitHandler(contactFormPrefix));
 };
+
+const getCmfModal = () =>
+  document.getElementById('cmf-modal') as HTMLDivElement;
+
+const showModalForm = () => {
+  const modal = getCmfModal();
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+};
+
+const hideModalForm = () => {
+  const modal = getCmfModal();
+  modal.classList.remove('flex');
+  modal.classList.add('hidden');
+  document.body.style.overflow = '';
+};
+
+const downloadBrochure = () => {
+  window.open(
+    'https://www.hindalco.com/upload/pdf/totalis-brochure.pdf',
+    '_blank'
+  );
+};
+
+const skipToDownloadBrochure = () => {
+  hideModalForm();
+  downloadBrochure();
+};
+
+export function initContactFormTriggers() {
+  const formTriggers = document.querySelectorAll('.contact-form-trigger');
+  const closeTriggers = document.querySelectorAll(
+    '.close-contact-form-trigger'
+  );
+  const brochureTriggers = document.querySelectorAll(
+    '.skip-to-download-brochure'
+  );
+
+  formTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      showModalForm();
+    });
+  });
+
+  closeTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      hideModalForm();
+    });
+  });
+
+  brochureTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      skipToDownloadBrochure();
+    });
+  });
+}

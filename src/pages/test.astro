@@ -2,13 +2,14 @@
 import Layout from '../layouts/layout.astro';
 
 import {
-  User,
   Mail,
   Phone,
   MapPin,
   Briefcase,
   Target,
   MapIcon,
+  UserRound,
+  MapPinned,
 } from '@lucide/astro';
 import Button from '../components/button.astro';
 import FormElement from '../components/input.astro';
@@ -62,11 +63,12 @@ import FormElement from '../components/input.astro';
           </a>
         </div>
       </div>
-      <form id="contact-form" class="space-y-2 grow">
+      <form id="cpf-contact-form" class="space-y-2 grow">
         <h2 class="text-xl mb-4 font-semibold">Quick Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormElement
-            id="fullName"
+            id="cpf-fullName"
+            fieldName="fullName"
             type="text"
             pattern="^[a-zA-Z \.]{3,50}$"
             patternTitle="Please enter a valid name"
@@ -75,12 +77,13 @@ import FormElement from '../components/input.astro';
             inputClass="text-base"
             required={true}
           >
-            <User slot={'labelIcon'} class="size-3" />
+            <UserRound slot={'labelIcon'} class="size-3" />
             <span slot="labelText">Full Name</span>
           </FormElement>
 
           <FormElement
-            id="email"
+            id="cpf-email"
+            fieldName="email"
             type="email"
             placeholder="johndoe@gmail.com"
             inputClass="text-base"
@@ -91,7 +94,8 @@ import FormElement from '../components/input.astro';
           </FormElement>
 
           <FormElement
-            id="whatsappNumber"
+            id="cpf-whatsappNumber"
+            fieldName="whatsappNumber"
             type="tel"
             pattern="[0-9]{10}"
             patternTitle="Please enter 10 digit whatsapp number"
@@ -105,7 +109,8 @@ import FormElement from '../components/input.astro';
           </FormElement>
 
           <FormElement
-            id="pincode"
+            id="cpf-pincode"
+            fieldName="pincode"
             type="text"
             pattern="[0-9]{6}"
             patternTitle="Enter 6 digit pincode"
@@ -119,7 +124,8 @@ import FormElement from '../components/input.astro';
           </FormElement>
 
           <FormElement
-            id="state"
+            id="cpf-state"
+            fieldName="state"
             type="select"
             selectOptions={[
               {
@@ -136,7 +142,8 @@ import FormElement from '../components/input.astro';
           </FormElement>
 
           <FormElement
-            id="city"
+            id="cpf-city"
+            fieldName="city"
             type="select"
             selectOptions={[
               {
@@ -148,12 +155,13 @@ import FormElement from '../components/input.astro';
             inputClass="text-base"
             disabled
           >
-            <MapPin slot={'labelIcon'} class="size-3" />
+            <MapPinned slot={'labelIcon'} class="size-3" />
             <span slot="labelText">City</span>
           </FormElement>
 
           <FormElement
-            id="intent"
+            id="cpf-intent"
+            fieldName="intent"
             type="select"
             selectOptions={[
               { value: '', displayValue: 'Select your intent' },
@@ -175,6 +183,8 @@ import FormElement from '../components/input.astro';
             <Target slot="labelIcon" class="size-3" />
           </FormElement>
           <FormElement
+            id="cpf-role"
+            fieldName="role"
             type="select"
             selectOptions={[
               {
@@ -194,7 +204,6 @@ import FormElement from '../components/input.astro';
             ]}
             containerClass="w-full md:col-span-2"
             inputClass="text-base max-w-sm"
-            id="role"
             required
           >
             <span slot="labelText">I am a...</span>
@@ -237,10 +246,9 @@ import FormElement from '../components/input.astro';
   </div>
 
   <script>
-    import { initEmblas } from '../scripts/embla';
-    import { initRevealObserver } from '../scripts/reveal';
-    import { initTabManager } from '../scripts/tab';
-    import { initExpandingCards } from '../scripts/expanding-cards';
-    import { initContactFormTriggers } from '../scripts/contact-form';
+    import { initContactForm } from '../scripts/contact-form';
+    document.addEventListener('DOMContentLoaded', () => {
+      initContactForm({ contactFormPrefix: 'cpf', formId: 'contact-form' });
+    });
   </script>
 </Layout>

@@ -2,7 +2,7 @@
 import {
   X,
   CheckCircle,
-  User,
+  UserRound,
   Mail,
   Phone,
   MapPin,
@@ -10,6 +10,7 @@ import {
   Briefcase,
   MapIcon,
   DownloadIcon,
+  MapPinned,
 } from '@lucide/astro';
 import Button from './button.astro';
 import FormElement from '../components/input.astro';
@@ -17,7 +18,7 @@ import FormElement from '../components/input.astro';
 
 <div
   class="fixed hidden inset-0 z-50 items-center w-full justify-center bg-black/70 backdrop-blur-sm transition-all duration-300 p-4 md:p-6 overflow-hidden"
-  id="contact-form-modal"
+  id="cmf-modal"
 >
   <div
     class="relative max-w-3xl w-full bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
@@ -42,10 +43,11 @@ import FormElement from '../components/input.astro';
     </div>
 
     <div class="p-4 sm:p-8 pt-4" id="form-container">
-      <form id="contact-form" class="space-y-2">
+      <form id="cmf-contact-form" class="space-y-2">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormElement
-            id="fullName"
+            id="cmf-fullName"
+            fieldName="fullName"
             type="text"
             pattern="^[a-zA-Z \.]{3,50}$"
             patternTitle="Please enter a valid name"
@@ -53,12 +55,13 @@ import FormElement from '../components/input.astro';
             minLength={3}
             required={true}
           >
-            <User slot={'labelIcon'} class="size-3" />
+            <UserRound slot={'labelIcon'} class="size-3" />
             <span slot="labelText">Full Name</span>
           </FormElement>
 
           <FormElement
-            id="email"
+            id="cmf-email"
+            fieldName="email"
             type="email"
             placeholder="johndoe@gmail.com"
             required={true}
@@ -68,7 +71,8 @@ import FormElement from '../components/input.astro';
           </FormElement>
 
           <FormElement
-            id="whatsappNumber"
+            id="cmf-whatsappNumber"
+            fieldName="whatsappNumber"
             type="tel"
             pattern="[0-9]{10}"
             patternTitle="Please enter 10 digit whatsapp number"
@@ -80,7 +84,8 @@ import FormElement from '../components/input.astro';
           </FormElement>
 
           <FormElement
-            id="pincode"
+            id="cmf-pincode"
+            fieldName="pincode"
             type="text"
             pattern="[0-9]{6}"
             patternTitle="Enter 6 digit pincode"
@@ -93,7 +98,8 @@ import FormElement from '../components/input.astro';
 
           <div class="grid grid-cols-2 gap-2">
             <FormElement
-              id="state"
+              id="cmf-state"
+              fieldName="state"
               type="select"
               selectOptions={[
                 {
@@ -109,7 +115,8 @@ import FormElement from '../components/input.astro';
             </FormElement>
 
             <FormElement
-              id="city"
+              id="cmf-city"
+              fieldName="city"
               type="select"
               selectOptions={[
                 {
@@ -120,13 +127,14 @@ import FormElement from '../components/input.astro';
               ]}
               disabled
             >
-              <MapPin slot={'labelIcon'} class="size-3" />
+              <MapPinned slot={'labelIcon'} class="size-3" />
               <span slot="labelText">City</span>
             </FormElement>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <FormElement
-              id="intent"
+              id="cmf-intent"
+              fieldName="intent"
               type="select"
               selectOptions={[
                 { value: '', displayValue: 'Select your intent' },
@@ -146,6 +154,8 @@ import FormElement from '../components/input.astro';
               <Target slot="labelIcon" class="size-3" />
             </FormElement>
             <FormElement
+              id="cmf-role"
+              fieldName="role"
               type="select"
               selectOptions={[
                 {
@@ -163,7 +173,6 @@ import FormElement from '../components/input.astro';
                   displayValue: 'Architect/Interior Decorator/Consultant',
                 },
               ]}
-              id="role"
               required
             >
               <span slot="labelText">I am a...</span>
