@@ -2,389 +2,245 @@
 import Layout from '../layouts/layout.astro';
 
 import {
-  X,
   User,
   Mail,
   Phone,
   MapPin,
   Briefcase,
   Target,
-  Map,
-  Download,
-  CheckCircle,
+  MapIcon,
 } from '@lucide/astro';
 import Button from '../components/button.astro';
 import FormElement from '../components/input.astro';
 ---
 
 <Layout title="Test Page" htmlClassName="no-js">
-  <button class="contact-form-trigger p-2 border border-neutral-200 shadow">
-    Show Form
-  </button>
+  <div class="max-w-6xl mx-auto py-8 px-4">
+    <div class="space-y-1 mb-4 sm:mb-8">
+      <h1 class="sm:text-4xl text-2xl font-bold text-neutral-800">
+        Contact Us
+      </h1>
+      <p class="sm:text-lg text-neutral-500">
+        Get in touch with our sales person for your requirements
+      </p>
+    </div>
 
-  <div
-    class="fixed flex inset-0 z-50 items-center w-full justify-center bg-black/70 backdrop-blur-sm transition-all duration-300 p-4 md:p-6 overflow-hidden"
-    id="contact-form-modal"
-  >
-    <div
-      class="relative max-w-3xl w-full bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
-    >
-      <div
-        class="sticky top-0 bg-white/50 backdrop-blur-sm rounded-t-2xl border-b border-neutral-100 sm:p-6 p-4 pb-2 sm:pb-4"
-      >
-        <button
-          class="close-contact-form-trigger absolute top-4 right-4 stroke-neutral-400 hover:stroke-neutral-600 focus:outline-none transition-colors cursor-pointer"
-        >
-          <X class="sm:size-6 size-5" />
-        </button>
-
-        <h2 class="sm:text-2xl text-xl font-semibold text-neutral-800">
-          Let's Know You First
-        </h2>
-        <!-- <p class="text-neutral-600 sm:text-base text-sm">
-          Just a few quick details, your download will be ready in seconds.
-        </p> -->
-      </div>
-
-      <div class="p-4 sm:p-8 sm:pt-4 pt-2" id="form-container">
-        <form id="contact-form" class="space-y-2">
-          <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-4 gap-2">
-            <FormElement
-              id="fullName"
-              type="text"
-              pattern="^[a-zA-Z \.]{3,50}$"
-              patternTitle="Please enter a valid name"
-              placeholder="John Doe"
-              minLength={3}
-              required={true}
-            >
-              <User slot={'labelIcon'} class="size-3" />
-              <span slot="labelText">Full Name</span>
-            </FormElement>
-
-            <FormElement
-              id="email"
-              type="email"
-              placeholder="johndoe@gmail.com"
-              required={true}
-            >
-              <Mail slot={'labelIcon'} class="size-3" />
-              <span slot="labelText">Email Address</span>
-            </FormElement>
-
-            <FormElement
-              id="whatsappNumber"
-              type="tel"
-              pattern="[0-9]{10}"
-              patternTitle="Please enter 10 digit whatsapp number"
-              placeholder="+91 XXXXXXXXXX"
-              required={true}
-            >
-              <Phone slot={'labelIcon'} class="size-3" />
-              <span slot="labelText">Whatsapp Number</span>
-            </FormElement>
-
-            <FormElement
-              id="pincode"
-              type="text"
-              pattern="[0-9]{6}"
-              patternTitle="Enter 6 digit pincode"
-              placeholder="Enter your pincode"
-              required={true}
-            >
-              <MapPin slot={'labelIcon'} class="size-3" />
-              <span slot="labelText">Pincode</span>
-            </FormElement>
-
-            <div class="grid grid-cols-2 gap-2">
-              <FormElement
-                id="state"
-                type="select"
-                selectOptions={[
-                  {
-                    value: '',
-                    displayValue: 'Select your state',
-                    selected: true,
-                  },
-                ]}
-                disabled
-              >
-                <Map slot="labelIcon" class="size-3" />
-                <span slot="labelText">State</span>
-              </FormElement>
-
-              <FormElement
-                id="city"
-                type="select"
-                selectOptions={[
-                  {
-                    value: '',
-                    displayValue: 'Select your city',
-                    selected: true,
-                  },
-                ]}
-                disabled
-              >
-                <MapPin slot={'labelIcon'} class="size-3" />
-                <span slot="labelText">City</span>
-              </FormElement>
-            </div>
-            <div class="grid grid-cols-2 gap-2">
-              <FormElement
-                id="intent"
-                type="select"
-                selectOptions={[
-                  { value: '', displayValue: 'Select your intent' },
-
-                  {
-                    value: 'Buy a Totalis Product',
-                    displayValue: 'Buy a Totalis Product',
-                  },
-                  {
-                    value: 'Become a Totalis Partner',
-                    displayValue: 'Become a Totalis Partner',
-                  },
-                ]}
-                required
-              >
-                <span slot="labelText">I am looking to...</span>
-                <Target slot="labelIcon" class="size-3" />
-              </FormElement>
-              <FormElement
-                type="select"
-                selectOptions={[
-                  {
-                    value: '',
-                    displayValue: 'Select your role',
-                    selected: true,
-                  },
-                  { value: 'Distributor', displayValue: 'Distributor' },
-                  {
-                    value: 'Individual Home Owner',
-                    displayValue: 'Individual Home Owner',
-                  },
-                  {
-                    value: 'Architect/Interior Decorator/Consultant',
-                    displayValue: 'Architect/Interior Decorator/Consultant',
-                  },
-                ]}
-                id="role"
-                required
-              >
-                <span slot="labelText">I am a...</span>
-                <Briefcase slot="labelIcon" class="size-3" />
-              </FormElement>
-            </div>
-          </div>
-
-          <div class="pt-2 sm:pt-4 border-t border-neutral-100">
-            <label class="flex items-start gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                required
-                class="mt-1 size-3 checked:bg-primary border-neutral-300 rounded focus:ring-primary focus:ring-2"
-              />
-              <span class="text-xs text-neutral-600 leading-relaxed">
-                I agree to the <a
-                  href="/privacy"
-                  class="text-primary hover:underline font-medium"
-                  >Privacy Policy</a
-                >
-                and <a
-                  href="/terms"
-                  class="text-primary hover:underline font-medium"
-                  >Terms & Conditions</a
-                > of Totalis
-              </span>
-            </label>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="flex justify-end items-center gap-2">
-            <Button
-              classList="skip-to-download-brochure py-1 text-sm text-neutral-600 rounded-lg transition-smooth"
-              variant="default">Skip</Button
-            >
-            <Button
-              variant="primary"
-              type="submit"
-              classList="py-1 text-sm rounded-lg transition-smooth"
-              >Submit Application</Button
-            >
-          </div>
-        </form>
-      </div>
-      <div class="p-8 text-center hidden" id="success-container">
-        <div class="max-w-md mx-auto">
-          <div
-            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+    <div class="flex flex-col-reverse md:flex-row gap-4">
+      <div class="min-w-2xs border-neutral-200 sm:pr-4 gap-4 flex flex-col">
+        <div class="text-primary-dark">
+          <h2 class="md:text-lg font-semibold mb-2">Email</h2>
+          <a
+            href="mailto:hil-totalis@adityabirla.com"
+            class="items-center flex gap-2"
           >
-            <CheckCircle class="w-8 h-8 text-green-600" />
-          </div>
-          <h3 class="text-xl font-semibold text-neutral-900 mb-2">
-            Thank You!
-          </h3>
-          <p class="text-neutral-600 mb-6">
-            Thanks for your time. We'll get back to you soon!
-          </p>
-          <Button variant="primary" classList="transition-smooth">
-            <Download class="size-4" />
-            Download Brochure</Button
-          >
+            <span
+              class="p-2 rounded-xl bg-gradient-to-br from-primary/5 to-primary/15 border-primary/30 border"
+            >
+              <Mail class="md:size-5 size-4 stroke-[1.5]" />
+            </span>
+            <span class="text-sm"> hil-totalis@adityabirla.com </span>
+          </a>
+        </div>
+        <div class="text-secondary">
+          <h2 class="md:text-lg font-semibold mb-2">Socials</h2>
+          <a href="linkedin.com" class="items-center flex gap-2">
+            <span
+              class="p-2 rounded-xl bg-gradient-to-br from-secondary/5 to-secondary/15 border-secondary/30 border"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                class="md:size-5 size-4 stroke-[1.5] fill-secondary"
+                ><path
+                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"
+                ></path></svg
+              >
+            </span>
+            <span class="text-sm hidden"> Linkedin</span>
+          </a>
         </div>
       </div>
+      <form id="contact-form" class="space-y-2 grow">
+        <h2 class="text-xl mb-4 font-semibold">Quick Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FormElement
+            id="fullName"
+            type="text"
+            pattern="^[a-zA-Z \.]{3,50}$"
+            patternTitle="Please enter a valid name"
+            placeholder="John Doe"
+            minLength={3}
+            inputClass="text-base"
+            required={true}
+          >
+            <User slot={'labelIcon'} class="size-3" />
+            <span slot="labelText">Full Name</span>
+          </FormElement>
+
+          <FormElement
+            id="email"
+            type="email"
+            placeholder="johndoe@gmail.com"
+            inputClass="text-base"
+            required={true}
+          >
+            <Mail slot={'labelIcon'} class="size-3" />
+            <span slot="labelText">Email Address</span>
+          </FormElement>
+
+          <FormElement
+            id="whatsappNumber"
+            type="tel"
+            pattern="[0-9]{10}"
+            patternTitle="Please enter 10 digit whatsapp number"
+            placeholder="+91 XXXXXXXXXX"
+            inputClass="text-base"
+            containerClass="max-w-sm md:col-span-2"
+            required={true}
+          >
+            <Phone slot={'labelIcon'} class="size-3" />
+            <span slot="labelText">Whatsapp Number</span>
+          </FormElement>
+
+          <FormElement
+            id="pincode"
+            type="text"
+            pattern="[0-9]{6}"
+            patternTitle="Enter 6 digit pincode"
+            placeholder="Enter your pincode"
+            containerClass="max-w-sm md:col-span-2"
+            inputClass="text-base"
+            required={true}
+          >
+            <MapPin slot={'labelIcon'} class="size-3" />
+            <span slot="labelText">Pincode</span>
+          </FormElement>
+
+          <FormElement
+            id="state"
+            type="select"
+            selectOptions={[
+              {
+                value: '',
+                displayValue: 'Select your state',
+                selected: true,
+              },
+            ]}
+            inputClass="text-base"
+            disabled
+          >
+            <MapIcon slot="labelIcon" class="size-3" />
+            <span slot="labelText">State</span>
+          </FormElement>
+
+          <FormElement
+            id="city"
+            type="select"
+            selectOptions={[
+              {
+                value: '',
+                displayValue: 'Select your city',
+                selected: true,
+              },
+            ]}
+            inputClass="text-base"
+            disabled
+          >
+            <MapPin slot={'labelIcon'} class="size-3" />
+            <span slot="labelText">City</span>
+          </FormElement>
+
+          <FormElement
+            id="intent"
+            type="select"
+            selectOptions={[
+              { value: '', displayValue: 'Select your intent' },
+
+              {
+                value: 'Buy a Totalis Product',
+                displayValue: 'Buy a Totalis Product',
+              },
+              {
+                value: 'Become a Totalis Partner',
+                displayValue: 'Become a Totalis Partner',
+              },
+            ]}
+            containerClass="md:col-span-2"
+            inputClass="text-base max-w-sm"
+            required
+          >
+            <span slot="labelText">I am looking to...</span>
+            <Target slot="labelIcon" class="size-3" />
+          </FormElement>
+          <FormElement
+            type="select"
+            selectOptions={[
+              {
+                value: '',
+                displayValue: 'Select your role',
+                selected: true,
+              },
+              { value: 'Distributor', displayValue: 'Distributor' },
+              {
+                value: 'Individual Home Owner',
+                displayValue: 'Individual Home Owner',
+              },
+              {
+                value: 'Architect/Interior Decorator/Consultant',
+                displayValue: 'Architect/Interior Decorator/Consultant',
+              },
+            ]}
+            containerClass="w-full md:col-span-2"
+            inputClass="text-base max-w-sm"
+            id="role"
+            required
+          >
+            <span slot="labelText">I am a...</span>
+            <Briefcase slot="labelIcon" class="size-3" />
+          </FormElement>
+        </div>
+
+        <!-- Terms & Conditions -->
+        <div class="pt-4">
+          <label class="flex items-start gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              required
+              class="mt-1 size-4 border-neutral-300 rounded focus:ring-primary focus:ring-2 accent-primary-dark"
+            />
+            <span class="text-sm text-neutral-600 leading-relaxed">
+              I agree to the <a
+                href="/privacy"
+                class="text-primary hover:underline font-medium"
+                >Privacy Policy</a
+              >
+              and <a
+                href="/terms"
+                class="text-primary hover:underline font-medium"
+                >Terms & Conditions</a
+              > of Totalis
+            </span>
+          </label>
+        </div>
+
+        <div class="flex justify-end items-center gap-2">
+          <Button
+            variant="primary"
+            type="submit"
+            classList="rounded-lg px-8 transition-smooth">Submit</Button
+          >
+        </div>
+      </form>
     </div>
   </div>
+
   <script>
     import { initEmblas } from '../scripts/embla';
     import { initRevealObserver } from '../scripts/reveal';
     import { initTabManager } from '../scripts/tab';
     import { initExpandingCards } from '../scripts/expanding-cards';
     import { initContactFormTriggers } from '../scripts/contact-form';
-
-    type PostalPincodeResponse = {
-      PostOffice: Array<{
-        District: string;
-        State: string;
-      }>;
-      Status: 'Error' | 'Success';
-    };
-
-    const resetStateAndCity = () => {
-      const stateInput = document.getElementById('state') as HTMLSelectElement;
-      const cityInput = document.getElementById('city') as HTMLSelectElement;
-
-      stateInput.innerHTML = `<option value="" selected>Select your state</option>`;
-      cityInput.innerHTML = `<option value="" selected>Select your city</option>`;
-      stateInput.required = false;
-      cityInput.required = false;
-      stateInput.disabled = true;
-      cityInput.disabled = true;
-    };
-
-    const fillStateAndCity = (data: PostalPincodeResponse) => {
-      const stateInput = document.getElementById('state') as HTMLSelectElement;
-      const cityInput = document.getElementById('city') as HTMLSelectElement;
-
-      const states = [...new Set(data.PostOffice.map((el) => el.State))];
-      const cities = [...new Set(data.PostOffice.map((el) => el.District))];
-
-      const selectedState = data.PostOffice[0].State;
-      const selectedCity = data.PostOffice[0].District;
-
-      stateInput.required = true;
-      cityInput.required = true;
-      stateInput.disabled = false;
-      cityInput.disabled = false;
-
-      stateInput.innerHTML = states
-        .map((state) => {
-          return `<option value="${state}" ${state === selectedState ? 'selected' : ''}>${state}</option>`;
-        })
-        .join('');
-
-      cityInput.innerHTML = cities
-        .map((city) => {
-          return `<option value="${city}" ${city === selectedCity ? 'selected' : ''}>${city}</option>`;
-        })
-        .join('');
-    };
-
-    const showError = (
-      input: HTMLInputElement,
-      el: HTMLParagraphElement,
-      message: string
-    ) => {
-      input.dataset.error = 'true';
-      el.textContent = message;
-      el.classList.remove('hidden');
-      input.focus();
-    };
-
-    const hideError = (input: HTMLInputElement, el: HTMLParagraphElement) => {
-      input.dataset.error = 'false';
-      el.textContent = '';
-      el.classList.add('hidden');
-    };
-
-    const processPincode = async (
-      pincodeEl: HTMLInputElement,
-      errorMessageEl: HTMLParagraphElement
-    ) => {
-      try {
-        const res = await fetch(
-          `https://api.postalpincode.in/pincode/${pincodeEl.value}`
-        );
-        const data = (await res.json())[0] as PostalPincodeResponse;
-
-        if (data.Status === 'Success') {
-          fillStateAndCity(data);
-        } else {
-          showError(pincodeEl, errorMessageEl, 'Invalid Pincode');
-        }
-      } catch (err) {
-        showError(pincodeEl, errorMessageEl, 'Unable to validate Pincode');
-      }
-    };
-
-    const handleFormSubmit = async (event: SubmitEvent) => {
-      event.preventDefault();
-
-      const form = event.target as HTMLFormElement;
-      const formData = new FormData(form);
-      const formPayload = Object.fromEntries(formData.entries());
-      console.log('The form data: ', formPayload);
-      try {
-        const response = await fetch('/api/submit-form', {
-          method: 'POST',
-          body: formPayload,
-        });
-        const formContainer = document.getElementById(
-          'form-container'
-        ) as HTMLDivElement;
-
-        formContainer.classList.add('hidden');
-        const successContainer = document.getElementById(
-          'success-container'
-        ) as HTMLDivElement;
-        successContainer?.classList.remove('hidden');
-      } catch (err) {
-        console.error('Error processing form submission:', err);
-      } finally {
-      }
-    };
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initTabManager();
-      initEmblas();
-      initExpandingCards();
-      initRevealObserver();
-      initContactFormTriggers();
-
-      const pincodeInput = document.getElementById(
-        'pincode'
-      ) as HTMLInputElement;
-      const errorMessage = pincodeInput?.parentElement?.querySelector(
-        '.error-message'
-      ) as HTMLParagraphElement;
-
-      pincodeInput?.addEventListener('blur', () => {
-        resetStateAndCity();
-
-        if (pincodeInput.checkValidity()) {
-          hideError(pincodeInput, errorMessage);
-          processPincode(pincodeInput, errorMessage);
-        } else {
-          showError(
-            pincodeInput,
-            errorMessage,
-            'Please enter a 6 digit Pincode'
-          );
-        }
-      });
-
-      const form = document.getElementById('contact-form') as HTMLFormElement;
-      form?.addEventListener('submit', handleFormSubmit);
-    });
   </script>
 </Layout>

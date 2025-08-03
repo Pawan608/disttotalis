@@ -35,7 +35,10 @@ import ContactUsForm from '../components/contact-us-form.astro';
     import { initCardGlowEffect } from '../scripts/glow';
     import { initRevealObserver } from '../scripts/reveal';
     import { initTabManager } from '../scripts/tab';
-    import { initContactFormTriggers } from '../scripts/contact-form';
+    import {
+      initContactFormTriggers,
+      initContactForm,
+    } from '../scripts/contact-form';
 
     // All DOMContentLoaded centralized logic
     document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +57,7 @@ import ContactUsForm from '../components/contact-us-form.astro';
       initRevealObserver();
       initCardGlowEffect();
       initContactFormTriggers();
+      initContactForm();
     });
   </script>
 </Layout>
