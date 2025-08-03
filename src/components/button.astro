@@ -1,6 +1,20 @@
 ---
 import { cx } from '../scripts/cx';
 
+type Props = {
+  title?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'default';
+  reveal?: boolean;
+  link?: string;
+  animationDelay?: number;
+  color?: 'green' | 'blue';
+  classList?: string;
+  disabled?: boolean;
+  ariaLabel?: string;
+  ariaPressed?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+};
+
 const {
   title,
   variant = 'default',

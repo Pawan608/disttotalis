@@ -60,3 +60,13 @@ export function downloadBrochure() {
     '_blank'
   );
 }
+
+
+export function validateForm() {
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+
+}
+
+const validations = {
+  name: (value: string) => value.trim().length > 3,
+}

@@ -49,7 +49,15 @@
   }
 
   .form-input {
-    @apply w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary text-sm;
+    @apply w-full px-4 py-1.5 rounded-lg border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary text-sm data-[error=true]:border-red-500 data-[error=true]:focus:ring-red-300;
+  }
+
+  .form-select {
+    @apply w-full px-2 sm:px-4 py-1.5 border border-neutral-200 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-white text-xs sm:text-sm data-[error=true]:border-red-500 data-[error=true]:focus:ring-red-300;
+  }
+
+  .form-label {
+    @apply pl-0.5 text-xs font-medium text-neutral-700 flex items-center gap-1;
   }
 
   .embla-viewport {

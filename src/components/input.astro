@@ -1,0 +1,80 @@
+---
+import { cx } from '../scripts/cx';
+
+type SelectProps = {
+  value: string;
+  displayValue: string;
+  selected?: boolean;
+};
+
+type Props = {
+  id: string;
+  type: 'text' | 'email' | 'tel' | 'select';
+  placeholder?: string;
+  required?: boolean;
+  pattern?: string;
+  selectOptions?: SelectProps[];
+  disabled?: boolean;
+  patternTitle?: string;
+  inputClass?: string;
+  minLength?: number;
+};
+
+const {
+  id,
+  type,
+  placeholder,
+  pattern,
+  selectOptions,
+  required,
+  disabled,
+  patternTitle,
+  inputClass,
+  minLength,
+} = Astro.props;
+---
+
+{
+  type === 'select' ? (
+    <div class="space-y-1 sm:space-y-1.5">
+      <label for={id} class="form-label">
+        <slot name="labelIcon" />
+        <slot name="labelText" />
+      </label>
+      <select
+        name={id}
+        id={id}
+        class={cx('form-select', inputClass)}
+        required={required}
+        disabled={disabled}
+      >
+        {selectOptions!.map((option) => (
+          <option value={option.value} selected={option.selected}>
+            {option.displayValue}
+          </option>
+        ))}
+      </select>
+      <p class="error-message text-xs text-red-500 px-2 pt-0.5 leading-3" />
+    </div>
+  ) : (
+    <div class="space-y-1 sm:space-y-1.5">
+      <label for={id} class="form-label">
+        <slot name="labelIcon" />
+        <slot name="labelText" />
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        class={cx('form-input', inputClass)}
+        placeholder={placeholder}
+        pattern={pattern}
+        title={patternTitle}
+        required={required}
+        disabled={disabled}
+        minlength={minLength}
+      />
+      <p class="error-message text-xs text-red-500 px-2 pt-0.5 leading-3 hidden" />
+    </div>
+  )
+}

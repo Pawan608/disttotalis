@@ -1,150 +1,240 @@
 ---
 import Layout from '../layouts/layout.astro';
-import ContactUsForm from '../components/contact-us-form.astro';
-import Button from '../components/button.astro';
-import { getImage } from 'astro:assets';
-import { cx } from '../scripts/cx';
 
 import {
-  Clock,
-  Lock,
-  Shield,
-  ThermometerSnowflake,
-  TrendingUp,
-  Zap,
-  UsersRound,
+  X,
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Briefcase,
+  Target,
+  Map,
+  Download,
+  CheckCircle,
 } from '@lucide/astro';
-
-import px1 from '../assets/px1.jpg';
-import px2 from '../assets/px2.jpg';
-import px3 from '../assets/px3.jpg';
-
-const product = {
-  name: 'TOT SD NEXGEN',
-  slug: 'nexgen',
-  description:
-    'Tested windows built for enhanced sturdiness—an ideal choice for every home.',
-  price: 17999,
-  images: [px1, px2, px3],
-  features: [
-    {
-      icon: Lock,
-      title: 'Central Multi-Point Locking',
-      text: 'Ensures maximum safety',
-    },
-    {
-      icon: Shield,
-      title: 'Reinforced Handles',
-      text: 'Provides maximum sturdiness',
-    },
-    {
-      icon: ThermometerSnowflake,
-      title: 'BIS Tested',
-      text: 'Against all weather conditions',
-    },
-  ],
-  stats: [
-    { label: 'Projects Completed', value: '100+', icon: TrendingUp },
-    { label: 'Happy Customers', value: '80+', icon: UsersRound },
-    { label: 'Years of Experience', value: '5+', icon: Clock },
-    { label: 'Quick Installation', value: '1–2 Days', icon: Zap },
-  ],
-};
-
-const images = await Promise.all(
-  product.images.map((i) =>
-    getImage({
-      src: i,
-      widths: [512, 768, 960],
-      format: 'webp',
-    })
-  )
-);
-
-const thumbs = await Promise.all(
-  product.images.map((i) =>
-    getImage({ src: i, widths: [96, 128], format: 'webp' })
-  )
-);
-
-const productData = { ...product, thumbs, images };
+import Button from '../components/button.astro';
+import FormElement from '../components/input.astro';
 ---
 
 <Layout title="Test Page" htmlClassName="no-js">
-  <ContactUsForm />
-
   <button class="contact-form-trigger p-2 border border-neutral-200 shadow">
     Show Form
   </button>
 
-  <section id="product-introduction">
-    <div class="max-w-6xl mt-8 mx-auto px-4 grid md:grid-cols-2 gap-16">
-      <div class="space-y-8">
-        <div
-          class="aspect-square w-full max-w-lg mx-auto rounded-2xl overflow-hidden border border-gray-200 shadow-md relative"
+  <div
+    class="fixed flex inset-0 z-50 items-center w-full justify-center bg-black/70 backdrop-blur-sm transition-all duration-300 p-4 md:p-6 overflow-hidden"
+    id="contact-form-modal"
+  >
+    <div
+      class="relative max-w-3xl w-full bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
+    >
+      <div
+        class="sticky top-0 bg-white/50 backdrop-blur-sm rounded-t-2xl border-b border-neutral-100 sm:p-6 p-4 pb-2 sm:pb-4"
+      >
+        <button
+          class="close-contact-form-trigger absolute top-4 right-4 stroke-neutral-400 hover:stroke-neutral-600 focus:outline-none transition-colors cursor-pointer"
         >
-          <div class="aspect-square">
-            <img
-              id="main-image"
-              src={productData.images[0].src}
-              srcset={productData.images[0].srcSet.values
-                .map((v) => `${v.url} ${v.descriptor}`)
-                .join(', ')}
-              alt={`${productData.name} Image`}
-              sizes="(max-width: 768px) 99vw, 50vw"
-              loading="eager"
-              class="w-full h-full object-cover transition-opacity duration-300"
-            />
-          </div>
+          <X class="sm:size-6 size-5" />
+        </button>
 
-          <div
-            class="absolute top-4 left-4 bg-primary inset-shadow-sm inset-primary-light text-white text-sm px-2 py-0.5 rounded-md"
-          >
-            BIS Certified
-          </div>
-        </div>
+        <h2 class="sm:text-2xl text-xl font-semibold text-neutral-800">
+          Let's Know You First
+        </h2>
+        <!-- <p class="text-neutral-600 sm:text-base text-sm">
+          Just a few quick details, your download will be ready in seconds.
+        </p> -->
+      </div>
 
-        <div
-          class="flex gap-4 justify-center"
-          role="group"
-          aria-label="Product images"
-        >
-          {
-            productData.thumbs.map((img, i: number) => (
-              <button
-                class={cx(
-                  'thumbnail-btn aspect-square w-16 rounded-lg overflow-hidden transition-all duration-300',
-                  'hover:brightness-75 ring-2 ring-offset-2 cursor-pointer',
-                  i === 0 ? 'ring-primary' : 'ring-transparent'
-                )}
-                data-src={productData.images[i].src}
-                data-srcset={productData.images[i].srcSet.values
-                  .map((v) => `${v.url} ${v.descriptor}`)
-                  .join(', ')}
-                data-alt={`${productData.name} view ${i + 1}`}
-                data-index={i}
-                aria-label={`View ${i + 1} of ${productData.name}`}
-                aria-selected={i === 0 ? 'true' : 'false'}
+      <div class="p-4 sm:p-8 sm:pt-4 pt-2" id="form-container">
+        <form id="contact-form" class="space-y-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-4 gap-2">
+            <FormElement
+              id="fullName"
+              type="text"
+              pattern="^[a-zA-Z \.]{3,50}$"
+              patternTitle="Please enter a valid name"
+              placeholder="John Doe"
+              minLength={3}
+              required={true}
+            >
+              <User slot={'labelIcon'} class="size-3" />
+              <span slot="labelText">Full Name</span>
+            </FormElement>
+
+            <FormElement
+              id="email"
+              type="email"
+              placeholder="johndoe@gmail.com"
+              required={true}
+            >
+              <Mail slot={'labelIcon'} class="size-3" />
+              <span slot="labelText">Email Address</span>
+            </FormElement>
+
+            <FormElement
+              id="whatsappNumber"
+              type="tel"
+              pattern="[0-9]{10}"
+              patternTitle="Please enter 10 digit whatsapp number"
+              placeholder="+91 XXXXXXXXXX"
+              required={true}
+            >
+              <Phone slot={'labelIcon'} class="size-3" />
+              <span slot="labelText">Whatsapp Number</span>
+            </FormElement>
+
+            <FormElement
+              id="pincode"
+              type="text"
+              pattern="[0-9]{6}"
+              patternTitle="Enter 6 digit pincode"
+              placeholder="Enter your pincode"
+              required={true}
+            >
+              <MapPin slot={'labelIcon'} class="size-3" />
+              <span slot="labelText">Pincode</span>
+            </FormElement>
+
+            <div class="grid grid-cols-2 gap-2">
+              <FormElement
+                id="state"
+                type="select"
+                selectOptions={[
+                  {
+                    value: '',
+                    displayValue: 'Select your state',
+                    selected: true,
+                  },
+                ]}
+                disabled
               >
-                <img
-                  src={img.src}
-                  srcset={img.srcSet.values
-                    .map((v) => `${v.url} ${v.descriptor}`)
-                    .join(', ')}
-                  sizes="(max-width: 768px) 96px, 128px"
-                  loading="lazy"
-                  decoding="async"
-                  class="w-full h-full object-cover"
-                  alt=""
-                />
-              </button>
-            ))
-          }
+                <Map slot="labelIcon" class="size-3" />
+                <span slot="labelText">State</span>
+              </FormElement>
+
+              <FormElement
+                id="city"
+                type="select"
+                selectOptions={[
+                  {
+                    value: '',
+                    displayValue: 'Select your city',
+                    selected: true,
+                  },
+                ]}
+                disabled
+              >
+                <MapPin slot={'labelIcon'} class="size-3" />
+                <span slot="labelText">City</span>
+              </FormElement>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <FormElement
+                id="intent"
+                type="select"
+                selectOptions={[
+                  { value: '', displayValue: 'Select your intent' },
+
+                  {
+                    value: 'Buy a Totalis Product',
+                    displayValue: 'Buy a Totalis Product',
+                  },
+                  {
+                    value: 'Become a Totalis Partner',
+                    displayValue: 'Become a Totalis Partner',
+                  },
+                ]}
+                required
+              >
+                <span slot="labelText">I am looking to...</span>
+                <Target slot="labelIcon" class="size-3" />
+              </FormElement>
+              <FormElement
+                type="select"
+                selectOptions={[
+                  {
+                    value: '',
+                    displayValue: 'Select your role',
+                    selected: true,
+                  },
+                  { value: 'Distributor', displayValue: 'Distributor' },
+                  {
+                    value: 'Individual Home Owner',
+                    displayValue: 'Individual Home Owner',
+                  },
+                  {
+                    value: 'Architect/Interior Decorator/Consultant',
+                    displayValue: 'Architect/Interior Decorator/Consultant',
+                  },
+                ]}
+                id="role"
+                required
+              >
+                <span slot="labelText">I am a...</span>
+                <Briefcase slot="labelIcon" class="size-3" />
+              </FormElement>
+            </div>
+          </div>
+
+          <div class="pt-2 sm:pt-4 border-t border-neutral-100">
+            <label class="flex items-start gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                required
+                class="mt-1 size-3 checked:bg-primary border-neutral-300 rounded focus:ring-primary focus:ring-2"
+              />
+              <span class="text-xs text-neutral-600 leading-relaxed">
+                I agree to the <a
+                  href="/privacy"
+                  class="text-primary hover:underline font-medium"
+                  >Privacy Policy</a
+                >
+                and <a
+                  href="/terms"
+                  class="text-primary hover:underline font-medium"
+                  >Terms & Conditions</a
+                > of Totalis
+              </span>
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="flex justify-end items-center gap-2">
+            <Button
+              classList="skip-to-download-brochure py-1 text-sm text-neutral-600 rounded-lg transition-smooth"
+              variant="default">Skip</Button
+            >
+            <Button
+              variant="primary"
+              type="submit"
+              classList="py-1 text-sm rounded-lg transition-smooth"
+              >Submit Application</Button
+            >
+          </div>
+        </form>
+      </div>
+      <div class="p-8 text-center hidden" id="success-container">
+        <div class="max-w-md mx-auto">
+          <div
+            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <CheckCircle class="w-8 h-8 text-green-600" />
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-900 mb-2">
+            Thank You!
+          </h3>
+          <p class="text-neutral-600 mb-6">
+            Thanks for your time. We'll get back to you soon!
+          </p>
+          <Button variant="primary" classList="transition-smooth">
+            <Download class="size-4" />
+            Download Brochure</Button
+          >
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
   <script>
     import { initEmblas } from '../scripts/embla';
     import { initRevealObserver } from '../scripts/reveal';
@@ -152,43 +242,149 @@ const productData = { ...product, thumbs, images };
     import { initExpandingCards } from '../scripts/expanding-cards';
     import { initContactFormTriggers } from '../scripts/contact-form';
 
-    const initImageBox = () => {
-      const mainImg = document.getElementById('main-image') as HTMLImageElement;
-      const thumbs = [
-        ...document.querySelectorAll('.thumbnail-btn'),
-      ] as HTMLButtonElement[];
+    type PostalPincodeResponse = {
+      PostOffice: Array<{
+        District: string;
+        State: string;
+      }>;
+      Status: 'Error' | 'Success';
+    };
 
-      const updateActiveStates = (activeIndex: number) => {
-        thumbs.forEach((btn, index) => {
-          if (index === activeIndex) {
-            btn.classList.add('ring-primary');
-            btn.classList.remove('ring-transparent');
-            btn.setAttribute('aria-selected', 'true');
-          } else {
-            btn.classList.add('ring-transparent');
-            btn.classList.remove('ring-primary');
-            btn.setAttribute('aria-selected', 'false');
-          }
-        });
-      };
+    const resetStateAndCity = () => {
+      const stateInput = document.getElementById('state') as HTMLSelectElement;
+      const cityInput = document.getElementById('city') as HTMLSelectElement;
 
-      thumbs.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-          mainImg.src = btn.dataset.src!;
-          mainImg.srcset = btn.dataset.srcset!;
-          mainImg.alt = btn.dataset.alt!;
-          updateActiveStates(index);
+      stateInput.innerHTML = `<option value="" selected>Select your state</option>`;
+      cityInput.innerHTML = `<option value="" selected>Select your city</option>`;
+      stateInput.required = false;
+      cityInput.required = false;
+      stateInput.disabled = true;
+      cityInput.disabled = true;
+    };
+
+    const fillStateAndCity = (data: PostalPincodeResponse) => {
+      const stateInput = document.getElementById('state') as HTMLSelectElement;
+      const cityInput = document.getElementById('city') as HTMLSelectElement;
+
+      const states = [...new Set(data.PostOffice.map((el) => el.State))];
+      const cities = [...new Set(data.PostOffice.map((el) => el.District))];
+
+      const selectedState = data.PostOffice[0].State;
+      const selectedCity = data.PostOffice[0].District;
+
+      stateInput.required = true;
+      cityInput.required = true;
+      stateInput.disabled = false;
+      cityInput.disabled = false;
+
+      stateInput.innerHTML = states
+        .map((state) => {
+          return `<option value="${state}" ${state === selectedState ? 'selected' : ''}>${state}</option>`;
+        })
+        .join('');
+
+      cityInput.innerHTML = cities
+        .map((city) => {
+          return `<option value="${city}" ${city === selectedCity ? 'selected' : ''}>${city}</option>`;
+        })
+        .join('');
+    };
+
+    const showError = (
+      input: HTMLInputElement,
+      el: HTMLParagraphElement,
+      message: string
+    ) => {
+      input.dataset.error = 'true';
+      el.textContent = message;
+      el.classList.remove('hidden');
+      input.focus();
+    };
+
+    const hideError = (input: HTMLInputElement, el: HTMLParagraphElement) => {
+      input.dataset.error = 'false';
+      el.textContent = '';
+      el.classList.add('hidden');
+    };
+
+    const processPincode = async (
+      pincodeEl: HTMLInputElement,
+      errorMessageEl: HTMLParagraphElement
+    ) => {
+      try {
+        const res = await fetch(
+          `https://api.postalpincode.in/pincode/${pincodeEl.value}`
+        );
+        const data = (await res.json())[0] as PostalPincodeResponse;
+
+        if (data.Status === 'Success') {
+          fillStateAndCity(data);
+        } else {
+          showError(pincodeEl, errorMessageEl, 'Invalid Pincode');
+        }
+      } catch (err) {
+        showError(pincodeEl, errorMessageEl, 'Unable to validate Pincode');
+      }
+    };
+
+    const handleFormSubmit = async (event: SubmitEvent) => {
+      event.preventDefault();
+
+      const form = event.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const formPayload = Object.fromEntries(formData.entries());
+      console.log('The form data: ', formPayload);
+      try {
+        const response = await fetch('/api/submit-form', {
+          method: 'POST',
+          body: formPayload,
         });
-      });
+        const formContainer = document.getElementById(
+          'form-container'
+        ) as HTMLDivElement;
+
+        formContainer.classList.add('hidden');
+        const successContainer = document.getElementById(
+          'success-container'
+        ) as HTMLDivElement;
+        successContainer?.classList.remove('hidden');
+      } catch (err) {
+        console.error('Error processing form submission:', err);
+      } finally {
+      }
     };
 
     document.addEventListener('DOMContentLoaded', () => {
       initTabManager();
-      initImageBox();
       initEmblas();
       initExpandingCards();
       initRevealObserver();
       initContactFormTriggers();
+
+      const pincodeInput = document.getElementById(
+        'pincode'
+      ) as HTMLInputElement;
+      const errorMessage = pincodeInput?.parentElement?.querySelector(
+        '.error-message'
+      ) as HTMLParagraphElement;
+
+      pincodeInput?.addEventListener('blur', () => {
+        resetStateAndCity();
+
+        if (pincodeInput.checkValidity()) {
+          hideError(pincodeInput, errorMessage);
+          processPincode(pincodeInput, errorMessage);
+        } else {
+          showError(
+            pincodeInput,
+            errorMessage,
+            'Please enter a 6 digit Pincode'
+          );
+        }
+      });
+
+      const form = document.getElementById('contact-form') as HTMLFormElement;
+      form?.addEventListener('submit', handleFormSubmit);
     });
   </script>
 </Layout>
