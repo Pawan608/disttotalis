@@ -139,16 +139,16 @@ const joiningDetails = [
         <div class="tab-pane p-4" data-tab="joining-details">
           <p class="text-xl font-semibold mb-6">Joining Detail</p>
           <table
-            class="w-full max-w-2xl mx-auto border-gray-300 border-collapse text-left"
+            class="w-full max-w-2xl mx-auto border-neutral-300 border-collapse text-left"
           >
             <tbody>
               {
                 joiningDetails.map(({ label, value }) => (
-                  <tr class="border-b last-of-type:border-none border-gray-300">
-                    <td class="font-semibold py-3 px-4 w-1/2 border-gray-300">
+                  <tr class="border-b last-of-type:border-none border-neutral-300">
+                    <td class="font-semibold py-3 px-4 w-1/2 border-neutral-300">
                       {label}
                     </td>
-                    <td class="text-gray-700 py-3 px-4">
+                    <td class="text-neutral-700 py-3 px-4">
                       {Array.isArray(value)
                         ? value.map((v) => <div>{v}</div>)
                         : value}

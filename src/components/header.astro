@@ -53,7 +53,7 @@ const { pathname } = Astro.url;
       />
       <button
         id="menu-toggle"
-        class="text-gray-700 focus:outline-none transition-transform duration-300 hover:scale-110"
+        class="text-neutral-700 focus:outline-none transition-transform duration-300 hover:scale-110"
         aria-label="Toggle menu"
       >
         <svg
@@ -73,7 +73,7 @@ const { pathname } = Astro.url;
 
     <!-- Desktop Links -->
     <div class="hidden md:flex gap-6 items-center">
-      <ul class="flex gap-2 text-gray-700 font-medium">
+      <ul class="flex gap-2 text-neutral-700 font-medium">
         {
           links.map(({ href, label, desktop, hasSub }) => {
             if (!desktop) return null;
@@ -82,7 +82,7 @@ const { pathname } = Astro.url;
               return (
                 <li class="relative">
                   <details class="group peer">
-                    <summary class="flex items-center justify-between gap-1 cursor-pointer px-3 py-2 text-sm font-medium text-gray-700 rounded-lg transition hover:bg-gray-50 hover:text-primary">
+                    <summary class="flex items-center justify-between gap-1 cursor-pointer px-3 py-2 text-sm font-medium text-neutral-700 rounded-lg transition hover:bg-neutral-50 hover:text-primary">
                       Products
                       <svg
                         class="w-4 h-4 transition-transform group-open:rotate-180"
@@ -103,7 +103,7 @@ const { pathname } = Astro.url;
                       <ul class="py-2">
                         <li class="group relative">
                           <details class="group">
-                            <summary class="flex justify-between items-center px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-50">
+                            <summary class="flex justify-between items-center px-4 py-2 text-sm text-neutral-700 cursor-pointer hover:bg-neutral-50">
                               Sliding
                               <svg
                                 class="w-4 h-4 transition-transform group-open:rotate-90"
@@ -124,7 +124,7 @@ const { pathname } = Astro.url;
                                 <li>
                                   <a
                                     href={href}
-                                    class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                                    class="block px-4 py-1 text-sm text-neutral-700 hover:bg-neutral-100 rounded"
                                   >
                                     {label}
                                   </a>
@@ -136,7 +136,7 @@ const { pathname } = Astro.url;
 
                         <li class="group relative">
                           <details class="group">
-                            <summary class="flex justify-between items-center px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-50">
+                            <summary class="flex justify-between items-center px-4 py-2 text-sm text-neutral-700 cursor-pointer hover:bg-neutral-50">
                               Casement
                               <svg
                                 class="w-4 h-4 transition-transform group-open:rotate-90"
@@ -157,7 +157,7 @@ const { pathname } = Astro.url;
                                 <li>
                                   <a
                                     href={href}
-                                    class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                                    class="block px-4 py-1 text-sm text-neutral-700 hover:bg-neutral-100 rounded"
                                   >
                                     {label}
                                   </a>
@@ -177,7 +177,7 @@ const { pathname } = Astro.url;
               <li>
                 <a
                   href={href}
-                  class={`block px-3 py-2 text-sm transition-colors duration-200 ${pathname === href ? 'text-primary font-semibold' : 'text-gray-700 hover:text-primary'}`}
+                  class={`block px-3 py-2 text-sm transition-colors duration-200 ${pathname === href ? 'text-primary font-semibold' : 'text-neutral-700 hover:text-primary'}`}
                 >
                   {label}
                 </a>
@@ -220,7 +220,7 @@ const { pathname } = Astro.url;
     <!-- Close Button -->
     <button
       id="menu-close"
-      class="absolute top-6 right-6 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+      class="absolute top-6 right-6 text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
       aria-label="Close menu"
     >
       <X class="size-6" stroke-width={1.25} />
