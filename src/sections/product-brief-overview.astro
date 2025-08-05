@@ -1,5 +1,76 @@
 ---
 import SectionHeading from '../components/section-heading.astro';
+
+import airTightness from '../assets/air-tightness.svg';
+import glassRange from '../assets/glass-range.svg';
+import maxSashWidth from '../assets/max-sash-width.svg';
+import maxSashHeight from '../assets/max-sash-height.svg';
+import waterTightness from '../assets/water-tightness.svg';
+import windLoad from '../assets/wind-load.svg';
+
+const productSpecs = [
+  {
+    img: maxSashHeight.src,
+    alt: 'Max Sash Height',
+    label: 'Max Sash Height',
+    value: '2400 mm',
+  },
+  {
+    img: maxSashWidth.src,
+    alt: 'Max Sash Width',
+    label: 'Max Sash Width',
+    value: '1050 mm',
+  },
+  {
+    img: glassRange.src,
+    alt: 'Glass Range',
+    label: 'Glass Range',
+    value: '5mm - 8mm',
+  },
+];
+
+const performanceParams = [
+  {
+    img: windLoad.src,
+    alt: 'Wind Load',
+    label: 'Wind load',
+    value: '1.6 kpa',
+    caption: 'As per class 4A (BS EN12210 : 2000)',
+  },
+  {
+    img: airTightness.src,
+    alt: 'Air Tightness',
+    label: 'Air Tightness',
+    value: '450 Pa',
+    caption: 'As per class 2 (BS EN12207 : 2000)',
+  },
+  {
+    img: waterTightness.src,
+    alt: 'Water Tightness',
+    label: 'Water tightness',
+    value: '250 Pa',
+    caption: 'As per class 4A (BS EN12207 : 2000)',
+  },
+];
+
+const joiningDetails = [
+  {
+    label: 'WIDTH ON JAMB',
+    value: ['Frame 2T-39mm', 'Frame 3T-75mm'],
+  },
+  {
+    label: 'FRAME CORNER JOINT',
+    value: '45°',
+  },
+  {
+    label: 'SHUTTER CORNER JOINT',
+    value: '90°',
+  },
+  {
+    label: 'SIGHT LINE',
+    value: '30mm',
+  },
+];
 ---
 
 <section id="brief-overview">
@@ -31,13 +102,63 @@ import SectionHeading from '../components/section-heading.astro';
       </div>
 
       <div
-        class="tab-content h-96 border-gray-200 border shadow-sm text-left p-4 mt-4 rounded-2xl"
+        class="tab-content border-neutral-200 border shadow-sm text-left p-4 mt-4 rounded-2xl"
       >
         <div class="tab-pane p-4" data-tab="technical-specs">
           <p class="text-xl font-semibold">Product Specifications</p>
+          <div class="flex flex-wrap justify-around gap-8 pt-12 pb-4">
+            {
+              productSpecs.map(({ img, alt, label, value }) => (
+                <article class="text-center">
+                  <img src={img} alt={alt} class="h-40 mx-auto" />
+                  <h3 class="font-semibold text-lg mt-4">{label}</h3>
+                  <p class="text-neutral-600 text-base">{value}</p>
+                </article>
+              ))
+            }
+          </div>
         </div>
-        <div class="tab-pane" data-tab="perf-parameters">Bello</div>
-        <div class="tab-pane" data-tab="joining-details">Trello</div>
+
+        <div class="tab-pane p-4" data-tab="perf-parameters">
+          <p class="text-xl font-semibold">Performance Parameters</p>
+          <div class="flex flex-wrap justify-around gap-8 pt-12 pb-4">
+            {
+              performanceParams.map(({ img, alt, label, value, caption }) => (
+                <article class="text-center max-w-xs">
+                  <img src={img} alt={alt} class="h-40 mx-auto" />
+                  <h3 class="font-semibold text-lg mt-4">
+                    {label} <span class="text-primary font-bold">{value}</span>
+                  </h3>
+                  <p class="text-sm text-neutral-500">{caption}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="tab-pane p-4" data-tab="joining-details">
+          <p class="text-xl font-semibold mb-6">Joining Detail</p>
+          <table
+            class="w-full max-w-2xl mx-auto border-gray-300 border-collapse text-left"
+          >
+            <tbody>
+              {
+                joiningDetails.map(({ label, value }) => (
+                  <tr class="border-b last-of-type:border-none border-gray-300">
+                    <td class="font-semibold py-3 px-4 w-1/2 border-gray-300">
+                      {label}
+                    </td>
+                    <td class="text-gray-700 py-3 px-4">
+                      {Array.isArray(value)
+                        ? value.map((v) => <div>{v}</div>)
+                        : value}
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

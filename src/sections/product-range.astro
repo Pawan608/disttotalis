@@ -132,7 +132,7 @@ const productsByCategory = {
         {
           categories.map((tab, i) => (
             <button
-              class="tab-button text-sm text-gray-600 data-[active=true]:text-white transition-all duration-300 px-4 lg:px-6 lg:py-4 cursor-pointer hover:text-gray-900 py-3 grow leading-none rounded-md data-[active=true]:font-medium"
+              class="tab-button text-sm text-neutral-600 data-[active=true]:text-white transition-all duration-300 px-4 lg:px-6 lg:py-4 cursor-pointer hover:text-neutral-900 py-3 grow leading-none rounded-md data-[active=true]:font-medium"
               data-tab={tab.id}
               data-active={i === 0}
             >
@@ -155,13 +155,13 @@ const productsByCategory = {
           >
             <div class="hidden md:flex max-w-6xl mx-auto gap-2 justify-end px-4">
               <button
-                class="embla-prev text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
+                class="embla-prev text-neutral-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-neutral-400 cursor-pointer"
                 aria-label="Previous product"
               >
                 <CircleArrowLeft class="size-10 stroke-[1.5]" />
               </button>
               <button
-                class="embla-next text-gray-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-gray-400 cursor-pointer"
+                class="embla-next text-neutral-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-neutral-400 cursor-pointer"
                 aria-label="Next product"
               >
                 <CircleArrowRight class="size-10 stroke-[1.5]" />

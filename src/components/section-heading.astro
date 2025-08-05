@@ -3,13 +3,13 @@ import { cx } from '../scripts/cx';
 const { title, description, headingClass, descriptionClass } = Astro.props;
 
 const headingClassList = cx(
-  'text-[clamp(1.75rem,4vw,2.75rem)] text-gray-800 font-semibold',
+  'text-[clamp(1.75rem,4vw,2.75rem)] text-neutral-800 font-semibold',
   'reveal',
   headingClass
 );
 
 const descriptionClassList = cx(
-  'text-[clamp(1rem,2vw,1.25rem)] text-gray-700 mt-2',
+  'text-[clamp(1rem,2vw,1.25rem)] text-neutral-700 mt-2',
   'reveal',
   descriptionClass
 );
