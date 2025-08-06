@@ -1,15 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import SectionHeading from '../components/section-heading.astro';
-import flushImg from '../assets/building.jpeg';
-import leverImg from '../assets/building.jpeg';
-import pullImg from '../assets/building.jpeg';
+import type { ProductItem } from '../types';
 
-const handleOptions = [
-  { title: 'Flush Lock', image: flushImg, alt: 'Flush Lock Handle' },
-  { title: 'Lever Handle', image: leverImg, alt: 'Lever Handle' },
-  { title: 'Pull Handle', image: pullImg, alt: 'Pull Handle' },
-];
+type Props = {
+  product: ProductItem;
+};
+
+const { product } = Astro.props;
 ---
 
 <section class="pt-16" id="handle-options">
@@ -22,7 +20,7 @@ const handleOptions = [
 
   <div class="max-w-6xl mx-auto flex flex-wrap gap-6 px-4 justify-center">
     {
-      handleOptions.map(({ title, image, alt }) => (
+      product.handleOptions.map(({ title, image, alt }) => (
         <div class="relative">
           <article
             class="w-xs transition-all group duration-300 rounded-2xl overflow-hidden shadow-sm border border-neutral-200 bg-white

@@ -9,22 +9,39 @@ import EmblaCarousel from 'embla-carousel';
  *  - `.embla-container`: the flex wrapper for slides
  *  - `.embla-prev` / `.embla-next`: optional navigation buttons
  */
+
+const emblaInstances: Map<string, EmblaCarouselType> = new Map();
+let idCounter = 0;
+
+let debounceTimer: number | null = null;
+function debounceInit() {
+  if (debounceTimer !== null) clearTimeout(debounceTimer);
+  debounceTimer = window.setTimeout(() => {
+    initEmblas();
+  }, 150); // 100ms delay
+}
+
 export function initEmblas(): void {
   const roots = document.querySelectorAll<HTMLElement>('.embla');
 
   roots.forEach((root) => {
+    const id = getOrAssignId(root);
+
     const viewport = root.querySelector<HTMLElement>('.embla-viewport');
     const prevBtn = root.querySelector<HTMLButtonElement>('.embla-prev');
     const nextBtn = root.querySelector<HTMLButtonElement>('.embla-next');
 
-    // Skip if essential viewport is missing
     if (!viewport) return;
 
-    // Create a new Embla instance on this root
-    const embla: EmblaCarouselType = EmblaCarousel(viewport, {
-      align: 'start',
+    const alreadyInit = emblaInstances.get(id);
+    if (alreadyInit) {
+      alreadyInit.destroy();
+    }
+
+    const embla = EmblaCarousel(viewport, {
+      // align: 'start',
       skipSnaps: false,
-      containScroll: 'trimSnaps',
+      // containScroll: 'trimSnaps',
     });
 
     const updateButtons = () => {
@@ -32,16 +49,44 @@ export function initEmblas(): void {
       if (nextBtn) nextBtn.disabled = !embla.canScrollNext();
     };
 
-    embla.on('select', updateButtons);
     embla.on('init', updateButtons);
+    embla.on('select', updateButtons);
 
-    // Hook up optional nav buttons if present
     prevBtn?.addEventListener('click', () => embla.scrollPrev());
     nextBtn?.addEventListener('click', () => embla.scrollNext());
 
-    // Optional: flag root as initialized
+    emblaInstances.set(id, embla);
     root.dataset.emblaInitialized = 'true';
+
+    // Only set up observers once per root
+    if (!root.dataset.emblaObserverAttached) {
+      root.dataset.emblaObserverAttached = 'true';
+
+      const resizeObserver = new ResizeObserver(() => {
+        if (isVisible(root)) debounceInit();
+      });
+      resizeObserver.observe(root);
+
+      const mutationObserver = new MutationObserver(() => {
+        if (isVisible(root)) debounceInit();
+      });
+      mutationObserver.observe(root, {
+        attributes: true,
+        attributeFilter: ['class', 'style'],
+      });
+    }
   });
+}
+
+function getOrAssignId(el: HTMLElement): string {
+  if (!el.dataset.emblaId) {
+    el.dataset.emblaId = `embla-${idCounter++}`;
+  }
+  return el.dataset.emblaId;
+}
+
+function isVisible(el: HTMLElement): boolean {
+  return el.offsetParent !== null;
 }
 
 /**

@@ -2,51 +2,14 @@
 import { ChevronDown } from '@lucide/astro';
 import SectionHeading from '../components/section-heading.astro';
 
-import type { AccordionItem } from '../types';
 import Button from '../components/button.astro';
+import type { ProductItem } from '../types';
 
-const faqItems: AccordionItem[] = [
-  {
-    question: 'What is the warranty period for TOT SD NEXGEN windows?',
-    answer:
-      'We provide a comprehensive 25-year warranty on our TOT SD NEXGEN sliding windows, covering manufacturing defects, hardware functionality, and weather sealing performance.',
-  },
-  {
-    question: 'Are these windows suitable for high-rise buildings?',
-    answer:
-      'Yes, TOT SD NEXGEN windows are engineered for high wind loads and structural safety, making them suitable for high-rise buildings.',
-  },
-  {
-    question: 'What glass options are available?',
-    answer:
-      'We offer a variety of glass types, including clear, tinted, frosted, and laminated options depending on your privacy and insulation needs.',
-  },
-  {
-    question: 'How long does installation take?',
-    answer:
-      'Installation typically takes 2–5 hours per unit depending on site readiness and number of windows.',
-  },
-  {
-    question: 'Can I customize the window dimensions?',
-    answer:
-      'Yes, we support fully customized dimensions to suit your architectural requirements.',
-  },
-  {
-    question: 'What maintenance is required?',
-    answer:
-      'Routine cleaning and occasional lubrication of tracks is sufficient. No intensive maintenance needed.',
-  },
-  {
-    question: 'Are the windows energy efficient?',
-    answer:
-      'Yes, with multiple glass options and precision sealing, they significantly reduce energy loss.',
-  },
-  {
-    question: 'What colors and finishes are available?',
-    answer:
-      'A range of powder-coated and anodized finishes are available in various neutral and custom colors.',
-  },
-];
+type Props = {
+  product: ProductItem;
+};
+
+const { product } = Astro.props;
 ---
 
 <section id="faq">
@@ -60,7 +23,7 @@ const faqItems: AccordionItem[] = [
         class="flex text-left flex-col gap-2 md:gap-4 bg-neutral-50 p-2 md:p-4"
       >
         {
-          faqItems.map((item) => (
+          product.faqs.map((item) => (
             <div class="overflow-hidden rounded-2xl border border-neutral-200 text-neutral-700 bg-white">
               <button class="peer group/trigger flex w-full justify-between items-center px-4 py-2">
                 <h3 class="text-neutral-600 font-medium md:text-lg text-left">
@@ -88,8 +51,8 @@ const faqItems: AccordionItem[] = [
           </p>
         </div>
         <div class="flex gap-4 items-center justify-center mb-2">
-          <Button variant="primary" reveal="true">Talk to An Expert</Button>
-          <Button variant="default" reveal="true">Send Inquiry</Button>
+          <Button variant="primary" reveal={true}>Talk to An Expert</Button>
+          <Button variant="default" reveal={true}>Send Inquiry</Button>
         </div>
       </div>
     </div>

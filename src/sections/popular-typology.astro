@@ -1,39 +1,47 @@
 ---
 import SectionHeading from '../components/section-heading.astro';
-import oneTrackTwoShutter from '../assets/1-track-2-shutter.png';
-import twoTrackThreeShutter from '../assets/2-track-3-shutter.png';
-import threeTrackThreeShutter from '../assets/3-track-3-shutter.png';
-import { Image } from 'astro:assets';
 
-const configurations = [
-  {
-    img: threeTrackThreeShutter,
-    title: '3 Track 3 Shutter',
-  },
-  {
-    img: oneTrackTwoShutter,
-    title: '1 Track 2 Shutter',
-  },
-  {
-    img: twoTrackThreeShutter,
-    title: '2 Track 3 Shutter',
-  },
-];
+import { Image } from 'astro:assets';
+import { CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
+import type { ProductItem } from '../types';
+
+type Props = {
+  product: ProductItem;
+};
+
+const { product } = Astro.props;
 ---
 
 <section id="popular-typology">
-  <div class="max-w-6xl mx-auto pt-16 text-center">
+  <div class="max-w-6xl mx-auto pt-16 text-center px-4">
     <SectionHeading
       title="Popular Typology"
       description="Choose from our most popular window configurations designed for different architectural needs"
     />
 
     <!-- Embla Carousel Starts -->
-    <div class="embla relative pt-8">
+    <div class="embla relative my-4">
+      <!-- Buttons -->
+      <div class="hidden md:flex max-w-6xl mx-auto gap-2 justify-end px-4">
+        <button
+          class="embla-prev text-neutral-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-neutral-400 cursor-pointer"
+          aria-label="Previous product"
+        >
+          <CircleArrowLeft class="size-10 stroke-[1.5]" />
+        </button>
+        <button
+          class="embla-next text-neutral-600 hover:text-primary disabled:cursor-not-allowed transition-colors disabled:text-neutral-400 cursor-pointer"
+          aria-label="Next product"
+        >
+          <CircleArrowRight class="size-10 stroke-[1.5]" />
+        </button>
+      </div>
+
+      <!-- Embla Viewport -->
       <div class="embla-viewport overflow-hidden">
         <div class="embla-container flex gap-4">
           {
-            configurations.map(({ img, title }) => (
+            product.configurations.map(({ img, title }) => (
               <div class="embla-slide min-w-[80%] sm:min-w-[33%] flex-shrink-0 flex flex-col items-center w-full">
                 <div class="grow flex items-center">
                   <Image src={img} alt={title} height={192} class="mb-2" />
@@ -44,16 +52,6 @@ const configurations = [
           }
         </div>
       </div>
-
-      <!-- Navigation Buttons -->
-      <button
-        class="embla-prev absolute top-1/2 left-0 -translate-y-1/2 z-10 px-3 py-2 bg-white shadow-md rounded-full"
-        >←</button
-      >
-      <button
-        class="embla-next absolute top-1/2 right-0 -translate-y-1/2 z-10 px-3 py-2 bg-white shadow-md rounded-full"
-        >→</button
-      >
     </div>
   </div>
 </section>

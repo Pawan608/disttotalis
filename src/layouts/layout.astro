@@ -3,6 +3,7 @@ import Header from '../components/header.astro';
 import Footer from '../components/footer.astro';
 
 import '../styles/global.css';
+import ContactUsForm from '../components/contact-us-form.astro';
 
 const { title, htmlClassName, description } = Astro.props;
 ---
@@ -24,5 +25,17 @@ const { title, htmlClassName, description } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <ContactUsForm />
   </body>
+  <script>
+    import {
+      initContactForm,
+      initContactFormTriggers,
+    } from '../scripts/contact-form';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initContactFormTriggers();
+      initContactForm({ contactFormPrefix: 'cmf', formId: 'contact-form' });
+    });
+  </script>
 </html>

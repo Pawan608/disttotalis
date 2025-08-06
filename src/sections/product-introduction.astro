@@ -3,10 +3,10 @@ import Button from '../components/button.astro';
 import { Star } from '@lucide/astro';
 import { getImage } from 'astro:assets';
 import { cx } from '../scripts/cx';
-import type { Product } from '../lib/products';
+import type { ProductItem } from '../types';
 
 type Props = {
-  product: Product;
+  product: ProductItem;
 };
 
 const { product } = Astro.props;
@@ -98,7 +98,7 @@ const productData = { ...product, thumbs, images };
           <p
             class="uppercase text-xs text-neutral-500 border border-neutral-400 px-2 bg-neutral-50 rounded-full max-w-fit leading-none py-0.5"
           >
-            Sliding Window
+            {product.category}
           </p>
           <h1 class="text-4xl font-bold text-neutral-900">{product.name}</h1>
           <p class="text-base text-neutral-600">{product.description}</p>

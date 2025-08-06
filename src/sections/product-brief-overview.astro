@@ -1,76 +1,9 @@
 ---
-import SectionHeading from '../components/section-heading.astro';
-
-import airTightness from '../assets/air-tightness.svg';
-import glassRange from '../assets/glass-range.svg';
-import maxSashWidth from '../assets/max-sash-width.svg';
-import maxSashHeight from '../assets/max-sash-height.svg';
-import waterTightness from '../assets/water-tightness.svg';
-import windLoad from '../assets/wind-load.svg';
-
-const productSpecs = [
-  {
-    img: maxSashHeight.src,
-    alt: 'Max Sash Height',
-    label: 'Max Sash Height',
-    value: '2400 mm',
-  },
-  {
-    img: maxSashWidth.src,
-    alt: 'Max Sash Width',
-    label: 'Max Sash Width',
-    value: '1050 mm',
-  },
-  {
-    img: glassRange.src,
-    alt: 'Glass Range',
-    label: 'Glass Range',
-    value: '5mm - 8mm',
-  },
-];
-
-const performanceParams = [
-  {
-    img: windLoad.src,
-    alt: 'Wind Load',
-    label: 'Wind load',
-    value: '1.6 kpa',
-    caption: 'As per class 4A (BS EN12210 : 2000)',
-  },
-  {
-    img: airTightness.src,
-    alt: 'Air Tightness',
-    label: 'Air Tightness',
-    value: '450 Pa',
-    caption: 'As per class 2 (BS EN12207 : 2000)',
-  },
-  {
-    img: waterTightness.src,
-    alt: 'Water Tightness',
-    label: 'Water tightness',
-    value: '250 Pa',
-    caption: 'As per class 4A (BS EN12207 : 2000)',
-  },
-];
-
-const joiningDetails = [
-  {
-    label: 'WIDTH ON JAMB',
-    value: ['Frame 2T-39mm', 'Frame 3T-75mm'],
-  },
-  {
-    label: 'FRAME CORNER JOINT',
-    value: '45°',
-  },
-  {
-    label: 'SHUTTER CORNER JOINT',
-    value: '90°',
-  },
-  {
-    label: 'SIGHT LINE',
-    value: '30mm',
-  },
-];
+import type { ProductItem } from '../types';
+type Props = {
+  product: ProductItem;
+};
+const { product } = Astro.props;
 ---
 
 <section id="brief-overview">
@@ -108,7 +41,7 @@ const joiningDetails = [
           <p class="text-xl font-semibold">Product Specifications</p>
           <div class="flex flex-wrap justify-around gap-8 pt-12 pb-4">
             {
-              productSpecs.map(({ img, alt, label, value }) => (
+              product.specs.map(({ img, alt, label, value }) => (
                 <article class="text-center">
                   <img src={img} alt={alt} class="h-40 mx-auto" />
                   <h3 class="font-semibold text-lg mt-4">{label}</h3>
@@ -123,7 +56,7 @@ const joiningDetails = [
           <p class="text-xl font-semibold">Performance Parameters</p>
           <div class="flex flex-wrap justify-around gap-8 pt-12 pb-4">
             {
-              performanceParams.map(({ img, alt, label, value, caption }) => (
+              product.performance.map(({ img, alt, label, value, caption }) => (
                 <article class="text-center max-w-xs">
                   <img src={img} alt={alt} class="h-40 mx-auto" />
                   <h3 class="font-semibold text-lg mt-4">
@@ -143,7 +76,7 @@ const joiningDetails = [
           >
             <tbody>
               {
-                joiningDetails.map(({ label, value }) => (
+                product.joining.map(({ label, value }) => (
                   <tr class="border-b last-of-type:border-none border-neutral-300">
                     <td class="font-semibold py-3 px-4 w-1/2 border-neutral-300">
                       {label}

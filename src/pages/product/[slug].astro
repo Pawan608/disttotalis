@@ -10,6 +10,8 @@ import ProductIntroduction from '../../sections/product-introduction.astro';
 import WhyChooseUs from '../../sections/why-choose-us.astro';
 import ProductBriefOverview from '../../sections/product-brief-overview.astro';
 import PopularTypology from '../../sections/popular-typology.astro';
+import FloatingContact from '../../components/floating-contact.astro';
+import ContactUsForm from '../../components/contact-us-form.astro';
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -26,10 +28,10 @@ const { product } = Astro.props;
   description={`Totalis By Hindalco - ${product.name} - ${product.description}`}
 >
   <div
-    class="h-12 border-neutral-200 sticky top-16 bg-white z-10 flex items-center justify-center"
+    class="h-12 border-neutral-200 sticky top-16 bg-white z-20 flex items-center justify-center"
   >
     <div
-      class="w-full text-neutral-500 flex items-center px-4 max-w-6xl text-sm font-light"
+      class="w-full text-neutral-500 flex items-center px-4 max-w-6xl text-xs font-light"
     >
       <span class="font-medium flex items-center gap-1 text-neutral-700">
         <span>Home</span>
@@ -37,19 +39,20 @@ const { product } = Astro.props;
       <ChevronRight class="size-4 mx-0.5" />
       <span>Product</span>
       <ChevronRight class="size-4 mx-0.5" />
-      <span>Sliding Windows</span>
+      <span class="capitalize">{product.category} windows</span>
       <ChevronRight class="size-4 mx-0.5" />
       <span class="text-secondary font-normal">{product.name}</span>
     </div>
   </div>
 
   <ProductIntroduction product={product} />
-  <ProductBriefOverview />
-  <PopularTypology />
-  <HandleOptions />
-  <Faq />
+  <ProductBriefOverview product={product} />
+  <PopularTypology product={product} />
+  <HandleOptions product={product} />
+  <Faq product={product} />
   <ProductCollection />
   <WhyChooseUs />
+  <FloatingContact />
 
   <CtaEnd />
 
@@ -60,10 +63,6 @@ const { product } = Astro.props;
     import { initTabManager } from '../../scripts/tab';
     import { initImageBox } from '../../scripts/image-box';
     import { initEmblas } from '../../scripts/embla';
-    import {
-      initContactForm,
-      initContactFormTriggers,
-    } from '../../scripts/contact-form';
 
     document.addEventListener('DOMContentLoaded', () => {
       initImageBox();
@@ -72,7 +71,6 @@ const { product } = Astro.props;
       initExpandingCards();
       initTabManager();
       initEmblas();
-      initContactFormTriggers();
     });
   </script>
 </Layout>

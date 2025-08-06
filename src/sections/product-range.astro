@@ -2,117 +2,8 @@
 import { CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
 import SectionHeading from '../components/section-heading.astro';
-import demoImage from '../assets/placeholder-product.jpg';
-import demoImage2 from '../assets/placeholder-product-2.jpg';
-import demoImage3 from '../assets/placeholder-product-3.jpg';
-import demoImage4 from '../assets/placeholder-product-4.jpg';
 
-// Product categories
-const categories = [
-  { id: 'sliding', name: 'Sliding' },
-  { id: 'casement', name: 'Casement' },
-  { id: 'railing', name: 'Railing' },
-];
-
-// Product data organized by category
-const productsByCategory = {
-  sliding: [
-    {
-      id: 1,
-      name: 'TOT SD LITE',
-      subtitle: 'total Service 00',
-      image: demoImage,
-    },
-    {
-      id: 2,
-      name: 'TOT SD PLUS',
-      subtitle: 'total Service 00',
-      image: demoImage2,
-    },
-    {
-      id: 3,
-      name: 'TOT SD NEXGEN',
-      subtitle: 'total Service 00',
-      image: demoImage3,
-    },
-    {
-      id: 4,
-      name: 'TOT SD PREMIUM',
-      subtitle: 'total Service 00',
-      image: demoImage4,
-    },
-    {
-      id: 5,
-      name: 'TOT SD ULTRA',
-      subtitle: 'total Service 00',
-      image: demoImage,
-    },
-  ],
-  casement: [
-    {
-      id: 6,
-      name: 'CM CLASSIC',
-      subtitle: 'casemate Series A1',
-      image: demoImage,
-    },
-    {
-      id: 7,
-      name: 'CM MODERN',
-      subtitle: 'casemate Series B2',
-      image: demoImage,
-    },
-    {
-      id: 8,
-      name: 'CM ELITE',
-      subtitle: 'casemate Series C3',
-      image: demoImage,
-    },
-  ],
-  railing: [
-    {
-      id: 9,
-      name: 'RAIL SECURE',
-      subtitle: 'railing Type X1',
-      image: demoImage,
-    },
-    {
-      id: 10,
-      name: 'RAIL PREMIUM',
-      subtitle: 'railing Type Y2',
-      image: demoImage,
-    },
-    {
-      id: 11,
-      name: 'RAIL LUXURY',
-      subtitle: 'railing Type Z3',
-      image: demoImage,
-    },
-    {
-      id: 12,
-      name: 'RAIL MASTER',
-      subtitle: 'railing Type A4',
-      image: demoImage,
-    },
-    {
-      id: 13,
-      name: 'RAIL SUPREME',
-      subtitle: 'railing Type B5',
-      image: demoImage,
-    },
-    {
-      id: 14,
-      name: 'RAIL ULTRA',
-      subtitle: 'railing Type C6',
-      image: demoImage,
-    },
-    {
-      id: 15,
-      name: 'RAIL NEXGEN',
-      subtitle: 'railing Type D7',
-      image: demoImage,
-    },
-  ],
-};
+import { productCategories, productsByCategory } from '../lib/products';
 ---
 
 <section id="product-range" class="w-full mb-8">
@@ -130,7 +21,7 @@ const productsByCategory = {
         class="tab-glider rounded-full flex gap-2 bg-neutral-100 relative px-1 before:bg-secondary before:shadow-secondary/60 before:rounded-full"
       >
         {
-          categories.map((tab, i) => (
+          productCategories.map((tab, i) => (
             <button
               class="tab-button text-sm text-neutral-600 data-[active=true]:text-white transition-all duration-300 px-4 lg:px-6 lg:py-4 cursor-pointer hover:text-neutral-900 py-3 grow leading-none rounded-md data-[active=true]:font-medium"
               data-tab={tab.id}
@@ -171,12 +62,12 @@ const productsByCategory = {
             <div class="embla-viewport">
               <div class="embla-container px-4">
                 {products.map((p) => (
-                  <div class="flex-none embla-slide md:w-sm w-xs pl-4 lg:pl-6">
-                    <a href="/product/nexgen" class="group block">
+                  <div class="flex-none embla-slide md:w-sm w-xs pl-4 lg:pl-6 last:mr-4">
+                    <a href={`product/${p.slug}`} class="group block">
                       <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 z-10" />
                         <Image
-                          src={p.image}
+                          src={p.images[0]}
                           alt={p.name}
                           loading="lazy"
                           decoding="async"
@@ -188,8 +79,8 @@ const productsByCategory = {
                           <h3 class="text-white text-lg md:text-xl font-bold mb-1">
                             {p.name}
                           </h3>
-                          <p class="text-white/80 text-xs md:text-sm">
-                            {p.subtitle}
+                          <p class="text-white/80 text-xs md:text-sm max-w-[calc(100%-60px)]">
+                            {p.shortDescription}
                           </p>
                         </div>
                         <div class="absolute bottom-4 right-4 z-20">

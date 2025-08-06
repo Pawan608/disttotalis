@@ -4,6 +4,7 @@ import Footer from '../components/footer.astro';
 
 import '../styles/global.css';
 import { cx } from '../scripts/cx';
+import ContactUsForm from '../components/contact-us-form.astro';
 
 const {
   frontmatter: { title, htmlClassName, description },
@@ -28,5 +29,17 @@ const {
       <slot />
     </main>
     <Footer />
+    <ContactUsForm />
   </body>
+  <script>
+    import {
+      initContactForm,
+      initContactFormTriggers,
+    } from '../scripts/contact-form';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initContactFormTriggers();
+      initContactForm({ contactFormPrefix: 'cmf', formId: 'contact-form' });
+    });
+  </script>
 </html>
