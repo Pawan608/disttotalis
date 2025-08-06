@@ -17,6 +17,11 @@ import {
   ArrowUp,
 } from '@lucide/astro';
 
+import placeholder1 from '../assets/placeholder-product.jpg';
+import placeholder2 from '../assets/placeholder-product-2.jpg';
+import placeholder3 from '../assets/placeholder-product-3.jpg';
+import placeholder4 from '../assets/placeholder-product-4.jpg';
+
 import px1 from '../assets/px1.jpg';
 import px2 from '../assets/px2.jpg';
 import px3 from '../assets/px3.jpg';
@@ -109,6 +114,7 @@ export const products: ProductItem[] = [
     description:
       'Strong, stylish, and built to last — the TOT SD NEXGEN aluminium sliding doors and windows are designed for modern homes that demand both beauty and durability. Tested for performance, they bring you peace of mind along with long-lasting elegance.',
     images: [px1, px2, px3], // Replace with actual image imports
+    productRangeImage: placeholder1,
     features: [
       {
         icon: Lock,
@@ -263,6 +269,7 @@ export const products: ProductItem[] = [
     category: 'sliding',
     description:
       "Smart, sleek, and efficient — the TOT SD LITE aluminium sliding windows are designed for everyday modern living. With smooth operation, lasting durability, and cost efficiency, they bring comfort and style within everyone's reach.",
+    productRangeImage: placeholder2,
     images: [sdLite1, sdLite2, sdLite3], // Replace with actual image imports
     features: [
       {
@@ -389,6 +396,7 @@ export const products: ProductItem[] = [
     category: 'sliding',
     description:
       'Versatile, secure, and efficient — the TOT SD PLUS aluminium sliding windows are designed to adapt to every home. Offering advanced safety features and customizable options, they combine strength with style for modern living.',
+    productRangeImage: placeholder3,
     images: [sdPlus1, sdPlus2, sdPlus3], // Replace with actual image imports
     features: [
       {
@@ -526,6 +534,7 @@ export const products: ProductItem[] = [
     category: 'casement',
     description:
       'Reliable and stylish, the TOT CS aluminium casement windows are built for lasting performance, with multiple color and style options to suit your home.',
+    productRangeImage: px1,
     images: [cs1, cs2, cs3], // Replace with actual image imports
     features: [
       {
@@ -681,6 +690,7 @@ export const products: ProductItem[] = [
     category: 'casement',
     description:
       'Crafted for strength and style, the TOT CS PLUS aluminium casement windows are built to the highest standards. They combine durability, design flexibility, and reliable performance — making them the perfect choice for modern homes.',
+    productRangeImage: px1,
     images: [csPlus1, csPlus2, csPlus3], // Replace with actual image imports
     features: [
       {
@@ -841,6 +851,7 @@ export const products: ProductItem[] = [
     category: 'railing',
     description:
       'Strong, sleek, and dependable — the TOT RL 80 aluminium railing system combines safety with style, making it ideal for residential, commercial, and industrial applications.',
+    productRangeImage: px1,
     images: [rl80_1, rl80_2, rl80_3], // Replace with actual image imports
     features: [
       {
@@ -999,6 +1010,7 @@ export const products: ProductItem[] = [
     category: 'railing',
     description:
       'Engineered for impact and elegance, the TOT RL 125 aluminium railing system offers safety with design flexibility — perfect for premium spaces.',
+    productRangeImage: px1,
     images: [rl125_1, rl125_2, rl125_3], // Replace with actual image imports
     features: [
       {

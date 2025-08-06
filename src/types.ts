@@ -13,6 +13,7 @@ export interface ProductItem {
   category: ProductCategory;
   description: string;
   images: ImageMetadata[];
+  productRangeImage: ImageMetadata;
   features: { icon: AstroComponent; title: string; text: string }[];
   stats: { label: string; value: string; icon: AstroComponent }[];
   specs: { img: string; alt: string; label: string; value: string }[];

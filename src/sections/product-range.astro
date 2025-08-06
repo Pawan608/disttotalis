@@ -63,11 +63,11 @@ import { productCategories, productsByCategory } from '../lib/products';
               <div class="embla-container px-4">
                 {products.map((p) => (
                   <div class="flex-none embla-slide md:w-sm w-xs pl-4 lg:pl-6 last:mr-4">
-                    <a href={`product/${p.slug}`} class="group block">
+                    <a href={`/product/${p.slug}`} class="group block">
                       <div class="relative aspect-video rounded-2xl overflow-hidden mb-4">
                         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 z-10" />
                         <Image
-                          src={p.images[0]}
+                          src={p.productRangeImage}
                           alt={p.name}
                           loading="lazy"
                           decoding="async"

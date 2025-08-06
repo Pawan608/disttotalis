@@ -12,6 +12,7 @@ import ProductBriefOverview from '../../sections/product-brief-overview.astro';
 import PopularTypology from '../../sections/popular-typology.astro';
 import FloatingContact from '../../components/floating-contact.astro';
 import ContactUsForm from '../../components/contact-us-form.astro';
+import ProductRange from '../../sections/product-range.astro';
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -50,7 +51,8 @@ const { product } = Astro.props;
   <PopularTypology product={product} />
   <HandleOptions product={product} />
   <Faq product={product} />
-  <ProductCollection />
+  <!-- <ProductCollection /> -->
+  <ProductRange />
   <WhyChooseUs />
   <FloatingContact />
 
