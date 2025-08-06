@@ -177,7 +177,8 @@ const downloadBrochure = () => {
 };
 
 const skipToDownloadBrochure = () => {
-  hideModalForm();
+  if (getCmfModal() && getCmfModal().classList.contains('flex'))
+    hideModalForm();
   downloadBrochure();
 };
 

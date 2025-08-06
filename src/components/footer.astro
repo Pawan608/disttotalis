@@ -9,10 +9,12 @@ const currentYear = new Date().getFullYear();
 <footer class="text-footer-light py-10 text-sm bg-secondary">
   <div class="max-w-7xl mx-auto px-4 py-12">
     <!-- Top Section -->
-    <div class="flex flex-col lg:flex-row lg:justify-between gap-10">
+    <div
+      class="flex flex-col lg:flex-row lg:justify-between gap-8 md:pb-8 pb-4"
+    >
       <!-- Logo & Description -->
-      <div class="flex-1 max-w-md">
-        <div class="flex items-center gap-3 mb-4">
+      <div class="flex-1 max-w-4xl">
+        <div class="flex items-center gap-4 mb-4">
           <!-- <img src="/logo.svg" alt="Totalis Logo" class="h-10 w-auto" /> -->
           <p class="text-xl font-semibold hidden">TOTALIS</p>
           <a href="/" aria-label="Totalis Home">
@@ -29,15 +31,13 @@ const currentYear = new Date().getFullYear();
           </a>
         </div>
         <p class="mb-2">
-          Totalis – Doors and Windows by Hindalco, are crafted from eternally
-          recyclable aluminium and undergo rigorous testing against wind load,
-          water penetration, and air infiltration.
+          Totalis by Hindalco Industries Limited supplies tested and certified
+          aluminium extrusions and hardware components. Fabrication, assembling,
+          installation, servicing, and warranty of the finished window system
+          are the sole responsibility of the fabricator. Users acknowledge that
+          their contractual relationship is with the fabricator. Please contact
+          your fabricator for details on warranties and after-sales service
         </p>
-        <p class="mb-2">
-          This commitment to testing ensures that customers can place their
-          trust in the durability and reliability of Totalis products.
-        </p>
-        <a href="#" class="underline hover:text-primary">Read More</a>
       </div>
 
       <!-- Navigation -->
@@ -45,14 +45,17 @@ const currentYear = new Date().getFullYear();
         <div class="flex flex-col space-y-2">
           <a href="/" class="hover:text-primary">Home</a>
           <a href="/about" class="hover:text-primary">About us</a>
-          <a href="/services" class="hover:text-primary">Services</a>
-          <a href="/products" class="hover:text-primary">Products</a>
+          <!-- <a href="/services" class="hover:text-primary">Services</a> -->
+          <!-- <a href="/products" class="hover:text-primary">Products</a> -->
           <a href="/contact" class="hover:text-primary">Contact Us</a>
           <a href="/locate-us" class="hover:text-primary">Locate Us</a>
         </div>
         <div class="flex flex-col space-y-2">
-          <a href="#" class="hover:text-primary">Linkedin</a>
-          <a href="#" class="hover:text-primary">Twitter</a>
+          <a
+            href="https://in.linkedin.com/company/totalisbyhindalco"
+            class="hover:text-primary">Linkedin</a
+          >
+          <!-- <a href="#" class="hover:text-primary">Twitter</a> -->
         </div>
         <!-- <div class="flex flex-col space-y-2">
           <a href="/terms" class="hover:text-primary">Terms and Conditions</a>
@@ -63,10 +66,10 @@ const currentYear = new Date().getFullYear();
     <div
       class="border-t border-white/20 pt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs"
     >
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4 pb-2">
         <a href="/terms" class="hover:text-primary">Terms of Use</a>
         <a href="/privacy" class="hover:text-primary">Privacy Policy</a>
-        <a href="/cookies" class="hover:text-primary">About Cookies</a>
+        <!-- <a href="/cookies" class="hover:text-primary">About Cookies</a> -->
       </div>
       <div>&copy; {currentYear} Totalis by HINDALCO. All rights reserved.</div>
     </div>

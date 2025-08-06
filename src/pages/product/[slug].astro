@@ -59,6 +59,11 @@ const { product } = Astro.props;
     import { initRevealObserver } from '../../scripts/reveal';
     import { initTabManager } from '../../scripts/tab';
     import { initImageBox } from '../../scripts/image-box';
+    import { initEmblas } from '../../scripts/embla';
+    import {
+      initContactForm,
+      initContactFormTriggers,
+    } from '../../scripts/contact-form';
 
     document.addEventListener('DOMContentLoaded', () => {
       initImageBox();
@@ -66,6 +71,8 @@ const { product } = Astro.props;
       initCardGlowEffect();
       initExpandingCards();
       initTabManager();
+      initEmblas();
+      initContactFormTriggers();
     });
   </script>
 </Layout>
