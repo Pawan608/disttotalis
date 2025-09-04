@@ -1,38 +1,64 @@
 ---
 import { CircleArrowLeft, CircleArrowRight } from '@lucide/astro';
 import { Image } from 'astro:assets';
-import demoImage from '../assets/building.jpeg';
-import demoBuilding from '../assets/hotel-building.jpg';
-import demoBuilding1 from '../assets/building-placeholder.jpg';
+import amethyst from '../assets/projects/amethyst.png';
+import eldeco from '../assets/projects/eldeco2.png';
+import habitat from '../assets/projects/habitat1.png';
+import shalimar from '../assets/projects/shalimar1.png';
+import spenser from '../assets/projects/spenser.jpg';
 import Marquee from '../components/marquee.astro';
 
+// Amethyst, by Vaibhav Group, Vadodara - 15000 SQFT – Logo available, Image available
+// Eldeco Luxa, Lucknow - 36000 SQFT - Logo available, Image available
+// Hawkins Factory, Satharia - 4000 SQFT - Logo available, No Image available
+// Shah Hospital, karnal - 12000 SQFT – No Logo as it is hospital, No Image available
+// Shalimar Mannat, Lucknow – Sqft details missing – Logo available, Image available
+// Spenser X Marina, Vadodara - 25000 SQFT – Logo available, Image available
+// Habitat, Unitech, Noida – sqft details missing – Logo available, Image available
+
 const properties = [
-  { id: 1, name: 'Supreme, Pune', area: '88544 Sqft.', image: demoBuilding1 },
+  {
+    id: 1,
+    name: 'Amethyst, Vadodara',
+    area: '15000 Sqft.',
+    image: amethyst,
+  },
   {
     id: 2,
+    name: 'Eldeco Luxa, Lucknow',
+    area: '36000 Sqft.',
+    image: eldeco,
+  },
+  {
+    id: 3,
     name: 'Shalimar Mannat, Lucknow',
-    area: '88544 Sqft.',
-    image: demoBuilding,
-  },  
-  { id: 3, name: 'Eldeco Luxa', area: '30000 Sqft.', image: demoImage },
+    // area: '30000 Sqft.',
+    image: shalimar,
+  },
   {
     id: 4,
-    name: 'Natura by One Oak, Lucknow',
-    area: '75114 Sqft.',
-    image: demoImage,
+    name: 'Spenser X Marina, Vadodara',
+    area: '25000 Sqft.',
+    image: spenser,
   },
   {
     id: 5,
-    name: 'Supreme Elite, Mumbai',
-    area: '95000 Sqft.',
-    image: demoImage,
+    name: 'Habitat, Noida',
+    // area: 'Sqft.',
+    image: habitat,
   },
-  {
-    id: 6,
-    name: 'Shalimar Heights, Delhi',
-    area: '72000 Sqft.',
-    image: demoImage,
-  },
+  // {
+  //   id: 6,
+  //   name: 'Hawkins Factory, Satharia',
+  //   area: '4000 Sqft.',
+  //   image: demoImage,
+  // },
+  // {
+  //   id: 7,
+  //   name: 'Shah Hospital, Karnal',
+  //   area: '12000 Sqft.',
+  //   image: demoImage,
+  // },
 ];
 ---
 
@@ -63,7 +89,7 @@ const properties = [
         <div class="embla-container">
           {
             properties.map((property) => (
-              <div class="embla-slide reveal w-64 first-of-type:md:pl-4 md:pl-6 pl-4 last-of-type:pr-4">
+              <div class="embla-slide reveal w-64 first-of-type:ml-4 last-of-type:mr-4 mx-2">
                 <div class="aspect-[8/9] overflow-hidden rounded-xl bg-radial from-indigo-500 to-indigo-600">
                   <Image
                     src={property.image}

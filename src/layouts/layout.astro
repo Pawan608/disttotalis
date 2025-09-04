@@ -14,6 +14,29 @@ const { title, htmlClassName, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/totalis-favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <!-- For Canonical SEO -->
+    <link
+      rel="canonical"
+      href={`https://totalis.hindalco.com${Astro.url.pathname}`}
+    />
+    <!-- TODO: Add canonical to skip from SEO score split -->
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta
+      property="og:url"
+      content={`https://totalis.hindalco.com${Astro.url.pathname}`}
+    />
+    <meta
+      property="og:image"
+      content="https://totalis.hindalco.com/og-image.jpg"
+    />
+    <!-- TODO: Deploy CDN with a original totalis logo which must be used here -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+
     <title>{title}</title>
     <script is:inline>
       document.documentElement.classList.remove('no-js');
