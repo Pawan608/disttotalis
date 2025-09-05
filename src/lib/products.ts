@@ -672,173 +672,173 @@ export const products: ProductItem[] = [
     ],
   },
 
-  {
-    name: 'TOT CS PLUS',
-    slug: 'tot-cs-plus',
-    shortDescription:
-      'Multi-point locking. Premium aesthetics. Multiple glass options.',
-    category: 'casement',
-    description:
-      'Crafted for strength and style, the TOT CS PLUS aluminium casement windows are built to the highest standards. They combine durability, design flexibility, and reliable performance — making them the perfect choice for modern homes.',
-    productRangeImage: csPlus1,
-    images: [csPlus1, csPlus2, csPlus3], // Replace with actual image imports
-    features: [
-      {
-        icon: Lock,
-        title: 'Multi-Point Locking',
-        text: 'Enhanced safety and security for your home',
-      },
-      {
-        icon: Palette,
-        title: 'Aesthetic Choice',
-        text: 'Multiple color and handle options to complement your interiors',
-      },
-      {
-        icon: Layers,
-        title: 'Glass Options',
-        text: 'Choose from a range of glass types for design and performance needs',
-      },
-    ],
-    stats: [
-      { label: 'Projects Completed', value: '100+', icon: TrendingUp },
-      { label: 'Happy Customers', value: '80+', icon: UsersRound },
-      { label: 'Years of Experience', value: '5+', icon: Clock },
-      { label: 'Quick Installation', value: '1–2 Days', icon: Zap },
-    ],
-    specs: [
-      {
-        img: maxSashHeight.src,
-        alt: 'Max Sash Height',
-        label: 'Max Sash Height',
-        content: [
-          ['Door', '2700 mm'],
-          ['Window', '2000 mm'],
-        ],
-        // value: '2700 mm',
-      },
-      {
-        img: maxSashWidth.src,
-        alt: 'Max Sash Width',
-        label: 'Max Sash Width',
-        content: [
-          ['Door', '900 mm'],
-          ['Window', '900 mm'],
-        ],
-        // value: '900 mm',
-      },
-      // {
-      //   img: maxSashHeight.src,
-      //   alt: 'Window Max Sash Height',
-      //   label: 'Window Max Sash Height',
-      //   value: '2000 mm',
-      // },
-      // {
-      //   img: maxSashWidth.src,
-      //   alt: 'Window Max Sash Width',
-      //   label: 'Window Max Sash Width',
-      //   value: '900 mm',
-      // },
-      {
-        img: glassRange.src,
-        alt: 'Glass Range',
-        label: 'Glass Range',
-        value: '6mm - 24mm',
-      },
-    ],
-    performance: [
-      {
-        img: windLoad.src,
-        alt: 'Wind Load',
-        label: 'Wind load',
-        value: '2.0 kpa',
-        caption: 'As per class C5 (BS EN12210 : 2000)',
-      },
-      {
-        img: airTightness.src,
-        alt: 'Air Tightness',
-        label: 'Air tightness',
-        value: '300 Pa',
-        caption: 'As per class 2 (BS EN12207 : 2000)',
-      },
-      {
-        img: waterTightness.src,
-        alt: 'Water Tightness',
-        label: 'Water tightness',
-        value: '300 Pa',
-        caption: 'As per class 7A (BS EN12207 : 2000)',
-      },
-    ],
-    joining: [
-      {
-        label: 'WIDTH ON JAMB',
-        value: 'Sides - 41 mm',
-      },
-      {
-        label: 'FRAME CORNER JOINT',
-        value: '45°',
-      },
-      {
-        label: 'SHUTTER CORNER JOINT',
-        value: '45°',
-      },
-      {
-        label: 'DOOR SIGHT LINE',
-        value: 'Frame- 55mm, Door Sash- 89mm',
-      },
-      {
-        label: 'WINDOW SIGHT LINE',
-        value: 'Frame- 49mm, Window Sash- 74mm',
-      },
-    ],
-    configurations: [
-      {
-        img: casementSingleDoor,
-        title: 'Single Door',
-      },
-      {
-        img: casementDoubleDoor,
-        title: 'Double Door',
-      },
-      {
-        img: casementWindow,
-        title: 'Casement Window',
-      },
-      {
-        img: casementFrench,
-        title: 'French Door',
-      },
-    ],
-    handleOptions: [
-      {
-        title: 'Premium Handle',
-        image: premiumHandleImg,
-        alt: 'Premium Casement Handle',
-      },
-      {
-        title: 'Multi-Point Lock',
-        image: multiPointImg,
-        alt: 'Multi-Point Lock Handle',
-      },
-      { title: 'Lever Handle', image: leverImg, alt: 'Lever Handle' },
-    ],
-    faqs: [
-      {
-        question: 'What are the benefits of multi-point locking?',
-        answer:
-          'Multi-point locking provides enhanced security by locking at multiple points along the frame, better weather sealing, and improved structural integrity.',
-      },
-      {
-        question: 'What glass thickness options are available?',
-        answer:
-          'TOT CS PLUS supports glass thickness from 6mm to 24mm, including double glazed and laminated glass options for enhanced insulation and security.',
-      },
-      {
-        question: 'Is this suitable for large openings?',
-        answer:
-          'Yes, with door heights up to 2700mm and window heights up to 2000mm, TOT CS PLUS is ideal for large openings and premium applications.',
-      },
-    ],
-  },
+  // {
+  //   name: 'TOT CS PLUS',
+  //   slug: 'tot-cs-plus',
+  //   shortDescription:
+  //     'Multi-point locking. Premium aesthetics. Multiple glass options.',
+  //   category: 'casement',
+  //   description:
+  //     'Crafted for strength and style, the TOT CS PLUS aluminium casement windows are built to the highest standards. They combine durability, design flexibility, and reliable performance — making them the perfect choice for modern homes.',
+  //   productRangeImage: csPlus1,
+  //   images: [csPlus1, csPlus2, csPlus3], // Replace with actual image imports
+  //   features: [
+  //     {
+  //       icon: Lock,
+  //       title: 'Multi-Point Locking',
+  //       text: 'Enhanced safety and security for your home',
+  //     },
+  //     {
+  //       icon: Palette,
+  //       title: 'Aesthetic Choice',
+  //       text: 'Multiple color and handle options to complement your interiors',
+  //     },
+  //     {
+  //       icon: Layers,
+  //       title: 'Glass Options',
+  //       text: 'Choose from a range of glass types for design and performance needs',
+  //     },
+  //   ],
+  //   stats: [
+  //     { label: 'Projects Completed', value: '100+', icon: TrendingUp },
+  //     { label: 'Happy Customers', value: '80+', icon: UsersRound },
+  //     { label: 'Years of Experience', value: '5+', icon: Clock },
+  //     { label: 'Quick Installation', value: '1–2 Days', icon: Zap },
+  //   ],
+  //   specs: [
+  //     {
+  //       img: maxSashHeight.src,
+  //       alt: 'Max Sash Height',
+  //       label: 'Max Sash Height',
+  //       content: [
+  //         ['Door', '2700 mm'],
+  //         ['Window', '2000 mm'],
+  //       ],
+  //       // value: '2700 mm',
+  //     },
+  //     {
+  //       img: maxSashWidth.src,
+  //       alt: 'Max Sash Width',
+  //       label: 'Max Sash Width',
+  //       content: [
+  //         ['Door', '900 mm'],
+  //         ['Window', '900 mm'],
+  //       ],
+  //       // value: '900 mm',
+  //     },
+  //     // {
+  //     //   img: maxSashHeight.src,
+  //     //   alt: 'Window Max Sash Height',
+  //     //   label: 'Window Max Sash Height',
+  //     //   value: '2000 mm',
+  //     // },
+  //     // {
+  //     //   img: maxSashWidth.src,
+  //     //   alt: 'Window Max Sash Width',
+  //     //   label: 'Window Max Sash Width',
+  //     //   value: '900 mm',
+  //     // },
+  //     {
+  //       img: glassRange.src,
+  //       alt: 'Glass Range',
+  //       label: 'Glass Range',
+  //       value: '6mm - 24mm',
+  //     },
+  //   ],
+  //   performance: [
+  //     {
+  //       img: windLoad.src,
+  //       alt: 'Wind Load',
+  //       label: 'Wind load',
+  //       value: '2.0 kpa',
+  //       caption: 'As per class C5 (BS EN12210 : 2000)',
+  //     },
+  //     {
+  //       img: airTightness.src,
+  //       alt: 'Air Tightness',
+  //       label: 'Air tightness',
+  //       value: '300 Pa',
+  //       caption: 'As per class 2 (BS EN12207 : 2000)',
+  //     },
+  //     {
+  //       img: waterTightness.src,
+  //       alt: 'Water Tightness',
+  //       label: 'Water tightness',
+  //       value: '300 Pa',
+  //       caption: 'As per class 7A (BS EN12207 : 2000)',
+  //     },
+  //   ],
+  //   joining: [
+  //     {
+  //       label: 'WIDTH ON JAMB',
+  //       value: 'Sides - 41 mm',
+  //     },
+  //     {
+  //       label: 'FRAME CORNER JOINT',
+  //       value: '45°',
+  //     },
+  //     {
+  //       label: 'SHUTTER CORNER JOINT',
+  //       value: '45°',
+  //     },
+  //     {
+  //       label: 'DOOR SIGHT LINE',
+  //       value: 'Frame- 55mm, Door Sash- 89mm',
+  //     },
+  //     {
+  //       label: 'WINDOW SIGHT LINE',
+  //       value: 'Frame- 49mm, Window Sash- 74mm',
+  //     },
+  //   ],
+  //   configurations: [
+  //     {
+  //       img: casementSingleDoor,
+  //       title: 'Single Door',
+  //     },
+  //     {
+  //       img: casementDoubleDoor,
+  //       title: 'Double Door',
+  //     },
+  //     {
+  //       img: casementWindow,
+  //       title: 'Casement Window',
+  //     },
+  //     {
+  //       img: casementFrench,
+  //       title: 'French Door',
+  //     },
+  //   ],
+  //   handleOptions: [
+  //     {
+  //       title: 'Premium Handle',
+  //       image: premiumHandleImg,
+  //       alt: 'Premium Casement Handle',
+  //     },
+  //     {
+  //       title: 'Multi-Point Lock',
+  //       image: multiPointImg,
+  //       alt: 'Multi-Point Lock Handle',
+  //     },
+  //     { title: 'Lever Handle', image: leverImg, alt: 'Lever Handle' },
+  //   ],
+  //   faqs: [
+  //     {
+  //       question: 'What are the benefits of multi-point locking?',
+  //       answer:
+  //         'Multi-point locking provides enhanced security by locking at multiple points along the frame, better weather sealing, and improved structural integrity.',
+  //     },
+  //     {
+  //       question: 'What glass thickness options are available?',
+  //       answer:
+  //         'TOT CS PLUS supports glass thickness from 6mm to 24mm, including double glazed and laminated glass options for enhanced insulation and security.',
+  //     },
+  //     {
+  //       question: 'Is this suitable for large openings?',
+  //       answer:
+  //         'Yes, with door heights up to 2700mm and window heights up to 2000mm, TOT CS PLUS is ideal for large openings and premium applications.',
+  //     },
+  //   ],
+  // },
 
   // RAILING PRODUCTS
   {
