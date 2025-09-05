@@ -8,13 +8,13 @@ description: 'Totalis privacy policy.'
 
 ## 1 Purpose
 
-Totalis is committed to protecting the privacy of every individual who visits www.Totaliswindows.com (the **“Website”**). We have adopted the following Privacy Policy, which sets out the basis on which any personal data we collect from you, or that you provide to us, will be handled and dealt with by us through your use of the Website.
+Totalis is committed to protecting the privacy of every individual who visits www.totalis.in (the **“Website”**). We have adopted the following Privacy Policy, which sets out the basis on which any personal data we collect from you, or that you provide to us, will be handled and dealt with by us through your use of the Website.
 
 ## 2 Definitions
 
 “We” / “Us” / “Our” means Totalis
 
-Website means www.Totaliswindows.com
+Website means www.totalis.in
 
 “You” or “your” means any person who visits our website.
 
