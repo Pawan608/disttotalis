@@ -11,14 +11,10 @@ const links = [
   { label: 'Brochure', desktop: true },
 ];
 
-const slidingLinks = [
-  { href: '/nexgen', label: 'Tot SD Nexgen' },
-  { href: '/lite', label: 'Tot SD Lite' },
-];
-const casementLinks = [
-  { href: '/classic', label: 'Casement Classic' },
-  { href: '/pro', label: 'Casement Pro' },
-];
+import {
+  productsByCategory,
+  productCategoryToCategoryTitle,
+} from '../lib/products';
 
 const { pathname } = Astro.url;
 ---
@@ -101,71 +97,42 @@ const { pathname } = Astro.url;
 
                     <div class="absolute right-0 mt-2 w-56 bg-white overflow-hidden shadow-xl rounded-2xl z-30">
                       <ul class="py-2">
-                        <li class="group relative">
-                          <details class="group">
-                            <summary class="flex justify-between items-center px-4 py-2 text-sm text-neutral-700 cursor-pointer hover:bg-neutral-50">
-                              Sliding
-                              <svg
-                                class="w-4 h-4 transition-transform group-open:rotate-90"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  d="M9 5l7 7-7 7"
-                                />
-                              </svg>
-                            </summary>
-                            <ul class="pl-4 py-1 space-y-1 bg-white">
-                              {slidingLinks.map(({ href, label }) => (
-                                <li>
-                                  <a
-                                    href={href}
-                                    class="block px-4 py-1 text-sm text-neutral-700 hover:bg-neutral-100 rounded"
+                        {Object.entries(productsByCategory).map(
+                          ([key, products]) => (
+                            <li class="group relative">
+                              <details class="group">
+                                <summary class="flex justify-between items-center px-4 py-2 text-sm text-neutral-700 cursor-pointer hover:bg-neutral-50">
+                                  {productCategoryToCategoryTitle[key]}
+                                  <svg
+                                    class="w-4 h-4 transition-transform group-open:rotate-90"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    viewBox="0 0 24 24"
                                   >
-                                    {label}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </details>
-                        </li>
-
-                        <li class="group relative">
-                          <details class="group">
-                            <summary class="flex justify-between items-center px-4 py-2 text-sm text-neutral-700 cursor-pointer hover:bg-neutral-50">
-                              Casement
-                              <svg
-                                class="w-4 h-4 transition-transform group-open:rotate-90"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  d="M9 5l7 7-7 7"
-                                />
-                              </svg>
-                            </summary>
-                            <ul class="pl-4 py-1 space-y-1 bg-white">
-                              {casementLinks.map(({ href, label }) => (
-                                <li>
-                                  <a
-                                    href={href}
-                                    class="block px-4 py-1 text-sm text-neutral-700 hover:bg-neutral-100 rounded"
-                                  >
-                                    {label}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </details>
-                        </li>
+                                    <path
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M9 5l7 7-7 7"
+                                    />
+                                  </svg>
+                                </summary>
+                                <ul class="pl-4 py-1 space-y-1 bg-white">
+                                  {products.map(({ slug, name }) => (
+                                    <li>
+                                      <a
+                                        href={'/product/' + slug}
+                                        class="block px-4 py-1 text-sm text-neutral-700 hover:bg-neutral-100 rounded"
+                                      >
+                                        {name}
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </details>
+                            </li>
+                          )
+                        )}
                       </ul>
                     </div>
                   </details>
@@ -239,34 +206,31 @@ const { pathname } = Astro.url;
       <nav class="space-y-6">
         <a href="/" class="block text-2xl font-light">Home</a>
         <a href="/why" class="block text-2xl font-light">Why Totalis</a>
-        <div>
-          <span class="block text-2xl font-light mb-2">Sliding</span>
-          <ul class="pl-4 space-y-2">
-            {
-              slidingLinks.map(({ href, label }) => (
-                <li>
-                  <a href={href} class="block text-xl font-light">
-                    {label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <div>
-          <span class="block text-2xl font-light mb-2">Casement</span>
-          <ul class="pl-4 space-y-2">
-            {
-              casementLinks.map(({ href, label }) => (
-                <li>
-                  <a href={href} class="block text-xl font-light">
-                    {label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+
+        {
+          Object.entries(productsByCategory).map(([key, products]) => {
+            return (
+              <div>
+                <span class="block text-2xl font-light mb-2">
+                  {productCategoryToCategoryTitle[key]}
+                </span>
+                <ul class="pl-4 space-y-2">
+                  {products.map(({ slug, name }) => (
+                    <li>
+                      <a
+                        href={'/product/' + slug}
+                        class="block text-xl font-light"
+                      >
+                        {name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })
+        }
+
         <a href="/brochure" class="block text-2xl font-light">Brochure</a>
       </nav>
     </div>

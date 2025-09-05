@@ -1202,3 +1202,9 @@ export const productCategories = [
   { id: 'casement', name: 'Casement' },
   { id: 'railing', name: 'Railing' },
 ];
+
+export const productCategoryToCategoryTitle: Record<string, string> = {
+  sliding: 'Sliding',
+  casement: 'Casement',
+  railing: 'Railing',
+};
