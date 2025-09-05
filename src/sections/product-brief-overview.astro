@@ -41,11 +41,21 @@ const { product } = Astro.props;
           <p class="text-xl font-semibold">Product Specifications</p>
           <div class="flex flex-wrap justify-around gap-8 pt-12 pb-4">
             {
-              product.specs.map(({ img, alt, label, value }) => (
+              product.specs.map(({ img, alt, label, value, content }) => (
                 <article class="text-center">
                   <img src={img} alt={alt} class="h-40 mx-auto" />
                   <h3 class="font-semibold text-lg mt-4">{label}</h3>
-                  <p class="text-neutral-600 text-base">{value}</p>
+                  {value ? (
+                    <p class="text-neutral-600 text-base">{value}</p>
+                  ) : (
+                    <div class="text-neutral-600 text-base">
+                      {content?.map(([k, v]) => (
+                        <div>
+                          <span class="font-medium">{k}:</span> {v}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </article>
               ))
             }

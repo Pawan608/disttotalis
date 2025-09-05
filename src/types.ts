@@ -16,7 +16,13 @@ export interface ProductItem {
   productRangeImage: ImageMetadata;
   features: { icon: AstroComponent; title: string; text: string }[];
   stats: { label: string; value: string; icon: AstroComponent }[];
-  specs: { img: string; alt: string; label: string; value: string }[];
+  specs: {
+    img: string;
+    alt: string;
+    label: string;
+    value?: string;
+    content?: string[][];
+  }[];
   performance: {
     img: string;
     alt: string;

@@ -17,38 +17,33 @@ import {
   ArrowUp,
 } from '@lucide/astro';
 
-import placeholder1 from '../assets/placeholder-product.jpg';
-import placeholder2 from '../assets/placeholder-product-2.jpg';
-import placeholder3 from '../assets/placeholder-product-3.jpg';
-import placeholder4 from '../assets/placeholder-product-4.jpg';
+import sdNexgen1 from '../assets/tot/sd-nexgen-wide.png';
+import sdNexgen2 from '../assets/tot/sd-nexgen1.png';
+import sdNexgen3 from '../assets/tot/sd-nexgen2.png';
 
-import px1 from '../assets/px1.jpg';
-import px2 from '../assets/px2.jpg';
-import px3 from '../assets/px3.jpg';
+import sdLite1 from '../assets/tot/sd-lite-wide.png';
+import sdLite2 from '../assets/tot/sd-lite1.png';
+import sdLite3 from '../assets/tot/sd-lite2.png';
 
-import sdLite1 from '../assets/px1.jpg';
-import sdLite2 from '../assets/px2.jpg';
-import sdLite3 from '../assets/px3.jpg';
+import sdPlus1 from '../assets/tot/sd-plus-wide.png';
+import sdPlus2 from '../assets/tot/sd-plus1.png';
+import sdPlus3 from '../assets/tot/sd-plus2.png';
 
-import sdPlus1 from '../assets/px1.jpg';
-import sdPlus2 from '../assets/px2.jpg';
-import sdPlus3 from '../assets/px3.jpg';
-
-import cs1 from '../assets/px1.jpg';
-import cs2 from '../assets/px2.jpg';
-import cs3 from '../assets/px3.jpg';
+import cs1 from '../assets/tot/cs-wide.png';
+import cs2 from '../assets/tot/cs1.png';
+import cs3 from '../assets/tot/cs2.png';
 
 import csPlus1 from '../assets/px1.jpg';
 import csPlus2 from '../assets/px2.jpg';
 import csPlus3 from '../assets/px3.jpg';
 
-import rl80_1 from '../assets/px1.jpg';
-import rl80_2 from '../assets/px2.jpg';
-import rl80_3 from '../assets/px3.jpg';
+import rl80_1 from '../assets/tot/rl80-wide.png';
+import rl80_2 from '../assets/tot/rl80-1.png';
+import rl80_3 from '../assets/tot/rl80-2.png';
 
-import rl125_1 from '../assets/px1.jpg';
-import rl125_2 from '../assets/px2.jpg';
-import rl125_3 from '../assets/px3.jpg';
+import rl125_1 from '../assets/tot/rl-125-wide.png';
+import rl125_2 from '../assets/tot/rl-125-1.png';
+import rl125_3 from '../assets/tot/rl-125-2.png';
 
 import airTightness from '../assets/air-tightness.svg';
 import glassRange from '../assets/glass-range.svg';
@@ -113,8 +108,8 @@ export const products: ProductItem[] = [
     category: 'sliding',
     description:
       'Strong, stylish, and built to last — the TOT SD NEXGEN aluminium sliding doors and windows are designed for modern homes that demand both beauty and durability. Tested for performance, they bring you peace of mind along with long-lasting elegance.',
-    images: [px1, px2, px3], // Replace with actual image imports
-    productRangeImage: placeholder1,
+    images: [sdNexgen1, sdNexgen2, sdNexgen3], // Replace with actual image imports
+    productRangeImage: sdNexgen1,
     features: [
       {
         icon: Lock,
@@ -269,7 +264,7 @@ export const products: ProductItem[] = [
     category: 'sliding',
     description:
       "Smart, sleek, and efficient — the TOT SD LITE aluminium sliding windows are designed for everyday modern living. With smooth operation, lasting durability, and cost efficiency, they bring comfort and style within everyone's reach.",
-    productRangeImage: placeholder2,
+    productRangeImage: sdLite1,
     images: [sdLite1, sdLite2, sdLite3], // Replace with actual image imports
     features: [
       {
@@ -396,7 +391,7 @@ export const products: ProductItem[] = [
     category: 'sliding',
     description:
       'Versatile, secure, and efficient — the TOT SD PLUS aluminium sliding windows are designed to adapt to every home. Offering advanced safety features and customizable options, they combine strength with style for modern living.',
-    productRangeImage: placeholder3,
+    productRangeImage: sdPlus1,
     images: [sdPlus1, sdPlus2, sdPlus3], // Replace with actual image imports
     features: [
       {
@@ -534,7 +529,7 @@ export const products: ProductItem[] = [
     category: 'casement',
     description:
       'Reliable and stylish, the TOT CS aluminium casement windows are built for lasting performance, with multiple color and style options to suit your home.',
-    productRangeImage: px1,
+    productRangeImage: cs1,
     images: [cs1, cs2, cs3], // Replace with actual image imports
     features: [
       {
@@ -562,27 +557,22 @@ export const products: ProductItem[] = [
     specs: [
       {
         img: maxSashHeight.src,
-        alt: 'Door Max Sash Height',
-        label: 'Door Max Sash Height',
-        value: '2400 mm',
+        alt: 'Max Sash Height',
+        content: [
+          ['Door', '2400 mm'],
+          ['Window', '1500 mm'],
+        ],
+        label: 'Max Sash Height',
+        // value: '2400 mm',
       },
       {
         img: maxSashWidth.src,
-        alt: 'Door Max Sash Width',
-        label: 'Door Max Sash Width',
-        value: '900 mm',
-      },
-      {
-        img: maxSashHeight.src,
-        alt: 'Window Max Sash Height',
-        label: 'Window Max Sash Height',
-        value: '1500 mm',
-      },
-      {
-        img: maxSashWidth.src,
-        alt: 'Window Max Sash Width',
-        label: 'Window Max Sash Width',
-        value: '750 mm',
+        alt: 'Max Sash Width',
+        label: 'Max Sash Width',
+        content: [
+          ['Door', '900 mm'],
+          ['Window', '750 mm'],
+        ],
       },
       {
         img: glassRange.src,
@@ -690,7 +680,7 @@ export const products: ProductItem[] = [
     category: 'casement',
     description:
       'Crafted for strength and style, the TOT CS PLUS aluminium casement windows are built to the highest standards. They combine durability, design flexibility, and reliable performance — making them the perfect choice for modern homes.',
-    productRangeImage: px1,
+    productRangeImage: csPlus1,
     images: [csPlus1, csPlus2, csPlus3], // Replace with actual image imports
     features: [
       {
@@ -718,28 +708,36 @@ export const products: ProductItem[] = [
     specs: [
       {
         img: maxSashHeight.src,
-        alt: 'Door Max Sash Height',
-        label: 'Door Max Sash Height',
-        value: '2700 mm',
+        alt: 'Max Sash Height',
+        label: 'Max Sash Height',
+        content: [
+          ['Door', '2700 mm'],
+          ['Window', '2000 mm'],
+        ],
+        // value: '2700 mm',
       },
       {
         img: maxSashWidth.src,
-        alt: 'Door Max Sash Width',
-        label: 'Door Max Sash Width',
-        value: '900 mm',
+        alt: 'Max Sash Width',
+        label: 'Max Sash Width',
+        content: [
+          ['Door', '900 mm'],
+          ['Window', '900 mm'],
+        ],
+        // value: '900 mm',
       },
-      {
-        img: maxSashHeight.src,
-        alt: 'Window Max Sash Height',
-        label: 'Window Max Sash Height',
-        value: '2000 mm',
-      },
-      {
-        img: maxSashWidth.src,
-        alt: 'Window Max Sash Width',
-        label: 'Window Max Sash Width',
-        value: '900 mm',
-      },
+      // {
+      //   img: maxSashHeight.src,
+      //   alt: 'Window Max Sash Height',
+      //   label: 'Window Max Sash Height',
+      //   value: '2000 mm',
+      // },
+      // {
+      //   img: maxSashWidth.src,
+      //   alt: 'Window Max Sash Width',
+      //   label: 'Window Max Sash Width',
+      //   value: '900 mm',
+      // },
       {
         img: glassRange.src,
         alt: 'Glass Range',
@@ -851,7 +849,7 @@ export const products: ProductItem[] = [
     category: 'railing',
     description:
       'Strong, sleek, and dependable — the TOT RL 80 aluminium railing system combines safety with style, making it ideal for residential, commercial, and industrial applications.',
-    productRangeImage: px1,
+    productRangeImage: rl80_1,
     images: [rl80_1, rl80_2, rl80_3], // Replace with actual image imports
     features: [
       {
@@ -1010,7 +1008,7 @@ export const products: ProductItem[] = [
     category: 'railing',
     description:
       'Engineered for impact and elegance, the TOT RL 125 aluminium railing system offers safety with design flexibility — perfect for premium spaces.',
-    productRangeImage: px1,
+    productRangeImage: rl125_1,
     images: [rl125_1, rl125_2, rl125_3], // Replace with actual image imports
     features: [
       {
