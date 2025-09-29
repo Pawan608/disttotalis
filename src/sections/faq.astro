@@ -10,13 +10,14 @@ type Props = {
 };
 
 const { product } = Astro.props;
+console.log("product",product);
 ---
 
 <section id="faq">
   <div class="px-4 pt-16 max-w-6xl mx-auto text-center">
     <SectionHeading
       title="Frequently Asked Questions"
-      description="Get answers to the most common questions about our TOT SD NEXGEN sliding windows"
+      description=`Get answers to the most common questions about our ${product.name}`
     />
     <div class="rounded-2xl overflow-hidden my-8">
       <div

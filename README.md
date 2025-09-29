@@ -33,9 +33,9 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
+| Command               | Action                                           |
+| :-------------------- | :----------------------------------------------- |
+| `bun install`         | Installs dependencies                            |
 | `bun dev`             | Starts local dev server at `localhost:4321`      |
 | `bun build`           | Build your production site to `./dist/`          |
 | `bun preview`         | Preview your build locally, before deploying     |
@@ -45,3 +45,20 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+# For New Deployment:-
+
+## Upload the corrected build:
+
+scp -P 4422 -r ./dist/ 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd61e54ef9@BMCSLBTPMPBRK2.abgplanet.abg.com:/tmp/
+
+## Deploy as before:
+
+npm run build
+ssh -p 4422 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd61e54ef9@BMCSLBTPMPBRK2.abgplanet.abg.com
+sudo su
+rm -rf /var/www/totalis.in/_
+mv /tmp/dist/_ /var/www/totalis.in/
+chown -R www-data:www-data /var/www/totalis.in
+chmod -R 755 /var/www/totalis.in
+rm -rf /tmp/dist/
