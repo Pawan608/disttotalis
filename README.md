@@ -50,15 +50,18 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 ## Upload the corrected build:
 
+npm run build
 scp -P 4422 -r ./dist/ 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd61e54ef9@BMCSLBTPMPBRK2.abgplanet.abg.com:/tmp/
 
 ## Deploy as before:
 
-npm run build
 ssh -p 4422 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd61e54ef9@BMCSLBTPMPBRK2.abgplanet.abg.com
 sudo su
-rm -rf /var/www/totalis.in/_
-mv /tmp/dist/_ /var/www/totalis.in/
+rm -rf /var/www/totalis.in/\*
+mv /tmp/dist/\* /var/www/totalis.in/
 chown -R www-data:www-data /var/www/totalis.in
 chmod -R 755 /var/www/totalis.in
 rm -rf /tmp/dist/
+
+##Location to start
+pm2 start /var/www/totalis.in/server/entry.mjs --name totalis

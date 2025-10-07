@@ -7,6 +7,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ["clsx", "kleur", "@astrojs/ssr-adapter"],
+    },
   },
   adapter: node({
     mode: "standalone",

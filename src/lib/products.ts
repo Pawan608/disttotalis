@@ -80,10 +80,6 @@ import cs1 from "../assets/tot/cs-wide.png";
 import cs2 from "../assets/tot/cs1.png";
 import cs3 from "../assets/tot/cs2.png";
 
-import csPlus1 from "../assets/px1.jpg";
-import csPlus2 from "../assets/px2.jpg";
-import csPlus3 from "../assets/px3.jpg";
-
 import rl80_1 from "../assets/tot/rl80-wide.png";
 import rl80_2 from "../assets/tot/rl80-1.png";
 import rl80_3 from "../assets/tot/rl80-2.png";
@@ -117,20 +113,6 @@ import railingHighRise from "../assets/wind-load.svg";
 import railingCustom from "../assets/wind-load.svg";
 import railingCommercial from "../assets/wind-load.svg";
 
-import oneTrackTwoShutter from "../assets/1-track-2-shutter.png";
-import twoTrackThreeShutter from "../assets/2-track-3-shutter.png";
-import threeTrackThreeShutter from "../assets/3-track-3-shutter.png";
-
-import twoTrackTwoShutter from "../assets/2-track-3-shutter.png";
-import oneTrackOneShutter from "../assets/3-track-3-shutter.png";
-
-import fourTrackFourShutter from "../assets/3-track-3-shutter.png";
-
-import casementSingleDoor from "../assets/2-track-3-shutter.png";
-import casementDoubleDoor from "../assets/3-track-3-shutter.png";
-import casementWindow from "../assets/3-track-3-shutter.png";
-import casementFrench from "../assets/3-track-3-shutter.png";
-
 import flushImg from "../assets/building.jpeg";
 import leverImg from "../assets/building.jpeg";
 import pullImg from "../assets/building.jpeg";
@@ -142,7 +124,6 @@ import flatTopImg from "../assets/building.jpeg";
 import premiumRoundHandrailImg from "../assets/building.jpeg";
 import designerSquareHandrailImg from "../assets/building.jpeg";
 import customProfileImg from "../assets/building.jpeg";
-import premiumHandleImg from "../assets/building.jpeg";
 
 import type { GroupedProducts, ProductItem } from "../types";
 

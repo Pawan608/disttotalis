@@ -1,4 +1,4 @@
-// src/pages/api/totalis.ts
+// src/pages/api/contact.ts
 import type { APIRoute } from "astro";
 
 // Disable prerendering for this API route
@@ -33,6 +33,21 @@ type ZohoResponse = {
     code: string;
     details: {
       errors?: ZohoError[];
+      api_name?: string;
+      duplicate_record?: {
+        id: string;
+        module: {
+          api_name: string;
+          id: string;
+        };
+        Owner: {
+          name: string;
+          id: string;
+          zuid: string;
+        };
+      };
+      json_path?: string;
+      more_records?: boolean;
     };
     message: string;
     status: string;
@@ -254,13 +269,86 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // console.log("Zoho CRM parsed response:", leadResult);
-
     const mainResponse = leadResult.data?.[0];
-    const errors = mainResponse?.details?.errors;
 
-    // Handle duplicate records
-    if (!leadResponse.ok && mainResponse?.code === "MULTIPLE_OR_MULTI_ERRORS") {
+    // Handle duplicate records - check for DUPLICATE_DATA directly or in nested errors
+    if (
+      mainResponse?.code === "DUPLICATE_DATA" &&
+      mainResponse?.details?.duplicate_record?.id
+    ) {
+      const duplicateRecordId = mainResponse.details.duplicate_record.id;
+      const duplicateField = mainResponse.details.api_name;
+
+      console.log(
+        `Duplicate detected on field: ${duplicateField}, Record ID: ${duplicateRecordId}`
+      );
+
+      // Prepare update data - remove the duplicate field
+      const updateData: Partial<LeadData> = { ...leadData.data[0] };
+
+      if (duplicateField && duplicateField in updateData) {
+        delete updateData[duplicateField as keyof LeadData];
+      }
+
+      // Always update these fields
+      updateData.Lead_Status = "New Enquiry";
+      updateData.Touchpoint_Source = "Website";
+      updateData.Lead_Sub_Source1 = "SEO";
+
+      console.log("Updating existing record with ID:", duplicateRecordId);
+      const updateResponse = await fetch(
+        `https://www.zohoapis.in/crm/v6/Leads/${duplicateRecordId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Zoho-oauthtoken ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data: [updateData] }),
+        }
+      );
+
+      const updateResponseText = await updateResponse.text();
+      console.log("Update response status:", updateResponse.status);
+      console.log("Update response text:", updateResponseText);
+
+      if (!updateResponse.ok) {
+        throw new Error(
+          `Failed to update duplicate record: ${updateResponseText}`
+        );
+      }
+
+      let updateResult;
+      try {
+        updateResult = JSON.parse(updateResponseText);
+      } catch (parseError) {
+        console.error("Failed to parse update response:", updateResponseText);
+        throw new Error(
+          `Invalid JSON response from Zoho update: ${updateResponseText.substring(
+            0,
+            100
+          )}`
+        );
+      }
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          data: updateResult,
+          message: "Record added successfully",
+        }),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    // Handle MULTIPLE_OR_MULTI_ERRORS with nested duplicate errors
+    if (mainResponse?.code === "MULTIPLE_OR_MULTI_ERRORS") {
+      const errors = mainResponse?.details?.errors;
       const duplicateErrors = errors?.filter(
         (error: any) => error.code === "DUPLICATE_DATA"
       );
