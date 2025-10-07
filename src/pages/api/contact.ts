@@ -335,7 +335,8 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({
           success: true,
           data: updateResult,
-          message: "Record added successfully",
+          message:
+            "Thank you for contacting us! Our team will get in touch with you soon.",
         }),
         {
           status: 200,
@@ -414,7 +415,8 @@ export const POST: APIRoute = async ({ request }) => {
           JSON.stringify({
             success: true,
             data: updateResult,
-            message: "Existing record updated successfully",
+            message:
+              "Thank you for contacting us! Our team will get in touch with you soon.",
           }),
           {
             status: 200,
@@ -434,7 +436,8 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify({
         success: true,
         data: leadResult,
-        message: "New record created successfully",
+        message:
+          "Thank you for contacting us! Our team will get in touch with you soon.",
       }),
       {
         status: 200,

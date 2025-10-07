@@ -63,5 +63,11 @@ chown -R www-data:www-data /var/www/totalis.in
 chmod -R 755 /var/www/totalis.in
 rm -rf /tmp/dist/
 
+cd /var/www/totalis.in
+nano package.json
+//Paste Package.json file
+npm i
+pm2 restart 3
+
 ##Location to start
 pm2 start /var/www/totalis.in/server/entry.mjs --name totalis
