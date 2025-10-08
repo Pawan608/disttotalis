@@ -155,6 +155,13 @@ const extractFormData = (formData: FormData) => {
   };
 };
 
+const downloadBrochure = () => {
+  window.open(
+    "https://www.hindalco.com/upload/pdf/totalis-brochure.pdf",
+    "_blank"
+  );
+};
+
 const getFormSubmitHandler =
   (prefix: ContactFormPrefix) => async (e: SubmitEvent) => {
     e.preventDefault();
@@ -209,6 +216,11 @@ const getFormSubmitHandler =
         // Reset form
         form.reset();
         resetStateAndCity(prefix);
+
+        // Download brochure after a short delay (2 seconds)
+        setTimeout(() => {
+          downloadBrochure();
+        }, 2000);
       } else {
         throw new Error(
           result.error ||
@@ -285,13 +297,6 @@ const hideModalForm = () => {
   modal.classList.remove("flex");
   modal.classList.add("hidden");
   document.body.style.overflow = "";
-};
-
-const downloadBrochure = () => {
-  window.open(
-    "https://www.hindalco.com/upload/pdf/totalis-brochure.pdf",
-    "_blank"
-  );
 };
 
 const skipToDownloadBrochure = () => {
