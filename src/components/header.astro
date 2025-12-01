@@ -6,7 +6,8 @@ import abgLogo from '../assets/logos/abg-logo-no-bg.png';
 
 const links = [
   { href: '/', label: 'Home', desktop: false },
-  // { href: '/why', label: 'Why Totalis', desktop: true },
+  { href: '/about', label: 'About Us', desktop: true },
+  { href: '/why', label: 'Why Totalis', desktop: true },
   { href: '/products', label: 'Products', desktop: true, hasSub: true },
   { label: 'Brochure', desktop: true },
 ];
@@ -175,68 +176,70 @@ const { pathname } = Astro.url;
   </nav>
 
   <!-- Mobile Overlay Menu -->
-<!-- Mobile Overlay Menu -->
-<div
-  id="mobile-overlay"
-  class="fixed inset-0 bg-white/75 backdrop-blur-3xl z-50 transform -translate-y-full transition-transform duration-500 ease-in-out md:hidden"
->
-  <a class="w-32 absolute top-6 left-6" href="/" aria-label="Totalis Home">
-    <Image
-      src={totalisLogo}
-      format="webp"
-      loading={'eager'}
-      widths={[160, 192]}
-      sizes="(max-width: 768px) 160px, 198px"
-      alt="Totalis Brand Logo"
-      layout="constrained"
-      class="w-40 opacity-90"
-    />
-  </a>
-
-  <!-- Close Button -->
-  <button
-    id="menu-close"
-    class="absolute top-6 right-6 text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
-    aria-label="Close menu"
+  <!-- Mobile Overlay Menu -->
+  <div
+    id="mobile-overlay"
+    class="fixed inset-0 bg-white/75 backdrop-blur-3xl z-50 transform -translate-y-full transition-transform duration-500 ease-in-out md:hidden"
   >
-    <X class="size-6" stroke-width={1.25} />
-  </button>
+    <a class="w-32 absolute top-6 left-6" href="/" aria-label="Totalis Home">
+      <Image
+        src={totalisLogo}
+        format="webp"
+        loading={'eager'}
+        widths={[160, 192]}
+        sizes="(max-width: 768px) 160px, 198px"
+        alt="Totalis Brand Logo"
+        layout="constrained"
+        class="w-40 opacity-90"
+      />
+    </a>
 
-  <!-- Menu Content -->
-  <div class="flex flex-col justify-center px-10 h-full pb-32 pt-8">
-    <nav class="space-y-6">
-      <a href="/" class="block text-2xl font-light">Home</a>
-      <a href="/why" class="block text-2xl font-light">Why Totalis</a>
+    <!-- Close Button -->
+    <button
+      id="menu-close"
+      class="absolute top-6 right-6 text-neutral-700 hover:text-neutral-900 transition-colors duration-200"
+      aria-label="Close menu"
+    >
+      <X class="size-6" stroke-width={1.25} />
+    </button>
 
-      {
-        Object.entries(productsByCategory).map(([key, products]) => {
-          return (
-            <div>
-              <span class="block text-2xl font-light mb-2">
-                {productCategoryToCategoryTitle[key]}
-              </span>
-              <ul class="pl-4 space-y-2">
-                {products.map(({ slug, name }) => (
-                  <li>
-                    <a
-                      href={'/product/' + slug}
-                      class="block text-xl font-light"
-                    >
-                      {name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })
-      }
+    <!-- Menu Content -->
+    <div class="flex flex-col justify-center px-10 h-full pb-32 pt-8">
+      <nav class="space-y-6">
+        <a href="/" class="block text-2xl font-light">Home</a>
+        <a href="/why" class="block text-2xl font-light">Why Totalis</a>
 
-      <!-- Updated Brochure button - same behavior as desktop -->
-      <button class="block text-2xl font-light text-left contact-form-trigger">Brochure</button>
-    </nav>
+        {
+          Object.entries(productsByCategory).map(([key, products]) => {
+            return (
+              <div>
+                <span class="block text-2xl font-light mb-2">
+                  {productCategoryToCategoryTitle[key]}
+                </span>
+                <ul class="pl-4 space-y-2">
+                  {products.map(({ slug, name }) => (
+                    <li>
+                      <a
+                        href={'/product/' + slug}
+                        class="block text-xl font-light"
+                      >
+                        {name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })
+        }
+
+        <!-- Updated Brochure button - same behavior as desktop -->
+        <button class="block text-2xl font-light text-left contact-form-trigger"
+          >Brochure</button
+        >
+      </nav>
+    </div>
   </div>
-</div>
 </header>
 
 <script>
@@ -250,9 +253,7 @@ const { pathname } = Astro.url;
       overlay.classList.add('translate-y-0');
       document.body.classList.add('overflow-hidden');
 
-      const menuItems = overlay.querySelectorAll(
-        'nav a, nav button'
-      );
+      const menuItems = overlay.querySelectorAll('nav a, nav button');
       menuItems.forEach((item, index) => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(20px)';
@@ -283,11 +284,15 @@ const { pathname } = Astro.url;
     });
 
     // Handle brochure button in mobile menu
-    const mobileBrochureBtn = overlay.querySelector('nav button.contact-form-trigger');
+    const mobileBrochureBtn = overlay.querySelector(
+      'nav button.contact-form-trigger'
+    );
     if (mobileBrochureBtn) {
-      mobileBrochureBtn.addEventListener('click', function(e) {
+      mobileBrochureBtn.addEventListener('click', function (e) {
         // Trigger the same behavior as desktop brochure button
-        const desktopBrochureBtn = document.querySelector('.contact-form-trigger');
+        const desktopBrochureBtn = document.querySelector(
+          '.contact-form-trigger'
+        );
         if (desktopBrochureBtn) {
           desktopBrochureBtn.click();
         }
@@ -308,7 +313,7 @@ const { pathname } = Astro.url;
     const productsDropdown = document.getElementById('products-dropdown');
 
     if (productsDropdown) {
-      document.addEventListener('click', function(event) {
+      document.addEventListener('click', function (event) {
         // Check if the click is outside the dropdown
         if (!productsDropdown.contains(event.target)) {
           // Close the dropdown by setting open to false
@@ -317,7 +322,7 @@ const { pathname } = Astro.url;
       });
 
       // Also handle escape key for dropdown
-      document.addEventListener('keydown', function(event) {
+      document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && productsDropdown.open) {
           productsDropdown.open = false;
         }

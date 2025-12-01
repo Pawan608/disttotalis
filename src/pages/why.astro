@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/layout.astro';
+import Hero from '../sections/why-hero.astro';
+import Projects from '../sections/projects.astro';
+import CtaEnd from '../sections/cta-end.astro';
+import ProductRangeSection from '../sections/product-range.astro';
+import FeaturesSection from '../sections/features.astro';
+import FloatingContactButton from '../components/floating-contact.astro';
+import Button from '../components/button.astro';
+import WhyPartner from '../sections/why-partner.astro';
+import WhatYouGet from '../sections/what-you-get.astro';
+---
+
+<Layout
+  title="Why Totalis"
+  htmlClassName="no-js"
+  description="Partnering with Totalis means more than Product."
+>
+  <Hero />
+  <WhyPartner />
+  <WhatYouGet />
+
+  <div class="bg-secondary text-center w-full py-8 md:py-12 px-8 lg:mb-8 my-8">
+    <div class="flex flex-col gap-1 md:gap-2 mb-4 max-w-2xl mx-auto">
+      <h3 class="text-xl md:text-2xl text-neutral-50">Grow with Totalis</h3>
+      <p class="text-neutral-200">
+        Join the Totalis fabricator network and take your business to the next
+        level with engineered aluminium windows that are tested and trusted.
+      </p>
+    </div>
+    <div class="flex gap-4 items-center justify-center mb-2">
+      <!-- <Button variant="primary" reveal={true}>Talk to An Expert</Button> -->
+      <Button link="/contact" variant="default" reveal={true}
+        >Send Inquiry</Button
+      >
+    </div>
+  </div>
+
+  <ProductRangeSection />
+  <FeaturesSection />
+  <Projects />
+  <CtaEnd />
+  <FloatingContactButton />
+
+  <script>
+    import { initRevealObserver } from '../scripts/reveal';
+    import { initTabManager } from '../scripts/tab';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initRevealObserver();
+      initTabManager();
+    });
+  </script>
+</Layout>
