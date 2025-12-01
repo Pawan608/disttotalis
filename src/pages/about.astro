@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/layout.astro';
+import Hero from '../sections/about-hero.astro';
+import CtaEnd from '../sections/cta-end.astro';
+import FloatingContactButton from '../components/floating-contact.astro';
+import Marquee from '../components/marquee.astro';
+import SectionHeading from '../components/section-heading.astro';
+import hindalcoLogo from '../assets/logos/hindalco-logo.svg';
+import { Sparkle } from '@lucide/astro';
+import { Image } from 'astro:assets';
+
+// Import icons for Why Choose section
+import { ShieldCheck, Network, ShieldBan, TrendingDown } from '@lucide/astro';
+
+// Import icons for Totalis Advantage section
+import { Package2, Home, Cloud } from '@lucide/astro';
+
+const keyPillars = [
+  {
+    icon: ShieldCheck,
+    title: 'Tested & Certified',
+    description:
+      'Rigorously tested for wind, water, and air performance to ensure unmatched durability and reliability.',
+  },
+  {
+    icon: Network,
+    title: 'Integrated Supply Chain',
+    description:
+      'Seamless integration with Hindalco ensures consistent quality, operational efficiency, and on-time delivery.',
+  },
+  {
+    icon: ShieldBan,
+    title: 'Anti-Counterfeit Protection',
+    description:
+      'Unique holograms and custom-designed handles safeguard authenticity and build customer confidence.',
+  },
+  {
+    icon: TrendingDown,
+    title: 'Optimized Pricing',
+    description:
+      'Competitive pricing provides exceptional value without compromising quality or performance.',
+  },
+];
+
+const advantages = [
+  {
+    icon: Package2,
+    title: 'Precision Built',
+    description: 'System-grade aluminium designed for lasting performance.',
+  },
+  {
+    icon: Home,
+    title: 'Made for Real Homes',
+    description:
+      'Works perfectly for renovations, new constructions & boutique projects',
+  },
+  {
+    icon: Cloud,
+    title: 'Climate Ready',
+    description:
+      'Insulates from weather, noise, dust and heat; with minimal upkeep requirements',
+  },
+];
+---
+
+<Layout
+  title="Totalis - About Us"
+  htmlClassName="no-js"
+  description="Enduring Beauty, Superior Functionality, & Unbeatable value."
+>
+  <Hero />
+
+  <!-- About Totalis Section -->
+  <section class="max-w-6xl mx-auto px-4 py-8 lg:py-16">
+    <div class="flex flex-col gap-4">
+      <SectionHeading title="About Totalis" />
+      <div class="flex flex-col gap-2.5">
+        <p>
+          <span class="font-bold"> Totalis </span>
+          is <span class="font-bold">brought to you by Hindalco</span>, created
+          to deliver engineered aluminium doors and windows that offer
+          exceptional performance and everyday value for modern Indian homes.
+        </p>
+        <p>
+          Born from the Aditya Birla Group's rich legacy, Totalis combines
+          world-class aluminium expertise with design innovation to produce
+          windows that are <span class="font-bold">
+            tested, trusted, and built to last.
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Powered by Hindalco Section -->
+    <div
+      class="mt-8 lg:mt-16 grid md:grid-cols-2 not-md:gap-4 py-4 items-center"
+    >
+      <div
+        class="flex item-center pt-8 pb-14 reveal"
+        data-delay="50"
+        id="hindalco-logo"
+      >
+        <Image
+          src={hindalcoLogo}
+          alt="Hindalco"
+          format="svg"
+          layout="constrained"
+          class="justify-self-center mx-auto"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+
+      <div
+        class="relative reveal bg-primary bg-radial flex flex-col justify-center px-12 py-8 min-h-64 text-white rounded-2xl blur-0!"
+        id="backed-card"
+        data-delay="50"
+      >
+        <Sparkle class="absolute top-6 right-4 stroke-0 fill-amber-300" />
+        <p
+          class="font-light py-2 tracking-wide text-[clamp(0.95rem,1.8vw,1.05rem)]"
+        >
+          Totalis draws its strength from Hindalco Industries Limited, one of
+          the world's foremost aluminium producers and the largest recycler of
+          aluminium globally.
+        </p>
+
+        <p
+          class="font-light py-2 tracking-wide text-[clamp(0.95rem,1.8vw,1.05rem)]"
+        >
+          As the flagship metals company of the Aditya Birla Group, Hindalco
+          stands for innovation, sustainability, and trusted excellence,
+          assuring that every Totalis product meets the highest global standards
+          of quality and reliability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Totalis Section -->
+  <section id="why-choose" class="px-4 max-w-6xl mx-auto py-8 lg:py-12">
+    <SectionHeading
+      title="Why Choose Totalis"
+      description="Every Totalis window is designed to deliver enduring beauty, superior functionality, and unbeatable value. Our promise rests on four key pillars:"
+    />
+
+    <div class="grid md:mt-8 mt-4 md:grid-cols-2 gap-8 md:gap-x-16 md:gap-y-10">
+      {
+        keyPillars.map((pillar, index) => (
+          <div class="flex gap-4 items-start reveal" data-delay={index * 50}>
+            <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+              <pillar.icon
+                class="w-12 h-12 stroke-[1.5] text-primary"
+                aria-hidden="true"
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-lg md:text-xl font-semibold text-secondary">
+                {pillar.title}
+              </h3>
+              <p class="text-neutral-700 text-sm md:text-base leading-relaxed">
+                {pillar.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Totalis Advantage Section -->
+  <section
+    id="totalis-advantage"
+    class="w-full bg-secondary py-12 mt-6 lg:mt-12 lg:py-16"
+  >
+    <div class="px-4 max-w-6xl mx-auto">
+      <div class="mb-12">
+        <h2
+          class="text-3xl md:text-4xl font-semibold text-white mb-4 text-center"
+        >
+          The Totalis Advantage
+        </h2>
+        <p
+          class="text-neutral-100 max-w-3xl mx-auto text-sm md:text-base text-center"
+        >
+          Precision-engineered aluminium windows that bring style, safety, and
+          durability together, designed for India's diverse climate and daily
+          living needs.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+        {
+          advantages.map((advantage, index) => (
+            <div
+              class="bg-white/85 rounded-2xl p-8 flex flex-col items-center text-center gap-4 reveal"
+              data-delay={index * 100}
+            >
+              <div class="w-16 h-16 flex items-center justify-center">
+                <advantage.icon
+                  class="w-14 h-14 stroke-[1.5] text-primary"
+                  aria-hidden="true"
+                />
+              </div>
+              <h3 class="text-lg md:text-xl font-semibold text-secondary">
+                {advantage.title}
+              </h3>
+              <p class="text-neutral-700 text-sm md:text-base leading-relaxed">
+                {advantage.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+  <CtaEnd />
+  <FloatingContactButton />
+
+  <script>
+    import { initRevealObserver } from '../scripts/reveal';
+    import { initTabManager } from '../scripts/tab';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initRevealObserver();
+      initTabManager();
+    });
+  </script>
+</Layout>
