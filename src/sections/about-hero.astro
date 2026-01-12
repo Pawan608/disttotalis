@@ -1,0 +1,76 @@
+---
+import heroImage from '../assets/about-us-hero.jpg';
+import { Image } from 'astro:assets';
+import Button from '../components/button.astro';
+import StaggerText from '../components/stagger-text.astro';
+import { Download } from '@lucide/astro';
+---
+
+<section
+  id="hero"
+  class="relative w-full min-h-[625px] h-full max-h-[70vh] overflow-hidden flex items-center"
+>
+  <div class="absolute inset-0 w-full h-full z-0">
+    <Image
+      src={heroImage}
+      format="webp"
+      quality={95}
+      decoding={'async'}
+      priority={true}
+      fetchpriority={'high'}
+      layout="full-width"
+      fit="cover"
+      widths={[640, 1024, 1440, 1920, 2560]}
+      sizes="100vw"
+      loading={'eager'}
+      alt="Hero Background"
+      height={625}
+      class="w-full h-full object-cover"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.85)]
+      to-[rgba(255,202,0,0.65)]"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative w-full pt-[clamp(4.25rem,8vh,6rem)] pb-[clamp(2rem,4vh,3rem)] z-10 text-white px-[clamp(1rem,4vw,4rem)] md:ml-16 max-w-4xl"
+  >
+    <h1
+      class="text-[clamp(3.5rem,8vw,6rem)] transition-smooth text-shadow-md text-primary font-bold mb-[clamp(1rem,3vh,2rem)] tracking-tight leading-[0.9]"
+    >
+      <StaggerText text="ABOUT" baseDelay={0} step={100} />
+      <br />
+      <StaggerText text="TOTALIS" baseDelay={200} step={100} />
+    </h1>
+
+    <p
+      class="text-[clamp(1.725rem,3.5vw,2.25rem)] mb-[clamp(1.5rem,4vh,3rem)] max-w-[clamp(20ch,60vw,32ch)] text-wrap text-shadow-sm reveal leading-tight"
+      data-delay={525}
+    >
+      Enduring Beauty, Superior Functionality, & Unbeatable value.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-[clamp(0.75rem,2vw,1rem)]">
+      <Button
+        link="/contact"
+        reveal={true}
+        animationDelay={675}
+        variant="primary"
+        classList="py-[clamp(0.75rem,1vh,4rem)] px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)] font-medium"
+        >Contact Us</Button
+      >
+
+      <!-- <Button
+        reveal={true}
+        animationDelay={675}
+        variant="primary"
+        classList="py-[clamp(0.75rem,1vh,4rem)] contact-form-trigger px-[clamp(1.5rem,4vw,2.5rem)] text-[clamp(0.875rem,2vw,1.125rem)] font-medium"
+      >
+        <Download class="shrink-0" size={16} />
+        Download Brochure
+      </Button> -->
+    </div>
+  </div>
+</section>

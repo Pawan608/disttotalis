@@ -1,0 +1,86 @@
+---
+import {
+  FileText,
+  BookOpen,
+  GraduationCap,
+  Target,
+  Calculator,
+  TrendingUp,
+  Package,
+} from '@lucide/astro';
+import SectionHeading from '../components/section-heading.astro';
+
+const benefits = [
+  {
+    icon: FileText,
+    title: 'Complete System from One Source',
+    description:
+      'No need to juggle multiple suppliers. With Totalis, you get aluminium systems, hardware, and accessories from a single, reliable source.',
+  },
+  {
+    icon: BookOpen,
+    title: 'Technical Manuals & Brochures',
+    description:
+      'Comprehensive documentation and product literature make it easy to understand, market, and sell our solutions.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Starter Training & Onboarding',
+    description:
+      'We equip you with the right knowledge from day one, from fabrication techniques to installation know-how.',
+  },
+  {
+    icon: Target,
+    title: 'Business Flexibility',
+    description:
+      'Your business, your way. Totalis offers you the freedom to operate independently while enjoying the backing of a trusted brand.',
+  },
+  {
+    icon: Calculator,
+    title: 'Estimation & Engineering Software Access',
+    description:
+      'Simplify your workflow with our dedicated software tools that help in accurate estimation, precision engineering, and faster project turnaround.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Better Cash Flow Support',
+    description:
+      'With optimized supply cycles, no stocking up inventory and flexible order sizes, Totalis helps you keep working capital free and your projects moving without unnecessary financial strain.',
+  },
+  {
+    icon: Package,
+    title: 'Reliable Stock Availability',
+    description:
+      'No delays, no downtime. Our streamlined supply chain ensures that you always get the material you need, when you need it.',
+  },
+];
+---
+
+<section id="what-you-get" class="px-4 max-w-6xl mx-auto py-8 lg:py-16">
+  <div class="text-center">
+    <SectionHeading title="What You Get with Totalis" />
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8 md:gap-x-16 md:gap-y-16 pt-8 md:pt-12">
+    {
+      benefits.map((benefit, index) => (
+        <div class="flex gap-4 items-start reveal" data-delay={index * 50}>
+          <div class="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+            <benefit.icon
+              class="size-12 stroke-[1.25] text-primary"
+              aria-hidden="true"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <h3 class="text-lg md:text-xl font-semibold text-secondary">
+              {benefit.title}
+            </h3>
+            <p class="text-neutral-700 text-sm md:text-base leading-relaxed">
+              {benefit.description}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

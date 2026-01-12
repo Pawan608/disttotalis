@@ -18,6 +18,10 @@ const descriptionClassList = cx(
 <h2 class={headingClassList}>
   {title}
 </h2>
-<p class={descriptionClassList} data-delay="50">
-  {description}
-</p>
+{
+  description && (
+    <p class={descriptionClassList} data-delay="50">
+      {description}
+    </p>
+  )
+}

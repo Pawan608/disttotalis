@@ -135,6 +135,30 @@ const showNotification = (message: string, type: "success" | "error") => {
   }, 5000);
 };
 
+const prefillIntentFromURL = (prefix: ContactFormPrefix) => {
+  const params = new URLSearchParams(window.location.search);
+  const intentParam = params.get("intent");
+
+  if (!intentParam) return;
+
+  const intentSelect = document.getElementById(
+    `${prefix}-intent`
+  ) as HTMLSelectElement;
+
+  if (!intentSelect) return;
+
+  // Optional mapping for friendly URLs
+  const intentMap: Record<string, string> = {
+    "Becoming a Partner": "Become a Totalis Partner",
+    "Become a Partner": "Become a Totalis Partner",
+  };
+
+  const finalValue = intentMap[intentParam] || intentParam;
+
+  intentSelect.value = finalValue;
+  intentSelect.dispatchEvent(new Event("change", { bubbles: true }));
+};
+
 const extractFormData = (formData: FormData) => {
   const fullName = (formData.get("fullName") as string) || "";
   const nameParts = fullName.trim().split(" ");
@@ -279,6 +303,7 @@ export const initContactForm = ({
   if (!form) return;
 
   initPincodeElement(contactFormPrefix);
+  prefillIntentFromURL(contactFormPrefix);
   form.addEventListener("submit", getFormSubmitHandler(contactFormPrefix));
 };
 

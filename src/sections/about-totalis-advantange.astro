@@ -1,0 +1,62 @@
+---
+import { Package2, Home, Cloud } from '@lucide/astro';
+
+const advantages = [
+  {
+    icon: Package2,
+    title: 'Precision Built',
+    description: 'System-grade aluminium designed for lasting performance.',
+  },
+  {
+    icon: Home,
+    title: 'Made for Real Homes',
+    description:
+      'Works perfectly for renovations, new constructions & boutique projects',
+  },
+  {
+    icon: Cloud,
+    title: 'Climate Ready',
+    description:
+      'Insulates from weather, noise, dust and heat; with minimal upkeep requirements',
+  },
+];
+---
+
+<section id="totalis-advantage" class="w-full bg-secondary py-12 lg:py-16">
+  <div class="px-4 max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4">
+        The Totalis Advantage
+      </h2>
+      <p class="text-neutral-100 max-w-3xl mx-auto text-sm md:text-base">
+        Precision-engineered aluminium windows that bring style, safety, and
+        durability together, designed for India's diverse climate and daily
+        living needs.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+      {
+        advantages.map((advantage, index) => (
+          <div
+            class="bg-white rounded-2xl p-8 flex flex-col items-center text-center gap-4 reveal"
+            data-delay={index * 100}
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <advantage.icon
+                class="w-14 h-14 stroke-[1.5] text-primary"
+                aria-hidden="true"
+              />
+            </div>
+            <h3 class="text-lg md:text-xl font-semibold text-modal-blue-dark">
+              {advantage.title}
+            </h3>
+            <p class="text-neutral-700 text-sm md:text-base leading-relaxed">
+              {advantage.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
