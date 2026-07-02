@@ -223,7 +223,7 @@ export const stores = [
     email: "smartwindow50@gmail.com",
   },
   {
-    storeName: "Samasta Build Mart ",
+    storeName: "Virtue Trading",
     pincode: "500010",
     city: "Secunderabad",
     state: "Telangana",

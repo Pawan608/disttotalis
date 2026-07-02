@@ -58,11 +58,13 @@ scp -P 4422 -r ./dist/ 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd6
 ssh -p 4422 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd61e54ef9@BMCSLBTPMPBRK2.abgplanet.abg.com
 
 sudo su
+cd /tmp/disttotalis
+git pull
 rm -rf /var/www/totalis.in/\*
-mv /tmp/dist/\* /var/www/totalis.in/
+mv /tmp/disttotalis/dist/\* /var/www/totalis.in/
 chown -R www-data:www-data /var/www/totalis.in
 chmod -R 755 /var/www/totalis.in
-rm -rf /tmp/dist/
+rm -rf /tmp/disttotalis/dist/
 
 cd /var/www/totalis.in
 nano package.json
