@@ -56,6 +56,7 @@ scp -P 4422 -r ./dist/ 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd6
 ## Deploy as before:
 
 ssh -p 4422 98f92fd80d7697849c20e0903904730e9375928fec8046f3b785fabd61e54ef9@BMCSLBTPMPBRK2.abgplanet.abg.com
+/tmp/disttotalis
 
 sudo su
 cd /tmp/disttotalis
