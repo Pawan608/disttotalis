@@ -43,6 +43,9 @@ const { title, htmlClassName, description } = Astro.props;
     </script>
   </head>
   <body class="flex flex-col min-h-screen">
+    <div id="consent-banner">
+      <script async src="https://consent.trustarc.com/v2/notice/po5ejq"></script>
+    </div>
     <Header />
     <main class="flex-grow">
       <slot />

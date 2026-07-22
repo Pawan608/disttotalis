@@ -64,7 +64,6 @@ rm -rf /var/www/totalis.in/\*
 mv /tmp/disttotalis/dist/\* /var/www/totalis.in/
 chown -R www-data:www-data /var/www/totalis.in
 chmod -R 755 /var/www/totalis.in
-rm -rf /tmp/disttotalis/dist/
 
 cd /var/www/totalis.in
 nano package.json
